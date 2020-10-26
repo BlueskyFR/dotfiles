@@ -1,0 +1,19 @@
+Host sky
+	HostName skyserver.zapto.org
+	User hugo
+
+Host lsky
+	HostName 192.168.1.32
+	User hugo
+
+Host cosmos
+        HostName blueskyfr.space
+        User hugo
+
+Host lcosmos
+	HostName 192.168.1.1
+	User hugo
+
+Host lc
+	HostName 192.168.1.1
+	User hugo
