@@ -94,6 +94,8 @@ alias lsky='ssh hugo@lsky'
 alias cosmos='ssh cosmos'
 alias lcosmos='ssh lcosmos'
 alias lc='ssh lc'
+alias hpe='ssh hpe'
+alias monit='ssh monit'
 alias projet='ssh projet@cosmos'
 alias clip='xclip -selection clipboard'
 alias padon='synclient TouchpadOff=0'
@@ -124,6 +126,11 @@ alias revolut='node ~/code/nodejs/ssl-legit/revolut.js'
 alias bundletool='java -jar ~/code/android/bundletool-all-0.10.2.jar'
 
 alias cssh='kitty +kitten ssh'
+
+# Screens configurations
+alias shpe='bash /home/hugo/.screenlayout/vertical-2k.sh'
+alias sv='bash /home/hugo/.screenlayout/vertical.sh'
+alias sn='bash /home/hugo/.screenlayout/normal.sh'
 
 mdd() {
     mkdir -p "$@"

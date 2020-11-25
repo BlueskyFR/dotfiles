@@ -17,3 +17,11 @@ Host lcosmos
 Host lc
 	HostName 192.168.1.1
 	User hugo
+
+Host hpe
+	HostName login-node
+	User hugo
+
+Host monit
+	HostName monit
+	User admin
