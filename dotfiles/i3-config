@@ -52,13 +52,14 @@ bindsym $mod+Ctrl+m exec pavucontrol
 ################################################################################################
 
 # Screen brightness controls
-# bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
-# bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
-# Media/Multimedia keys bindings
-bindsym XF86AudioPlay exec "playerctl play-pause"
-bindsym XF86AudioStop exec "playerctl stop"
-bindsym XF86AudioPrev exec "playerctl previous"
-bindsym XF86AudioNext exec "playerctl next"
+bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
+bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
+# Media/Multimedia keys bindings (see xev command to get their names)
+#bindsym XF86AudioPlay exec "playerctl play-pause"
+#bindsym XF86AudioStop exec "playerctl stop"
+#bindsym XF86AudioPrev exec "playerctl previous"
+#bindsym XF86AudioNext exec "playerctl next"
+#bindsym XF86AudioMicMute exec "playerctl play-pause"
 
 # Start Applications
 bindsym $mod+Ctrl+b exec i3-sensible-terminal 'bmenu'
@@ -135,11 +136,11 @@ bindsym $mod+Shift+s sticky toggle
 bindsym $mod+a focus parent
 
 # move the currently focused window to the scratchpad
-bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+Shift+parenright move scratchpad
 
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
-bindsym $mod+minus scratchpad show
+bindsym $mod+parenright scratchpad show
 
 #navigate workspaces next / previous
 bindsym $mod+Ctrl+Right workspace next
@@ -171,7 +172,8 @@ bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 
 # Move current workspace to the next screen
-bindsym $mod+x move workspace to output right
+bindsym $mod+x move workspace to output up
+bindsym $mod+Shift+x move workspace to output right
 
 # Move focused container to workspace
 bindsym $mod+Ctrl+1 move container to workspace $ws1
@@ -290,11 +292,13 @@ bindsym $mod+l exec --no-startup-id blurlock
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 ## BACKGROUND/WALLPAPER ##
-#exec_always --no-startup-id nitrogen --set-zoom-fill --random ~/Pictures/bg/ --no-recurse --head=0
+exec_always --no-startup-id nitrogen --set-zoom-fill ~/Pictures/wallpapers/os_x_mavericks_wallpaper_by_ediskrad_studios-d6pcx4x.png --head=0
+exec_always --no-startup-id nitrogen --set-zoom-fill ~/Pictures/wallpapers/interstellar-3840x2160.jpg --head=1
+exec_always --no-startup-id nitrogen --set-zoom-fill ~/Pictures/wallpapers/wallpaper-2707591.jpg --head=2
 #exec_always --no-startup-id nitrogen --set-zoom-fill --random ~/Pictures/bg/ --no-recurse --head=1
 #exec_always --no-startup-id nitrogen --set-zoom-fill ~/Pictures/bg/IMG_20190427_172635.jpg --head=0
 #exec_always --no-startup-id nitrogen --set-zoom-fill ~/Pictures/bg/space.jpg --head=1
-exec_always --no-startup-id nitrogen --set-zoom-fill ~/Pictures/bg/cyberpunk.png
+#exec_always --no-startup-id nitrogen --set-zoom-fill ~/Pictures/bg/cyberpunk.png
 #exec --no-startup-id nitrogen --set-zoom-fill ~/Images/bg/Aiguille-du-midi.jpg
 #exec --no-startup-id nitrogen --restore
 
@@ -467,7 +471,7 @@ mode "$mode_gaps_outer" {
 	
 	# Discord
 	exec discord
-	#exec slack
+	exec slack
 	for_window [class="^discord$"] move to workspace 4
 	for_window [class="^Slack$"] move to workspace 4
         

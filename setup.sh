@@ -29,7 +29,8 @@ pamac upgrade -a
 # - Vivaldi browser
 # - ncspot (CLI version of Spotify)
 # - Twemoji (emoji font)
-pamac build --no-confirm vivaldi vivaldi-widevine vivaldi-codecs-ffmpeg-extra-bin ncspot ttf-twemoji
+# - Hyper (terminal)
+pamac build --no-confirm vivaldi vivaldi-widevine vivaldi-codecs-ffmpeg-extra-bin ttf-twemoji hyper
 
 # Remove palemoon (default browser)
 sudo pacman -R palemoon-bin
@@ -65,6 +66,9 @@ sudo pamac install --no-confirm hub
 # Install Thunderbird
 sudo pamac install --no-confirm thunderbird
 
+# Install Flameshot
+sudo pamac install --no-confirm flameshot
+
 # Install Spotify
 sudo snap install spotify
 
@@ -93,6 +97,8 @@ mkdir "$HOME/.config/rofi"
 link rofi/config "$HOME/.config/rofi/config"
 link rofi/fullscreen.rasi "$HOME/.config/rofi/fullscreen.rasi"
 
+# Install zsh
+sudo pamac install --no-confirm zsh
 # Install Kitty shell
 sudo pamac install --no-confirm kitty
 link .zshrc
@@ -109,6 +115,9 @@ grep -qxF 'export TERMINAL="kitty"' ~/.profile || echo 'export TERMINAL="kitty"'
 # Pure-prompt for sh
 #sudo npm install --global pure-prompt
 yarn global add pure-prompt
+
+# Change default shell to zsh
+chsh -s $(which zsh)
 
 # At the end, remove all orphans
 sudo pamac remove -o --no-confirm
