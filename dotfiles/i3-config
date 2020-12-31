@@ -171,7 +171,7 @@ bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 
 # Move current workspace to the next screen
-bindsym $mod+Shift+x move workspace to output right
+bindsym $mod+x move workspace to output right
 
 # Move focused container to workspace
 bindsym $mod+Ctrl+1 move container to workspace $ws1
@@ -467,7 +467,7 @@ mode "$mode_gaps_outer" {
 	
 	# Discord
 	exec discord
-	exec slack
+	#exec slack
 	for_window [class="^discord$"] move to workspace 4
 	for_window [class="^Slack$"] move to workspace 4
         
