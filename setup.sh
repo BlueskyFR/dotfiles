@@ -100,7 +100,10 @@ link rofi/fullscreen.rasi "$HOME/.config/rofi/fullscreen.rasi"
 # Install zsh
 sudo pamac install --no-confirm zsh
 # Install Kitty shell
-sudo pamac install --no-confirm kitty
+#sudo pamac install --no-confirm kitty
+# Install Alacritty (better than Kitty)
+sudo pamac install --no-confirm alacritty
+
 link .zshrc
 # Install Kitty plugins and themes
 curl -o ~/.config/kitty/snazzy.conf https://raw.githubusercontent.com/connorholyday/kitty-snazzy/master/snazzy.conf
