@@ -474,7 +474,7 @@ mode "$mode_gaps_outer" {
 	for_window [class="^Vivaldi\-stable$"] move to workspace 3
 	
 	# Discord
-	#exec discord
+	exec discord
 	exec slack
 	for_window [class="^discord$"] move to workspace 4
 	
