@@ -84,7 +84,7 @@ alias ll='ls -lArth  --color=auto'
 alias la='ls -A --color=auto'
 alias l='ls -CF --color=auto'
 
-alias cssh='TERM=xterm-256color ssh'
+alias ssh='TERM=xterm-256color ssh'
 
 alias sshk='ssh luc@knowledge.univ-savoie.fr'
 alias ssho='ssh luc@ontology.univ-savoie.fr'
@@ -128,6 +128,8 @@ alias bundletool='java -jar ~/code/android/bundletool-all-0.10.2.jar'
 
 alias rs='systemctl --user restart spotifyd'
 
+alias pip-upgrade-all='pip list --outdated --format=freeze | grep -v "^\-e" | cut -d = -f 1  | xargs -n1 pip install -U'
+
 # Screens configurations
 alias shpe='bash /home/hugo/.screenlayout/vertical-2k.sh'
 alias sv='bash /home/hugo/.screenlayout/vertical.sh'
@@ -140,7 +142,7 @@ mdd() {
 
 cd() { builtin cd "$@" && ls; }
 
-ccssh() { infocmp alacritty | ssh "$@" tic -x -o \~/.terminfo /dev/stdin }
+cssh() { infocmp alacritty | ssh "$@" tic -x -o \~/.terminfo /dev/stdin }
 
 alias vpn='sudo openconnect vpn.univ-smb.fr'
 alias mountp='sudo mount -v -t cifs //srv-data2.iut-acy.local/home/etudiants/cartignh /media/p/ -o credentials=/home/hugo/.iut-creds.crd,domain=iut-acy.local,vers=1.0'
