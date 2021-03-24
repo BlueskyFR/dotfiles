@@ -26,5 +26,9 @@ Host monit
 	HostName monit
 	User admin
 
+Host V100
+	HostName 16.16.186.123
+	User hugo
+
 Host *
 	ServerAliveInterval 240
