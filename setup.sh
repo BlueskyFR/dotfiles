@@ -104,6 +104,9 @@ sudo pamac install --no-confirm zsh
 # Install Alacritty (better than Kitty)
 sudo pamac install --no-confirm alacritty
 
+# Install Fire Code font
+sudo pamac install --no-confirm ttf-fira-code
+
 link .zshrc
 # Install Kitty plugins and themes
 curl -o ~/.config/kitty/snazzy.conf https://raw.githubusercontent.com/connorholyday/kitty-snazzy/master/snazzy.conf
