@@ -118,6 +118,7 @@ alias arm='sudo apt autoremove -y'
 alias c='clear'
 alias autobalance='amixer -D pulse set Master 20%'
 alias rc='killall compton && compton --config /home/hugo/.config/compton.conf -b'
+alias ip='ip -c'
 alias poule='git pull'
 alias radio='bash ~/code/bash/radio.sh'
 
