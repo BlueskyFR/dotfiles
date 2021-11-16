@@ -92,6 +92,7 @@ sudo pamac install --no-confirm playerctl
 sudo pamac install --no-confirm xorg-xev
 
 # Install Rofi
+rm -rf ~/.config/rofi
 sudo pamac install --no-confirm rofi
 link rofi/ "$HOME/.config/rofi"
 
