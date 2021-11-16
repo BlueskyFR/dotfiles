@@ -1,11 +1,3 @@
-Host sky
-	HostName skyserver.zapto.org
-	User hugo
-
-Host lsky
-	HostName 192.168.1.32
-	User hugo
-
 Host cosmos
         HostName blueskyfr.space
         User hugo
@@ -22,12 +14,16 @@ Host hpe
 	HostName login-node
 	User hugo
 
-Host monit
-	HostName monit
-	User admin
+Host V100s
+	HostName 16.16.186.125
+	User hugo
 
-Host V100
-	HostName 16.16.186.123
+Host A40
+	HostName 16.16.186.127
+	User hugo
+
+Host A100
+	HostName 16.16.185.83
 	User hugo
 
 Host *

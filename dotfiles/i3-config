@@ -297,19 +297,22 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec autorandr -c
 
 ## BACKGROUND/WALLPAPER ##
-exec_always --no-startup-id nitrogen --set-zoom-fill ~/Pictures/wallpapers/os_x_mavericks_wallpaper_by_ediskrad_studios-d6pcx4x.png --head=0
-exec_always --no-startup-id nitrogen --set-zoom-fill ~/Pictures/wallpapers/interstellar-3840x2160.jpg --head=1
-exec_always --no-startup-id nitrogen --set-zoom-fill ~/Pictures/wallpapers/wallpaper-2707591.jpg --head=2
+#exec --no-startup-id nitrogen --restore; sleep 1; compton -b
+#exec sleep 1; compton -b
+exec --no-startup-id sleep 1; picom
+
+#exec_always --no-startup-id nitrogen --set-zoom-fill ~/Pictures/wallpapers/os_x_mavericks_wallpaper_by_ediskrad_studios-d6pcx4x.png --head=0
+#exec_always --no-startup-id nitrogen --set-zoom-fill ~/Pictures/wallpapers/interstellar-3840x2160.jpg --head=1
+#exec_always --no-startup-id nitrogen --set-zoom-fill ~/Pictures/wallpapers/wallpaper-2707591.jpg --head=2
+exec_always --no-startup-id nitrogen --set-zoom-fill --random /home/hugo/Pictures/gtgraphics.de-wallpapers --no-recurse --head=0
+exec_always --no-startup-id nitrogen --set-zoom-fill --random /home/hugo/Pictures/gtgraphics.de-wallpapers --no-recurse --head=1
+exec_always --no-startup-id nitrogen --set-zoom-fill --random /home/hugo/Pictures/gtgraphics.de-wallpapers --no-recurse --head=2
 #exec_always --no-startup-id nitrogen --set-zoom-fill --random ~/Pictures/bg/ --no-recurse --head=1
 #exec_always --no-startup-id nitrogen --set-zoom-fill ~/Pictures/bg/IMG_20190427_172635.jpg --head=0
 #exec_always --no-startup-id nitrogen --set-zoom-fill ~/Pictures/bg/space.jpg --head=1
 #exec_always --no-startup-id nitrogen --set-zoom-fill ~/Pictures/bg/cyberpunk.png
 #exec --no-startup-id nitrogen --set-zoom-fill ~/Images/bg/Aiguille-du-midi.jpg
 #exec --no-startup-id nitrogen --restore
-
-#exec --no-startup-id nitrogen --restore; sleep 1; compton -b
-#exec sleep 1; compton -b
-exec --no-startup-id sleep 1; picom
 ## END BACKGROUND/WALLPAPER ##
 
 #exec --no-startup-id manjaro-hello
@@ -403,7 +406,8 @@ bindsym $mod+m bar mode toggle
 #############################
 
 # Set inner/outer gaps
-gaps inner 14
+#gaps inner 14
+gaps inner 18
 gaps outer -2
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
@@ -476,11 +480,11 @@ mode "$mode_gaps_outer" {
 	# Discord
 	exec discord
 	exec slack
-	for_window [class="^discord$"] move to workspace 4
+	for_window [class="^(discord|Slack)$"] move to workspace 4
 	
 	# Teams
 	exec teams
-	for_window [class="^Microsoft Teams - Preview$" instance="^microsoft teams \- preview$"] move to workspace 4
+	for_window [class="^Microsoft Teams - Preview$" instance="^microsoft teams \- preview$"] move to workspace 7
 	
 	# Outlook
 	exec unofficial-webapp-office.outlook
@@ -497,6 +501,7 @@ mode "$mode_gaps_outer" {
         #workspace 4 output HDMI-0
 	workspace 4 output eDP1
 	workspace 5 output DP2-2
+	workspace 7 output eDP1
         workspace 8 output eDP1
 
 # Numlock ON
