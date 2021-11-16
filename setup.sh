@@ -93,9 +93,7 @@ sudo pamac install --no-confirm xorg-xev
 
 # Install Rofi
 sudo pamac install --no-confirm rofi
-mkdir "$HOME/.config/rofi"
-link rofi/config "$HOME/.config/rofi/config"
-link rofi/fullscreen.rasi "$HOME/.config/rofi/fullscreen.rasi"
+link rofi/ "$HOME/.config/rofi"
 
 # Install zsh
 sudo pamac install --no-confirm zsh
