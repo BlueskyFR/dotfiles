@@ -63,6 +63,7 @@ bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness 
 
 # Start Applications
 bindsym $mod+Ctrl+b exec i3-sensible-terminal 'bmenu'
+bindsym $mod+F1 exec pamac-manager
 bindsym $mod+F2 exec vivaldi-stable
 bindsym $mod+F3 exec pcmanfm
 # bindsym $mod+F3 exec ranger
