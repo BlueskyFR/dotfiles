@@ -82,6 +82,13 @@
             path = ./hosts/yurt;
           };
 
+          # Work
+
+          zbook = {
+            modules = [desktop];
+            path = ./hosts/zbook;
+          };
+
           hcax = {
             modules = [server];
             path = ./hosts/hcax;
