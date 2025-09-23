@@ -77,6 +77,11 @@
             path = ./hosts/chador;
           };
 
+          yurt = {
+            modules = [server];
+            path = ./hosts/yurt;
+          };
+
           hcax = {
             modules = [server];
             path = ./hosts/hcax;
