@@ -10,8 +10,6 @@
     default = "saved";
     # Detect other OSs
     useOSProber = true;
-    # Custom theme
-    theme = pkgs.bsol-grub2-theme;
   };
 
   hardware.bluetooth = {
@@ -29,7 +27,7 @@
     #  };
     #})
     (where-is-my-sddm-theme.override {variants = ["qt5" "qt6"];})
-    # USB file flasher
+    # USB iso/file flasher
     popsicle
     spotify
     (vivaldi.override {commandLineArgs = ["--ozone-platform-hint=auto"];})

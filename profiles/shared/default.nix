@@ -26,6 +26,9 @@
       # main disk, so we use the special "nodev" value preventing that behavior.
       # More info: https://is.gd/fZ6Gks
       device = "nodev";
+
+      # Custom theme
+      theme = pkgs.bsol-grub2-theme;
     };
     efi.canTouchEfiVariables = true;
   };
