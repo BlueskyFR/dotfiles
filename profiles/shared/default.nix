@@ -142,6 +142,8 @@
       # /run/media/$USER (nicer to type!) and cleans stale mountpoints at boot
       mountOnMedia = true;
     };
+    # DBus service that provides power management support to applications
+    upower.enable = true;
     # Firmware update utility/DBus service
     fwupd.enable = true;
   };
