@@ -26,7 +26,7 @@
     #    passwordFontSize = 45;
     #  };
     #})
-    (where-is-my-sddm-theme.override {variants = ["qt5" "qt6"];})
+    # (where-is-my-sddm-theme.override {variants = ["qt5" "qt6"];})
     # USB iso/file flasher
     popsicle
     spotify
@@ -36,13 +36,38 @@
   ];
 
   services = {
-    # SDDM
-    displayManager.sddm = {
+    displayManager.ly = {
       enable = true;
-      wayland.enable = false;
-      autoNumlock = true;
-      theme = "where_is_my_sddm_theme_qt5"; # The QT6 version does not work currently
+      x11Support = false;
+      # Config file ref: https://is.gd/4M1IwB
+      settings = {
+        # The active animation
+        animation = "colormix";
+        # Number of failed attempts before special animation plays
+        auth_fails = 3;
+        bigclock = "en";
+        # blank_box = false;
+        # clear_password = true;
+        numlock = true;
+
+        # Color mixing animation first color id
+        colormix_col1 = "0x00FF5C57";
+        # Color mixing animation second color id
+        colormix_col2 = "0x00230096";
+        # Color mixing animation third color id
+        colormix_col3 = "0x20000000";
+      };
     };
+
+    # SDDM
+    # displayManager.sddm = {
+    #   enable = true;
+    #   wayland.enable = false;
+    #   autoNumlock = true;
+    #   # theme = "where_is_my_sddm_theme"; # The QT6 version does not work currently
+    #   theme = "${pkgs.where-is-my-sddm-theme.override {variants = ["qt6"];}}/share/sddm/themes/where_is_my_sddm_theme";
+    #   extraPackages = with pkgs; [kdePackages.qt5compat];
+    # };
 
     xserver = {
       # For SDDM
