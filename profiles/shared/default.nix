@@ -146,6 +146,13 @@
     upower.enable = true;
     # Firmware update utility/DBus service
     fwupd.enable = true;
+
+    # Support 24 bit colors instead of 256 by replacing Getty with Kmscon for TTYs
+    kmscon = {
+      enable = true;
+      hwRender = true;
+      useXkbConfig = true;
+    };
   };
 
   # networking.firewall.enable = false;
