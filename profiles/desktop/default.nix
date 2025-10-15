@@ -26,13 +26,7 @@
     #    passwordFontSize = 45;
     #  };
     #})
-    # (where-is-my-sddm-theme.override {variants = ["qt5" "qt6"];})
-    # USB iso/file flasher
-    popsicle
-    spotify
-    (vivaldi.override {commandLineArgs = ["--ozone-platform-hint=auto"];})
-    discord-krisp
-    postman
+    (where-is-my-sddm-theme.override {variants = ["qt5" "qt6"];})
   ];
 
   services = {
@@ -105,6 +99,18 @@
   # Home-manager introduces its own `config` so we shadow the main scope one
   home-manager.users.hugo = {config, ...}: {
     imports = [./hyprland.nix ./rofi.nix ./hyprpanel.nix];
+
+    home.packages = with pkgs; [
+      # USB iso/file flasher
+      popsicle
+      spotify
+      (vivaldi.override {commandLineArgs = ["--ozone-platform-hint=auto"];})
+      discord-krisp
+      postman
+
+      # Vivaldi font fix
+      fira
+    ];
 
     programs = {
       vscode = {
