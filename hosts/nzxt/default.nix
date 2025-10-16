@@ -26,8 +26,9 @@
       # Also check `hyprctl monitors all`
       monitor = lib.mkForce [
         # "DP-3, highrr, 0x0, auto, vrr, 1" # Variable refresh rate, 1 = on
-        "DP-3, highrr, 0x0, 1.25, vrr, 0" # Variable refresh rate, 1 = on
-        "DP-2, highres, -1920x360, auto"
+        "DP-2, highres, 0x0, auto"
+        # (1440 / 1.25) - 1080 = -72 (compute the delta on the scaled height or width)
+        "DP-3, highrr, 1920x-72, 1.25, vrr, 0" # Variable refresh rate, 1 = on
       ];
 
       #misc.vfr = true;

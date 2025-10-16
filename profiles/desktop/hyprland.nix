@@ -19,12 +19,12 @@
         "[workspace 3 silent] vivaldi"
         "[workspace 4 silent] discord"
         # Lift all workspace placement rules after startup
-        "sleep 40 && hyprctl keyword windowrulev2 workspace unset, class:.*"
+        "sleep 40 && hyprctl keyword windowrule workspace unset, class:.*"
       ];
 
       # Window rules
       ## Info about class/title/status: `hyprctl clients`
-      windowrulev2 = [
+      windowrule = [
         # Fix for the forking processes mentionned above during startup
         "workspace 2 silent, class:code"
         "workspace 3 silent, class:vivaldi-stable"
@@ -50,8 +50,8 @@
       # monitor = name, resolution, position, scale
       # Position: X is normal but Y is reversed
       monitor = lib.mkDefault [
-        "DP-3, highrr, 0x0, auto, vrr, 1" # Variable refresh rate, 1 = on
-        "DP-2, highres, -1920x360, auto"
+        "DP-3, highrr, 1920x-360, auto, vrr, 1" # Variable refresh rate, 1 = on
+        "DP-2, highres, 0x0, auto"
       ];
 
       "$mod" = "SUPER";
