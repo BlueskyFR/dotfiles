@@ -44,6 +44,7 @@
       easy-hosts = let
         desktop = ./profiles/desktop;
         server = ./profiles/server.nix;
+        sddmGreeter = ./profiles/sddm-greeter.nix;
       in {
         shared = {
           modules = [
@@ -66,7 +67,7 @@
           nzxt = {
             # arch = "x86_64"; (default)
             # class = "nixos"; (default; could be "iso")
-            modules = [desktop];
+            modules = [desktop sddmGreeter];
             # nixpkgs = inputs.xxx;
             path = ./hosts/nzxt;
             # tags = [ "graphical" "desktop" ];
