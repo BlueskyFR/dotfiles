@@ -195,9 +195,11 @@
 
     git = {
       enable = true;
-      userName = "Hugo Cartigny (BlueskyFR)";
-      userEmail = "hugo.cartigny@gmail.com";
-      extraConfig = {
+      settings = {
+        user = {
+          name = "Hugo Cartigny (BlueskyFR)";
+          email = "hugo.cartigny@gmail.com";
+        };
         color.ui = "auto";
         pull.rebase = true;
       };
