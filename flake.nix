@@ -19,6 +19,11 @@
     };
 
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+
+    vscode-server = {
+      url = "github:nix-community/nixos-vscode-server";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -43,7 +48,7 @@
 
       easy-hosts = let
         desktop = ./profiles/desktop;
-        server = ./profiles/server.nix;
+        server = ./profiles/server;
         sddmGreeter = ./profiles/sddm-greeter.nix;
       in {
         shared = {
@@ -52,6 +57,7 @@
             inputs.home-manager.nixosModules.home-manager
 
             inputs.chaotic.nixosModules.default
+            inputs.vscode-server.nixosModules.default
 
             ./profiles/shared
 

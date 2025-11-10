@@ -83,7 +83,11 @@
       openssl
 
       # piper?
-      # Nil? Nix LSP
+
+      # Nix language server
+      nil
+      # Nix language formatter
+      alejandra
 
       # Custom scripts
       # fup-repl

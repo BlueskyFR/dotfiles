@@ -110,6 +110,9 @@
     curl
     wget
     tree
+
+    docker-compose
+    passt
   ];
 
   programs = {
@@ -155,8 +158,6 @@
     };
   };
 
-  # networking.firewall.enable = false;
-
   security.sudo.extraConfig = ''
     # No password prompt timeout
     Defaults passwd_timeout=0
@@ -167,7 +168,22 @@
   # Podman/containers
   virtualisation = {
     ## Enable common container config files in /etc/containers
-    containers.enable = true;
+    containers = {
+      enable = true;
+      containersConf.settings = {
+        network = {
+          default_subnet = "172.16.0.0/16";
+          default_subnet_pools = [
+            { base = "172.17.0.0/16"; size = 24; }
+            { base = "172.18.0.0/15"; size = 24; }
+            { base = "172.20.0.0/14"; size = 24; }
+            { base = "172.24.0.0/14"; size = 24; }
+            { base = "172.28.0.0/14"; size = 24; }
+          ];
+        };
+      };
+    };
+    
     podman = {
       enable = true;
       # Create a `docker` alias for podman, to use it as a drop-in replacement
@@ -181,15 +197,12 @@
       };
     };
   };
+  
+  # Podman containers minimum port
+  boot.kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = 80;
 
   # Configure console keymap
   console.keyMap = lib.mkDefault "fr";
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   environment.sessionVariables = {
     # Make electron apps use Wayland Ozone (still in dev so disabled by default)
