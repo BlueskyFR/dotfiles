@@ -50,9 +50,12 @@
       # monitor = name, resolution, position, scale
       # Position: X is normal but Y is reversed
       monitor = lib.mkDefault [
-        "DP-3, highrr, 1920x-360, auto, vrr, 1" # Variable refresh rate, 1 = on
-        "DP-2, highres, 0x0, auto"
+        # "DP-3, highrr, 1920x-360, auto, vrr, 1" # Variable refresh rate, 1 = on
+        # "DP-2, highres, 0x0, auto"
       ];
+      # Support defining monitors imperatively and dynamically using nwg-displays;
+      # to support it you must force `monitor = lib.mkForce [];` above and per-host.
+      source = "~/.config/hypr/monitors.conf";
 
       "$mod" = "SUPER";
       bind =

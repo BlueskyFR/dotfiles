@@ -56,9 +56,11 @@
 
       # Dev
       gh
-      cargo
-      rustc
       deno
+      ## Rust
+      rustup
+      gcc # Needed for rustup
+      bacon
 
       # Cli tools
       zip
@@ -72,6 +74,8 @@
       tldr
 
       pcmanfm
+      # Dynamically update Hyprland monitors using a GUI
+      nwg-displays
 
       # System tools
       xdg-utils # Makes url handlers work between apps
@@ -81,6 +85,8 @@
       grimblast
       nix-inspect
       openssl
+      # git secret management
+      # transcrypt
 
       # piper?
 
