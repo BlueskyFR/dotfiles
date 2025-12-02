@@ -156,6 +156,25 @@
       };
     };
 
+    services = {
+      flameshot = {
+        enable = true;
+        settings = {
+          General = {
+            disabledTrayIcon = true;
+            showStartupLaunchMessage = false;
+            disabledGrimWarning = true;
+            useGrimAdapter = true;
+            # Use larger color palette as the default one
+            predefinedColorPaletteLarge = true;
+          };
+          Shortcuts = {
+            TYPE_COPY = "Enter";
+          };
+        };
+      };
+    };
+
     # Home Manager is pretty good at managing dotfiles. The primary way to manage
     # plain files is through 'home.file'.
     home.file = {
