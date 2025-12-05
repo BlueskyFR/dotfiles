@@ -229,6 +229,7 @@
     NIXOS_OZONE_WL = "1";
   };
 
+  # Enable completions for system packages
   environment.pathsToLink = ["/share/zsh"];
 
   # This value determines the NixOS release from which the default

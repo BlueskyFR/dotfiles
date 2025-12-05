@@ -26,9 +26,15 @@
     ip = "ip -color=auto";
   };
 
-  programs.zsh.shellGlobalAliases = {
-    aa = "aa";
-    g = "grep -i";
+  programs.zsh = {
+    shellGlobalAliases = {
+      aa = "aa";
+      g = "grep -i";
+    };
+    initContent = lib.mkAfter ''
+      # Custom cd function, defined after zoxide's init
+      cd() { __zoxide_z "$@" && l }
+    '';
   };
 
   # TODO: add back `alias -s py=python` (suffix alias)
