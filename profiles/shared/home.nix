@@ -208,6 +208,8 @@
         };
         color.ui = "auto";
         pull.rebase = true;
+        pull.autoStash = true;
+        push.autoSetupRemote = true;
       };
     };
 
