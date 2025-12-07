@@ -85,6 +85,7 @@
       (vivaldi.override {commandLineArgs = ["--ozone-platform-hint=auto"];})
       discord-krisp
       postman
+      pavucontrol
 
       # Vivaldi font fix
       fira
