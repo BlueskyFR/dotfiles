@@ -60,6 +60,8 @@
       ## Rust
       rustup
       gcc # Needed for rustup
+      cargo-binstall # Shouldn't be needed - but just in case
+      cargo-flamegraph
       bacon
 
       # Cli tools
