@@ -63,4 +63,13 @@
       };
     };
   };
+
+  # G213 keyboard leds
+  services.udev = {
+    packages = [pkgs.g810-led];
+    # Horizontal RGB wave effect, length 0xAA * 256ms = 43sec
+    extraRules = ''
+      ACTION=="add", SUBSYSTEM=="usb", RUN+="${pkgs.g810-led}/bin/g810-led -fx hwave keys aa"
+    '';
+  };
 }
