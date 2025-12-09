@@ -16,6 +16,7 @@
     p = "${pkgs.python313}/bin/python";
     b = "bat -pp"; # Colored cat
     bp = "bat -p"; # Colored cat (keep pager)
+    cyme = "cyme --headings"; # Stylish lsusb
     zz = "zz";
 
     # Make aliases work with sudo X

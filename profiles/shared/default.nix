@@ -117,6 +117,10 @@
     # Network tools
     tcpdump
     ipcalc
+
+    # Hardware listing utils
+    usbutils # Provides lsusb
+    cyme # Better lsusb
   ];
 
   programs = {
