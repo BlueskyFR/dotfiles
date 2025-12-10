@@ -168,17 +168,20 @@
     };
   };
 
-  xdg.userDirs = {
+  xdg = {
     enable = true;
-    createDirectories = true;
-    desktop = null;
-    publicShare = null;
-    templates = null;
-    documents = "${config.home.homeDirectory}/docs";
-    download = "${config.home.homeDirectory}/dl";
-    pictures = "${config.home.homeDirectory}/pics";
-    videos = "${config.home.homeDirectory}/vids";
-    music = "${config.home.homeDirectory}/music";
+    userDirs = {
+      enable = true;
+      createDirectories = true;
+      desktop = null;
+      publicShare = null;
+      templates = null;
+      documents = "${config.home.homeDirectory}/docs";
+      download = "${config.home.homeDirectory}/dl";
+      pictures = "${config.home.homeDirectory}/pics";
+      videos = "${config.home.homeDirectory}/vids";
+      music = "${config.home.homeDirectory}/music";
+    };
   };
 
   programs = {
