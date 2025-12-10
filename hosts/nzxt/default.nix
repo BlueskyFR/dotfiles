@@ -68,8 +68,10 @@
   services.udev = {
     packages = [pkgs.g810-led];
     # Horizontal RGB wave effect, length 0xAA * 256ms = 43sec
+    # Extra udev rule in case of keyboard plug/unplug
+    # idVendor + idProduct fetched with `cyme` (lsusb)
     extraRules = ''
-      ACTION=="add", SUBSYSTEM=="usb", RUN+="${pkgs.g810-led}/bin/g810-led -fx hwave keys aa"
+      ACTION=="add", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c336", RUN+="${pkgs.g810-led}/bin/g810-led -fx hwave keys aa"
     '';
   };
 }
