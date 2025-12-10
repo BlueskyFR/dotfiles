@@ -5,33 +5,14 @@
   config,
   ...
 }: {
+  imports = [./bluetooth.nix];
+
   boot.loader.grub = {
     # Automatically pre-select the last boot item
     default = "saved";
     # Detect other OSs
     useOSProber = true;
   };
-
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-    settings = {
-      General = {
-        # Shows battery charge of connected devices but may make bluetooth mice buggy?
-        Experimental = true;
-        # When enabled other devices can connect faster to us, however
-        # the tradeoff is increased power consumption. Defaults to
-        # 'false'.
-        # FastConnectable = true;
-      };
-    };
-  };
-  # Automatically switch audio to the bluetooth device when it connects
-  hardware.pulseaudio.extraConfig = ''
-    load-module module-switch-on-connect
-  '';
-  # Also enable a bluetooth device pairing GUI
-  services.blueman.enable = true;
 
   services = {
     displayManager.ly = {
@@ -88,9 +69,16 @@
 
   users.users.hugo.extraGroups = ["video"]; # video is for light (screen brightness control)
 
-  # Home-manager introduces its own `config` so we shadow the main scope one
+  # Home-manager introduces its own `config` so we shadow the main scope's
   home-manager.users.hugo = {config, ...}: {
-    imports = [./hyprland.nix ./rofi.nix ./hyprpanel.nix];
+    imports = [
+      ./hyprland.nix
+      ./rofi.nix
+
+      # Ax-Shell
+      # inputs.ax-shell.homeManagerModules.default
+      # ./ax-shell.nix
+    ];
 
     home.packages = with pkgs; [
       # USB iso/file flasher
