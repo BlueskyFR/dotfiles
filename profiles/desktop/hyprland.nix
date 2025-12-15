@@ -136,6 +136,13 @@
                 "$mod CTRL, ${wsKey}, moveworkspacetomonitor, ${ws} -1"
                 ## 3. Finally switch to it!
                 "$mod CTRL, ${wsKey}, workspace, ${ws}"
+
+                # Now same but silently/without switching to it at the end!
+                "$mod CTRL ALT, ${wsKey}, movetoworkspacesilent, ${ws}"
+                "$mod CTRL ALT, ${wsKey}, moveworkspacetomonitor, ${ws} -1"
+                "$mod CTRL ALT, ${wsKey}, workspace, ${ws}"
+                ## Just switch back to the previous on top of that ;)
+                "$mod CTRL ALT, ${wsKey}, workspace, previous"
               ]
             )
             10)
