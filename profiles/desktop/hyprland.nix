@@ -64,7 +64,7 @@
           "$mod, Return, exec, alacritty"
           "$mod, V, exec, vivaldi"
           "$mod, A, killactive"
-          "$mod SHIFT, X, forcekillactive"
+          "$mod SHIFT, A, forcekillactive"
           ", Print, exec, grimblast --notify copysave area"
           "$mod, space, togglefloating"
           "$mod, D, exec, rofi -show drun -show-icons"
@@ -126,6 +126,16 @@
                 "$mod, ${wsKey}, workspace, ${ws}"
                 # Move active window to a workspace with $mod + SHIFT + [0-9]
                 "$mod SHIFT, ${wsKey}, movetoworkspace, ${ws}"
+                # Same but silent (doesn't switch workspace) with ALT instead
+                "$mod ALT, ${wsKey}, movetoworkspacesilent, ${ws}"
+
+                # Move active window to workspace [0-9] + place it on the other screen
+                ## 1. Move the window silently/in the background to it
+                "$mod CTRL, ${wsKey}, movetoworkspacesilent, ${ws}"
+                ## 2. Then move the target workspace relative to the still active monitor
+                "$mod CTRL, ${wsKey}, moveworkspacetomonitor, ${ws} -1"
+                ## 3. Finally switch to it!
+                "$mod CTRL, ${wsKey}, workspace, ${ws}"
               ]
             )
             10)
