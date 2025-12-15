@@ -5,7 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # nixpkgs.url = "/home/hugo/code/nixpkgs";
     # Difference between Nix channels: https://is.gd/2ySq2I
-    # stable-pkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -28,6 +28,7 @@
 
   outputs = inputs @ {
     nixpkgs,
+    nixpkgs-stable,
     flake-parts,
     easy-hosts,
     ...
@@ -62,9 +63,7 @@
             ./profiles/shared
 
             # Custom overlay
-            {
-              nixpkgs.overlays = [(import ./overlay.nix)];
-            }
+            ./overlay.nix
           ];
           specialArgs = {flakeDir = "/conf";};
         };
@@ -108,14 +107,14 @@
   outputs = inputs @ {
     self,
     nixpkgs,
-    # stable-pkgs,
+    # nixpkgs-stable,
     home-manager,
     utils,
     chaotic,
     ...
   }: let
     flakeDir = "/conf";
-    stable-pkgs = inputs.stable-pkgs.x86_64-linux.nixpkgs;
+    nixpkgs-stable = inputs.nixpkgs-stable.x86_64-linux.nixpkgs;
   in
     utils.lib.mkFlake {
       # Required arguments
@@ -143,7 +142,7 @@
           chaotic.nixosModules.default
         ];
 
-        extraArgs = {inherit stable-pkgs inputs flakeDir;};
+        extraArgs = {inherit nixpkgs-stable inputs flakeDir;};
       };
 
       hosts = let
