@@ -95,6 +95,11 @@
             path = ./hosts/zbook;
           };
 
+          banana = {
+            modules = [desktop sddmGreeter];
+            path = ./hosts/banana;
+          };
+
           hcax = {
             modules = [server];
             path = ./hosts/hcax;
