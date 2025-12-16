@@ -75,6 +75,7 @@
           "$mod, H, changegroupactive, f"
           "$mod, P, pseudo"
           "$mod, O, exec, nwg-displays"
+          "$mod SHIFT, R, exec, hyprctl reload"
           # 768 is in pixels; 768 = (3840px / 1.5x) * 33%
           "$mod, M, exec, [float; size 768 60%] pavucontrol"
           # Exit Hyprland
