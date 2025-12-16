@@ -73,16 +73,8 @@
       nix-output-monitor # Fancy dependency graph for `nix build`
       tldr
 
-      pcmanfm
-      # Dynamically update Hyprland monitors using a GUI
-      nwg-displays
-
       # System tools
       xdg-utils # Makes url handlers work between apps
-      gparted
-      # GUI agent for polkit interactive auth
-      polkit_gnome
-      grimblast
       nix-inspect
       openssl
       # git secret management
@@ -108,8 +100,8 @@
 
       (writeShellScriptBin "upgrade-firmware" ''
         sudo fwupdmgr get-devices
-        echo Waiting 10 sec...
-        sleep 10
+        echo Waiting 2 sec...
+        sleep 2
         sudo fwupdmgr refresh --force
         sudo fwupdmgr get-updates
         sudo fwupdmgr update
@@ -144,29 +136,6 @@
         fancyOutput = true;
       }))
     ]);
-
-  # Autostart the gnome polkit agent
-  systemd = {
-    user.services.polkit-gnome-authentication-agent-1 = {
-      Unit = {
-        Description = "polkit-gnome-authentication-agent-1";
-        Wants = ["graphical-session.target"];
-        After = ["graphical-session.target"];
-      };
-
-      Install = {
-        WantedBy = ["graphical-session.target"];
-      };
-
-      Service = {
-        Type = "simple";
-        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
-    };
-  };
 
   xdg = {
     enable = true;

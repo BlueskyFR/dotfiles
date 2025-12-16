@@ -91,6 +91,14 @@
 
       # Vivaldi font fix
       fira
+
+      pcmanfm
+      # Dynamically update Hyprland monitors using a GUI
+      nwg-displays
+      gparted
+      # GUI agent for polkit interactive auth
+      polkit_gnome
+      grimblast
     ];
 
     programs = {
@@ -229,6 +237,29 @@
       ## Anyway the following does work for chromium! Test it with `dconf write /org/gnome/desktop/interface/color-scheme "'prefer-dark'"`
       ## with this page for instance (change visible live): https://hugooo.dev/dark-mode.html
       "org/gnome/desktop/interface".color-scheme = "prefer-dark";
+    };
+
+    # Autostart the gnome polkit agent
+    systemd = {
+      user.services.polkit-gnome-authentication-agent-1 = {
+        Unit = {
+          Description = "polkit-gnome-authentication-agent-1";
+          Wants = ["graphical-session.target"];
+          After = ["graphical-session.target"];
+        };
+
+        Install = {
+          WantedBy = ["graphical-session.target"];
+        };
+
+        Service = {
+          Type = "simple";
+          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+          Restart = "on-failure";
+          RestartSec = 1;
+          TimeoutStopSec = 10;
+        };
+      };
     };
   };
 }
