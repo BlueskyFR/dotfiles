@@ -110,6 +110,7 @@
     curl
     wget
     tree
+    file
 
     docker-compose
     passt
