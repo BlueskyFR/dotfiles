@@ -17,6 +17,16 @@
     b = "bat -pp"; # Colored cat
     bp = "bat -p"; # Colored cat (keep pager)
     cyme = "cyme --headings"; # Stylish lsusb
+
+    # Docker/podman compose
+    dc = "docker compose";
+    dcu = "docker compose up -d";
+    dcd = "docker compose down";
+    dcr = "docker compose down && docker compose up -d";
+    dcp = "docker compose pull";
+    dcb = "docker compose build";
+    dcf = "docker compose pull && docker compose build && docker compose down && docker compose up -d";
+
     zz = "zz";
 
     # Make aliases work with sudo X
