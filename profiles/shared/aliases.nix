@@ -22,10 +22,8 @@
     dc = "docker compose";
     dcu = "docker compose up -d";
     dcd = "docker compose down";
-    dcr = "docker compose down && docker compose up -d";
     dcp = "docker compose pull";
     dcb = "docker compose build";
-    dcf = "docker compose pull && docker compose build && docker compose down && docker compose up -d";
 
     zz = "zz";
 
@@ -45,6 +43,11 @@
     initContent = lib.mkAfter ''
       # Custom cd function, defined after zoxide's init
       cd() { __zoxide_z "$@" && l }
+
+      # Custom docker/podman compose commands
+      dcr() { docker compose down $* && docker compose up -d  $* }
+      dcrl() { docker compose down $* && docker compose up -d  $* && docker compose logs -f $* }
+      dcf() { docker compose pull && docker compose build && docker compose down $* && docker compose up -d  $* }
     '';
   };
 
