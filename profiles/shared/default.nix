@@ -210,6 +210,10 @@
 
     podman = {
       enable = true;
+      # Fix podman logs not showing (https://discourse.nixos.org/t/nixos-podman-logdriver-issues/73161/5
+      # and https://github.com/NixOS/nixpkgs/commit/d060dee75bcae416a63de584c3aa58a663402539)
+      # Tracking issue: https://github.com/NixOS/nixpkgs/issues/471843
+      package = pkgs.podman.override {systemdMinimal = pkgs.systemd;};
       # Create a `docker` alias for podman, to use it as a drop-in replacement
       dockerCompat = true;
       # Required for containers under podman-compose to be able to talk to each other
