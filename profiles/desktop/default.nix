@@ -45,6 +45,9 @@
         variant = "";
       };
     };
+
+    # Gaming devices configuration, needed for piper (see home pkgs)
+    ratbagd.enable = true;
   };
 
   programs = {
@@ -88,6 +91,9 @@
       discord-krisp
       postman
       pavucontrol
+      # Gaming devices configuration
+      ## Also needs ratbagd (see services)
+      piper
 
       # Vivaldi font fix
       fira
