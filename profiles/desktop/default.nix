@@ -101,6 +101,8 @@
       pcmanfm
       # Dynamically update Hyprland monitors using a GUI
       nwg-displays
+      # Print key names (Wayland equivalent of X11's xev)
+      wev
       gparted
       # GUI agent for polkit interactive auth
       polkit_gnome
