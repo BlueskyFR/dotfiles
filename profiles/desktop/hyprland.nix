@@ -150,10 +150,41 @@
             10)
         );
 
+      # m = movement is expected, drag_threshold is configurable (a click won't count)
+      # (drag_threshold is 0 by default though!)
+      # Bind flags: https://wiki.hypr.land/Configuring/Binds/#bind-flags
       bindm = [
         # Move/resize windows with mod + LMB/RMB and dragging
         "$mod, mouse:272, movewindow"
         "$mod, mouse:273, resizewindow"
+
+        # Move window using mouse button 5
+        ", mouse:277, movewindow"
+      ];
+
+      # l = works even when screen is locked
+      bindl = [
+        # `playerctl` acts on the app currently playing some media
+        ", XF86AudioPlay, exec, playerctl play-pause"
+        ", XF86AudioPrev, exec, playerctl previous"
+        ", XF86AudioNext, exec, playerctl next"
+        # Use wpctl (Wireplumber) for volume control to change the system volume
+        # instead of the app's volume (if it was playerctl)
+        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_SINK@ 5%-"
+        ", XF86AudioRaiseVolume, exec, wpctl set-volume --limit 1.0 @DEFAULT_SINK@ 5%+"
+        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_SINK@ toggle"
+      ];
+
+      # le = will repeat when held even when screen is locked
+      bindle = [
+        # Seek forward/backward X seconds when combining with CTRL
+        # (to avoid conflicting with regular key presses)
+        "CTRL, XF86AudioPrev, exec, playerctl position 5-"
+        "CTRL, XF86AudioNext, exec, playerctl position 5+"
+
+        # Control the app volume when using CTRL + volume keys
+        "CTRL, XF86AudioLowerVolume, exec, playerctl volume 0.05-"
+        "CTRL, XF86AudioRaiseVolume, exec, playerctl volume 0.05+"
       ];
 
       input = {

@@ -195,6 +195,10 @@
 
       # Handle bluetooth media controls
       mpris-proxy.enable = true;
+
+      # cli tool for controlling media players that implement the MPRIS D-Bus Interface Specification,
+      # making it easier to map XF86 keys in Hyprland for instance
+      playerctld.enable = true;
     };
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage
