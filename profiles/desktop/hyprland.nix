@@ -19,7 +19,7 @@
         "[workspace 3 silent] vivaldi"
         "[workspace 4 silent] discord"
         # Lift all workspace placement rules after startup
-        "sleep 40 && hyprctl keyword windowrule workspace unset, class:.*"
+        "sleep 40 && hyprctl keyword windowrule workspace unset, 'class:.*'"
       ];
 
       # Window rules
