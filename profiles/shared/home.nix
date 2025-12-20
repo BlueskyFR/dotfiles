@@ -64,6 +64,8 @@
       cargo-flamegraph
       bacon
 
+      android-tools
+
       # Cli tools
       zip
       unzip
