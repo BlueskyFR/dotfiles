@@ -12,7 +12,6 @@
     lt = "lsd --tree";
     llt = "lsd -lArth --tree";
 
-    ns = "nix-shell -p";
     p = "${pkgs.python313}/bin/python";
     b = "bat -pp"; # Colored cat
     bp = "bat -p"; # Colored cat (keep pager)
@@ -40,9 +39,13 @@
       aa = "aa";
       g = "grep -i";
     };
+    # Nix string litterals (here indented string) escape chars: https://nix.dev/manual/nix/2.28/language/string-literals.html
     initContent = lib.mkAfter ''
       # Custom cd function, defined after zoxide's init
       cd() { __zoxide_z "$@" && l }
+
+      # Alias for `ns pkg1 pkg2` -> `nix shell nixpkgs#pkg1 nixpkgs#pkg2`
+      ns() { nix shell ''${@/#/nixpkgs#} }
 
       # Custom docker/podman compose commands
       dcr() { docker compose down $* && docker compose up -d  $* }
