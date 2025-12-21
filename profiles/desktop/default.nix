@@ -107,6 +107,8 @@
       # GUI agent for polkit interactive auth
       polkit_gnome
       grimblast
+
+      android-tools
     ];
 
     programs = {
