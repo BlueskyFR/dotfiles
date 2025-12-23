@@ -49,6 +49,7 @@
 
       easy-hosts = let
         desktop = ./profiles/desktop;
+        work = ./profiles/work;
         server = ./profiles/server;
         sddmGreeter = ./profiles/sddm-greeter.nix;
       in {
