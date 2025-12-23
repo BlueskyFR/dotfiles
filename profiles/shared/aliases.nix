@@ -51,6 +51,9 @@
       dcr() { docker compose down $* && docker compose up -d  $* }
       dcrl() { docker compose down $* && docker compose up -d  $* && docker compose logs -f $* }
       dcf() { docker compose pull && docker compose build && docker compose down $* && docker compose up -d  $* }
+
+      # is.gd url shortener
+      shorten() { out=$(curl -s --fail-with-body "https://is.gd/create.php?format=simple&url=$1") && wl-copy "$out" 2> /dev/null && echo '✅ Copied to clipboard!' || echo $out }
     '';
   };
 

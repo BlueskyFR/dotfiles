@@ -103,6 +103,7 @@
       nwg-displays
       # Print key names (Wayland equivalent of X11's xev)
       wev
+      wl-clipboard-rs
       gparted
       # GUI agent for polkit interactive auth
       polkit_gnome
