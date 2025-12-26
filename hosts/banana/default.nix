@@ -12,8 +12,6 @@
     ./hardware-configuration.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
   home-manager.users.hugo = {
     wayland.windowManager.hyprland.settings = {
       # monitor = lib.mkForce [

@@ -13,9 +13,6 @@
     ./nvidia.nix
   ];
 
-  # Force the latest Linux kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
   # wow.hyprlandGitVersion.enable = true;
 
   home-manager.users.hugo = {
