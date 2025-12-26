@@ -91,6 +91,7 @@
       discord-krisp
       postman
       pavucontrol
+      networkmanagerapplet
       # Gaming devices configuration
       ## Also needs ratbagd (see services)
       piper
