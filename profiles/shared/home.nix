@@ -29,6 +29,7 @@
       # # fonts?
       #(nerdfonts.override {fonts = ["FiraCode"];})
       nerd-fonts.fira-code
+      nerd-fonts.victor-mono
       #twemoji-color-font (old one)
       twitter-color-emoji
       # Custom fonts

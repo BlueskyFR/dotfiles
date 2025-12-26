@@ -5,7 +5,7 @@
   config,
   ...
 }: {
-  imports = [./bluetooth.nix];
+  imports = [./bluetooth.nix ./hyprlock.nix];
 
   boot.loader.grub = {
     # Automatically pre-select the last boot item
@@ -105,8 +105,6 @@
       wev
       wl-clipboard-rs
       gparted
-      # GUI agent for polkit interactive auth
-      polkit_gnome
       grimblast
 
       android-tools
@@ -176,6 +174,9 @@
           };
         };
       };
+
+      # Screenshot utility
+      hyprshot.enable = true;
     };
 
     services = {
@@ -202,6 +203,16 @@
       # cli tool for controlling media players that implement the MPRIS D-Bus Interface Specification,
       # making it easier to map XF86 keys in Hyprland for instance
       playerctld.enable = true;
+
+      # GUI agent for polkit interactive auth
+      hyprpolkitagent.enable = true;
+      # Hyprland window switcher (Windows' alt-tab-like)
+      /*
+         hyprshell = {
+        enable = true;
+        settings = {};
+      };
+      */
     };
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -252,29 +263,6 @@
       ## Anyway the following does work for chromium! Test it with `dconf write /org/gnome/desktop/interface/color-scheme "'prefer-dark'"`
       ## with this page for instance (change visible live): https://hugooo.dev/dark-mode.html
       "org/gnome/desktop/interface".color-scheme = "prefer-dark";
-    };
-
-    # Autostart the gnome polkit agent
-    systemd = {
-      user.services.polkit-gnome-authentication-agent-1 = {
-        Unit = {
-          Description = "polkit-gnome-authentication-agent-1";
-          Wants = ["graphical-session.target"];
-          After = ["graphical-session.target"];
-        };
-
-        Install = {
-          WantedBy = ["graphical-session.target"];
-        };
-
-        Service = {
-          Type = "simple";
-          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-          Restart = "on-failure";
-          RestartSec = 1;
-          TimeoutStopSec = 10;
-        };
-      };
     };
   };
 }

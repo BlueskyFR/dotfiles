@@ -12,7 +12,7 @@
         config.allowUnfree = true;
       };
 
-      hyprdynamicmonitors = inputs.hyprdynamicmonitors.packages.${prev.system}.default;
+      # hyprdynamicmonitors = inputs.hyprdynamicmonitors.packages.${prev.stdenv.hostPlatform.system}.default;
 
       /*
         flameshot = prev.flameshot.overrideAttrs (previousAttrs: {

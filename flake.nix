@@ -20,6 +20,8 @@
 
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
+    custom-hyprlock.url = "github:BlueskyFR/hyprlock";
+
     vscode-server = {
       url = "github:nix-community/nixos-vscode-server";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -80,7 +82,7 @@
           };
 
           chador = {
-            modules = [desktop];
+            modules = [desktop sddmGreeter];
             path = ./hosts/chador;
           };
 
