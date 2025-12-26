@@ -18,8 +18,20 @@
         "[workspace 2 silent] code"
         "[workspace 3 silent] vivaldi"
         "[workspace 4 silent] discord"
-        # Lift all workspace placement rules after startup
-        "sleep 40 && hyprctl keyword windowrule workspace unset, 'class:.*'"
+        "[workspace 9 silent] spotify"
+      ];
+
+      # Also exec on reloads
+      exec = [
+        # Lift all workspace placement rules after startup or reload
+        "sleep 25 && hyprctl keyword windowrule workspace unset, 'class:.*'"
+
+        # NixOS configuration on workspace 10
+        ## The '*' needs to be shell-escaped, and the '\` itself needs to be escaped in the nix
+        ## string in order to be passed to the shell;
+        ## The `workspace X silent` is a static rule, meaning it cannot apply to dynamic tags
+        ## so we make it dynamic manually by triggering it a couple seconds after startup
+        "sleep 10 && hyprctl dispatch movetoworkspacesilent '10,tag:nixos-conf\\*'"
       ];
 
       # Window rules
@@ -27,11 +39,15 @@
       windowrule = [
         # Fix for the forking processes mentionned above during startup
         "workspace 2 silent, class:code"
+        # NixOS configuration on workspace 10
+        "tag +nixos-conf, class:code, title: NixOS configuration"
+        # Static rule, doesn't work on dynamic tags:
+        # "workspace 10 silent, tag:nixos-conf*"
         "workspace 3 silent, class:vivaldi-stable"
         "workspace 4 silent, class:discord"
 
         # Picture-in-Picture
-        "pin, title:'Picture in picture'"
+        "float, pin, title:Picture in picture"
       ];
 
       # Required for Nvidia drivers
@@ -65,7 +81,7 @@
           "$mod, V, exec, vivaldi"
           "$mod, A, killactive"
           "$mod SHIFT, A, forcekillactive"
-          ", Print, exec, grimblast --notify copysave area"
+          ", Print, exec, hyprshot --clipboard-only -d -m region"
           "$mod, space, togglefloating"
           "$mod, D, exec, rofi -show drun -show-icons"
           "$mod, E, togglesplit"

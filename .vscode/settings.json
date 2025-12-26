@@ -1,0 +1,5 @@
+{
+    // Set a specific title for this workspace/window so it can be detected by Hyprland
+    // using dynamic tags by matching the WM_CLASS ("code") + the window title
+    "window.title": "NixOS configuration"
+}
