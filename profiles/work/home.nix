@@ -7,6 +7,7 @@
 }: {
   home.packages = with pkgs; [
     teams-for-linux
+    remmina
   ];
 
   wayland.windowManager.hyprland.settings = {
