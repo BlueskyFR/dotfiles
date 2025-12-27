@@ -48,6 +48,9 @@
       # Custom cd function, defined after zoxide's init
       cd() { __zoxide_z "$@" && l }
 
+      # Highlight lines matching pattern without trimming output
+      hl() { grep --color=always -Ei "^|.*$@.*" }
+
       # Alias for `ns pkg1 pkg2` -> `nix shell nixpkgs#pkg1 nixpkgs#pkg2`
       ns() { nix shell ''${@/#/nixpkgs#} }
 
