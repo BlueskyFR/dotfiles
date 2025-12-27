@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  flakeDir,
   ...
 }: {
   home.shellAliases = {
@@ -23,6 +24,9 @@
     dcd = "docker compose down";
     dcp = "docker compose pull";
     dcb = "docker compose build";
+
+    # Nix aliases
+    repl = "nix repl ${flakeDir}#nixosConfigurations.$(hostname)";
 
     zz = "zz";
 
@@ -58,6 +62,47 @@
   };
 
   # TODO: add back `alias -s py=python` (suffix alias)
+
+  home.packages = with pkgs;
+    [
+      (writeShellScriptBin "upgrade-firmware" ''
+        sudo fwupdmgr get-devices
+        echo Waiting 2 sec...
+        sleep 2
+        sudo fwupdmgr refresh --force
+        sudo fwupdmgr get-updates
+        sudo fwupdmgr update
+      '')
+    ]
+    ++ (let
+      script = {
+        updateFlakeInputs ? false,
+        fancyOutput ? false,
+      }: ''
+        sudo true
+        ${
+          if updateFlakeInputs
+          then "nix flake update --flake ${flakeDir}"
+          else ""
+        }
+        sudo nixos-rebuild switch --flake ${flakeDir}${
+          if fancyOutput
+          then " |& ${nix-output-monitor}/bin/nom"
+          else ""
+        }'';
+    in [
+      # Rebuild/sync system
+      (writeShellScriptBin "s" (script {}))
+      # Update flake inputs + rebuild system
+      (writeShellScriptBin "us" (script {updateFlakeInputs = true;}))
+      # Rebuild/sync system (fancy)
+      (writeShellScriptBin "sf" (script {fancyOutput = true;}))
+      # Update flake inputs + rebuild system (fancy)
+      (writeShellScriptBin "usf" (script {
+        updateFlakeInputs = true;
+        fancyOutput = true;
+      }))
+    ]);
 
   # Some tools need some global vars to enable colors
   home.sessionVariables = {

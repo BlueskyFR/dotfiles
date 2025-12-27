@@ -21,124 +21,85 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = with pkgs;
-    [
-      # # It is sometimes useful to fine-tune packages, for example, by applying
-      # # overrides. You can do that directly here, just don't forget the
-      # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-      # # fonts?
-      #(nerdfonts.override {fonts = ["FiraCode"];})
-      nerd-fonts.fira-code
-      nerd-fonts.victor-mono
-      #twemoji-color-font (old one)
-      twitter-color-emoji
-      # Custom fonts
-      # stdenv.mkDerivation
-      # {
-      #   name = "Operator Mono SSm Lig Book";
-      #   version = "1.0";
-      #   src = self;
+  home.packages = with pkgs; [
+    # # It is sometimes useful to fine-tune packages, for example, by applying
+    # # overrides. You can do that directly here, just don't forget the
+    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
+    # # fonts?
+    #(nerdfonts.override {fonts = ["FiraCode"];})
+    nerd-fonts.fira-code
+    nerd-fonts.victor-mono
+    #twemoji-color-font (old one)
+    twitter-color-emoji
+    # Custom fonts
+    # stdenv.mkDerivation
+    # {
+    #   name = "Operator Mono SSm Lig Book";
+    #   version = "1.0";
+    #   src = self;
 
-      #   installPhase = ''
-      #     dest="$out/share/fonts/opentype/Operator Mono SSm Lig Book"
-      #     mkdir -p $dest
-      #     cp -r custom-fonts/* $dest
-      #   '';
-      # }
+    #   installPhase = ''
+    #     dest="$out/share/fonts/opentype/Operator Mono SSm Lig Book"
+    #     mkdir -p $dest
+    #     cp -r custom-fonts/* $dest
+    #   '';
+    # }
 
-      # oh-my-zsh?
-      # firacode ttf nerd
-      # my custom font here
-      # starship
-      # zsh-syntax-highlighting
-      # zsh-autosuggestions
-      # Alacritty snazzy
-      # WORK ONLY: teams, slack, remmina (+ freerdp for rdp support?), minicom
+    # oh-my-zsh?
+    # firacode ttf nerd
+    # my custom font here
+    # starship
+    # zsh-syntax-highlighting
+    # zsh-autosuggestions
+    # Alacritty snazzy
+    # WORK ONLY: teams, slack, remmina (+ freerdp for rdp support?), minicom
 
-      # Dev
-      gh
-      deno
-      ## Rust
-      rustup
-      gcc # Needed for rustup
-      cargo-binstall # Shouldn't be needed - but just in case
-      cargo-flamegraph
-      bacon
+    # Dev
+    gh
+    deno
+    ## Rust
+    rustup
+    gcc # Needed for rustup
+    cargo-binstall # Shouldn't be needed - but just in case
+    cargo-flamegraph
+    bacon
 
-      # Cli tools
-      zip
-      unzip
+    # Cli tools
+    zip
+    unzip
 
-      # rofi + rofi themes (gh) + rofimoji
-      trashy # trash-cli alternative, usage -> alias rm="trashy"
-      nmap
-      manix # Nix/HM cli doc searcher
-      nix-output-monitor # Fancy dependency graph for `nix build`
-      tldr
+    # rofi + rofi themes (gh) + rofimoji
+    trashy # trash-cli alternative, usage -> alias rm="trashy"
+    nmap
+    manix # Nix/HM cli doc searcher
+    nix-output-monitor # Fancy dependency graph for `nix build`
+    tldr
 
-      # System tools
-      xdg-utils # Makes url handlers work between apps
-      nix-inspect
-      openssl
-      # git secret management
-      # transcrypt
+    # System tools
+    xdg-utils # Makes url handlers work between apps
+    nix-inspect
+    openssl
+    # git secret management
+    # transcrypt
 
-      # piper?
+    # piper?
 
-      # Nix language server
-      nil
-      # Nix language formatter
-      alejandra
+    # Nix language server
+    nil
+    # Nix language formatter
+    alejandra
 
-      # Custom scripts
-      # fup-repl
+    # Custom scripts
+    # fup-repl
 
-      # Extremely important
-      sl
-      cmatrix
-      asciiquarium
-      neofetch
-      ipfetch
-      countryfetch
-
-      (writeShellScriptBin "upgrade-firmware" ''
-        sudo fwupdmgr get-devices
-        echo Waiting 2 sec...
-        sleep 2
-        sudo fwupdmgr refresh --force
-        sudo fwupdmgr get-updates
-        sudo fwupdmgr update
-      '')
-    ]
-    ++ (let
-      script = {
-        updateFlakeInputs ? false,
-        fancyOutput ? false,
-      }: ''
-        sudo true
-        ${
-          if updateFlakeInputs
-          then "nix flake update --flake ${flakeDir}"
-          else ""
-        }
-        sudo nixos-rebuild switch --flake ${flakeDir}${
-          if fancyOutput
-          then " |& ${nix-output-monitor}/bin/nom"
-          else ""
-        }'';
-    in [
-      # Rebuild/sync system
-      (writeShellScriptBin "s" (script {}))
-      # Update flake inputs + rebuild system
-      (writeShellScriptBin "us" (script {updateFlakeInputs = true;}))
-      # Rebuild/sync system (fancy)
-      (writeShellScriptBin "sf" (script {fancyOutput = true;}))
-      # Update flake inputs + rebuild system (fancy)
-      (writeShellScriptBin "usf" (script {
-        updateFlakeInputs = true;
-        fancyOutput = true;
-      }))
-    ]);
+    # Extremely important
+    sl
+    cmatrix
+    asciiquarium
+    neofetch
+    ipfetch
+    countryfetch
+  ];
 
   xdg = {
     enable = true;
