@@ -41,6 +41,7 @@
           ignore_empty_input = true;
           text_trim = false;
           hide_cursor = true;
+          fractional_scaling = 0;
         };
 
         input-field = {
@@ -60,9 +61,9 @@
           rounding = 0;
           valign = "center";
 
-          outline_thickness = 5;
+          outline_thickness = 15;
 
-          size = "99%, 99%";
+          size = "99.4%, 99%";
           dots_text_format = "*";
           dots_size = 0.1;
           dots_spacing = 0.15;
@@ -75,7 +76,8 @@
           font_color = "rgba(255, 255, 255, 1)";
 
           # Colors
-          fail_color = "rgb(255, 49, 23)";
+          # fail_color = "rgb(255, 49, 23)"; # Red from where-is-my-sddm-theme
+          fail_color = "rgb(244, 67, 54)";
           check_color = "rgba(255, 255, 255, 0.5)";
           numlock_color = "rgb(255, 128, 0)";
           invert_numlock = true;
@@ -86,16 +88,17 @@
 
         label = {
           monitor = "";
+          color = "rgba(255, 255, 255, 0.65)";
           # font_family = JetBrains Mono Nerd Font Mono ExtraBold;
           font_family = "VictorMono Nerd Font Mono Bold";
-          # font_size = 90;
-          font_size = 112;
+          font_size = 256;
           halign = "center";
-          position = "0, -100";
+          position = "0, -10%";
           shadow_boost = 0.5;
           shadow_passes = 3;
-          text = "$TIME";
-          color = "rgba(255, 255, 255, 0.65)";
+          text_align = "center";
+          # text = "$TIME";
+          text = ''cmd[update:1000] H=$((10##$(date +%H) * 255 / 23)); M=$((10##$(date +%M) * 255 / 59)); S=$((10##$(date +%S) * 255 / 59)); hex=$(printf '%02x%02x%02x' $H $M $S); echo "<span foreground='##$hex'>$(date +%X)</span><br/><span font_size='64pt' line_height='1025'>0x$hex</span>"'';
           valign = "top";
           zindex = 3;
         };
