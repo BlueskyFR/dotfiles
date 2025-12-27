@@ -29,8 +29,9 @@
         };
 
         background = {
-          blur_passes = 1;
-          blur_size = 4;
+          # 4 passes with size = 1 replicates approximately the settings I had with blurlock on Manjaro!
+          blur_passes = 4;
+          blur_size = 1;
           color = "rgba(34, 34, 34, 1)";
           path = "screenshot";
           zindex = -1;
