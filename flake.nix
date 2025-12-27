@@ -22,6 +22,11 @@
 
     custom-hyprlock.url = "github:BlueskyFR/hyprlock";
 
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     vscode-server = {
       url = "github:nix-community/nixos-vscode-server";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -60,6 +65,7 @@
             # NixOS module, not a function �
             inputs.home-manager.nixosModules.home-manager
 
+            # NixOS modules
             inputs.chaotic.nixosModules.default
             inputs.vscode-server.nixosModules.default
 

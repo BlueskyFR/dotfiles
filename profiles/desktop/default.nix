@@ -78,6 +78,9 @@
       ./hyprland.nix
       ./rofi.nix
 
+      inputs.dms.homeModules.dank-material-shell
+      ./dank-material-shell
+
       # Ax-Shell
       # inputs.ax-shell.homeManagerModules.default
       # ./ax-shell.nix
@@ -206,15 +209,9 @@
       # mpris-proxy.enable = false;
       playerctld.enable = true;
 
-      # GUI agent for polkit interactive auth
-      hyprpolkitagent.enable = true;
-      # Hyprland window switcher (Windows' alt-tab-like)
-      /*
-         hyprshell = {
-        enable = true;
-        settings = {};
-      };
-      */
+      # Clipboard persistence
+      ## By default on Wayland, an app "owns" the clipboard data it copies, hence cleared when it's closed
+      wl-clip-persist.enable = true;
     };
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage
