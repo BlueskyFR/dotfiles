@@ -4,6 +4,8 @@
   flakeDir,
   ...
 }: {
+  imports = [./beta.nix];
+
   # Home manager global config
   home-manager = {
     # Use global nixpkgs
