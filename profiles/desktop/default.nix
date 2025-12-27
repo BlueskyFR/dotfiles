@@ -198,11 +198,12 @@
         };
       };
 
-      # Handle bluetooth media controls
-      mpris-proxy.enable = true;
-
       # cli tool for controlling media players that implement the MPRIS D-Bus Interface Specification,
-      # making it easier to map XF86 keys in Hyprland for instance
+      # making it easier to map XF86 keys in Hyprland for instance;
+      # Bluetooth headset controls (keys) should be forwarded to the kernel as a key by BlueZ,
+      # which Hyprland should be able to catch;
+      # so enabling mpris-proxy would be useless and creates a fake player/sink which messes with playerctl.
+      # mpris-proxy.enable = false;
       playerctld.enable = true;
 
       # GUI agent for polkit interactive auth

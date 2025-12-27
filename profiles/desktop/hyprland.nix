@@ -182,7 +182,9 @@
       # l = works even when screen is locked
       bindl = [
         # `playerctl` acts on the app currently playing some media
+        # Bluetooth events (keys) can be debugged using `sudo evtest`
         ", XF86AudioPlay, exec, playerctl play-pause"
+        ", XF86AudioPause, exec, playerctl play-pause"
         ", XF86AudioPrev, exec, playerctl previous"
         ", XF86AudioNext, exec, playerctl next"
         # Use wpctl (Wireplumber) for volume control to change the system volume
