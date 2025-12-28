@@ -162,6 +162,9 @@
         virtualenvs.in-project = true;
       };
     };
+
+    # Run software without installing it (`, cowsay wow`)
+    nix-index-database.comma.enable = true;
   };
 
   # Home Manager can also manage your environment variables through

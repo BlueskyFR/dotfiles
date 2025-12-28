@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   lib,
   flakeDir,
@@ -12,7 +13,14 @@
     useGlobalPkgs = true;
     # Allow per-user packages
     useUserPackages = true;
-    users.hugo.imports = [./home.nix ./aliases.nix ./zsh.nix];
+    users.hugo = {
+      imports = [
+        inputs.nix-index-database.homeModules.default
+        ./home.nix
+        ./aliases.nix
+        ./zsh.nix
+      ];
+    };
     extraSpecialArgs = {inherit flakeDir;};
   };
 
