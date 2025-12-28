@@ -137,6 +137,21 @@
     cyme # Better lsusb
   ];
 
+  fonts.packages = with pkgs; [
+    # # It is sometimes useful to fine-tune packages, for example, by applying
+    # # overrides. You can do that directly here, just don't forget the
+    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
+    # # fonts?
+    #(nerdfonts.override {fonts = ["FiraCode"];})
+    nerd-fonts.fira-code
+    nerd-fonts.victor-mono
+    #twemoji-color-font (old one)
+    twitter-color-emoji
+
+    # Custom fonts
+    inputs.custom-fonts.packages.${pkgs.stdenv.hostPlatform.system}.default
+  ];
+
   programs = {
     # Zsh, already configured in home-manager but required here so that the right files are sourced
     zsh.enable = true;
