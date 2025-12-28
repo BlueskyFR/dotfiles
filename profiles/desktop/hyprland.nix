@@ -80,6 +80,7 @@
           # Standard binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
           "$mod, Return, exec, alacritty"
           "$mod, V, exec, vivaldi"
+          "$mod, S, exec, nautilus --new-window"
           "$mod, A, killactive"
           "$mod SHIFT, A, forcekillactive"
           ", Print, exec, hyprshot --clipboard-only -d -m region"

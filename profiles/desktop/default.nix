@@ -102,7 +102,7 @@
       # Vivaldi font fix
       fira
 
-      pcmanfm
+      nautilus
       # Dynamically update Hyprland monitors using a GUI
       nwg-displays
       # Print key names (Wayland equivalent of X11's xev)
@@ -243,8 +243,25 @@
 
     gtk = {
       enable = true;
-      # theme.name = "adw-gtk3";
-      # iconTheme.name = "GruvboxPlus";
+      colorScheme = "dark";
+      iconTheme = {
+        # package = pkgs.papirus-icon-theme;
+        # name = "Papirus";
+        package = pkgs.whitesur-icon-theme.override {
+          boldPanelIcons = true;
+          alternativeIcons = true;
+          # themeVariants = ["pink"]; ["all"]
+        };
+        name = "WhiteSur-dark"; # or e.g. WhiteSur
+      };
+      theme = {
+        package = pkgs.whitesur-gtk-theme.override {
+          themeVariants = ["pink"]; # ["all"]
+          nautilusStyle = "glassy";
+        };
+        name = "WhiteSur-Dark-pink"; # or e.g. WhiteSur-Light-solid-pink
+        # name = "adw-gtk3";
+      };
     };
 
     home.pointerCursor = {
