@@ -23,7 +23,7 @@ to get there and accumulate all this knowledge in a single place! ❤️
 
 ## nix github.com rate-limiting
 
-Rate-limit caused by the amount of requests to github.com can be solved by [creating a personal access token](https://github.com/settings/personal-access-tokens) (default permissions, i.e. read-only access to public repos is enough) and pasting it under `~/.config/nix/nix.conf`:
+Rate-limit caused by the amount of requests to github.com can be solved by [creating a personal access token](https://github.com/settings/personal-access-tokens/new?name=hostname+(NixOS)+-+nix&expires_in=none&metadata=read&contents=read) (default permissions, i.e. read-only access to public repos is enough) and pasting it under `~/.config/nix/nix.conf`:
 
 ```shell
 mkdir -p ~/.config/nix
