@@ -316,6 +316,7 @@
           "showSwap": true,
           "minimumWidth": true
         },
+        "network_speed_monitor",
         "notificationButton",
         "battery",
         {
