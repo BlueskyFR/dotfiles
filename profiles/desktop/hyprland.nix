@@ -21,8 +21,8 @@
         "[workspace 9 silent] spotify"
 
         # System tray icons
-        "nm-applet"
-        "blueman-applet"
+        "sleep 10 && nm-applet"
+        "sleep 10 && blueman-applet"
       ];
 
       # Also exec on reloads
