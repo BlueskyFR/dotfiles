@@ -19,6 +19,7 @@
         "[workspace 3 silent] vivaldi"
         "[workspace 4 silent] discord"
         "[workspace 9 silent] spotify"
+        "nm-applet"
       ];
 
       # Also exec on reloads
