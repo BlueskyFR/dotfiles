@@ -101,6 +101,9 @@
     countryfetch
   ];
 
+  # Place config files inside xdg dirs whenever supported instead of e.g. $HOME/.npmrc
+  home.preferXdgDirectories = true;
+
   xdg = {
     enable = true;
     userDirs = {
