@@ -12,7 +12,7 @@
         config.allowUnfree = true;
       };
 
-      # hyprdynamicmonitors = inputs.hyprdynamicmonitors.packages.${prev.stdenv.hostPlatform.system}.default;
+      monolisa-hugo = inputs.custom-fonts.packages.${prev.stdenv.hostPlatform.system}.monolisa-hugo;
 
       /*
         flameshot = prev.flameshot.overrideAttrs (previousAttrs: {
