@@ -53,7 +53,8 @@
           fail_text = "";
           # font_family=$font
           # font_family = "monospace";
-          font_family = "FiraCode Nerd Font Mono Ret";
+          # font_family = "FiraCode Nerd Font Mono Ret";
+          font_family = "MonoLisa Hugo Variable";
           # font_family = VictorMono Nerd Font Mono
           halign = "center";
           # placeholder_text=Input password...
@@ -90,7 +91,8 @@
           monitor = "";
           color = "rgba(255, 255, 255, 0.65)";
           # font_family = JetBrains Mono Nerd Font Mono ExtraBold;
-          font_family = "VictorMono Nerd Font Mono Bold";
+          # font_family = "VictorMono Nerd Font Mono Bold";
+          font_family = "MonoLisa Hugo Variable";
           font_size = 256;
           halign = "center";
           position = "0, -10%";
@@ -98,7 +100,7 @@
           shadow_passes = 3;
           text_align = "center";
           # text = "$TIME";
-          text = ''cmd[update:1000] H=$((10##$(date +%H) * 255 / 23)); M=$((10##$(date +%M) * 255 / 59)); S=$((10##$(date +%S) * 255 / 59)); hex=$(printf '%02x%02x%02x' $H $M $S); echo "<span foreground='##$hex'>$(date +%X)</span><br/><span font_size='64pt' line_height='1025'>0x$hex</span>"'';
+          text = ''cmd[update:1000] H=$((10##$(date +%H) * 255 / 23)); M=$((10##$(date +%M) * 255 / 59)); S=$((10##$(date +%S) * 255 / 59)); hex=$(printf '%02X%02X%02X' $H $M $S); echo "<span foreground='##$hex' font_weight='600'>$(date +%X)</span><br/><span font_size='64pt' line_height='1025' font_weight='150'>0x$hex</span>"'';
           valign = "top";
           zindex = 3;
         };
