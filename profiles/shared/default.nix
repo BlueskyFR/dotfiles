@@ -155,7 +155,7 @@
 
     fontconfig.defaultFonts = {
       emoji = ["Twitter Color Emoji"];
-      monospace = ["MonoLisa Hugo Variable"];
+      monospace = ["MonoLisaHugoTerm Nerd Font"];
     };
   };
 
