@@ -152,6 +152,11 @@
       # Custom fonts
       monolisa-hugo
     ];
+
+    fontconfig.defaultFonts = {
+      emoji = ["Twitter Color Emoji"];
+      monospace = ["MonoLisa Hugo Variable"];
+    };
   };
 
   programs = {
