@@ -77,7 +77,6 @@
           font_color = "rgba(255, 255, 255, 1)";
 
           # Colors
-          # fail_color = "rgb(255, 49, 23)"; # Red from where-is-my-sddm-theme
           fail_color = "rgb(244, 67, 54)";
           check_color = "rgba(255, 255, 255, 0.5)";
           numlock_color = "rgb(255, 128, 0)";
