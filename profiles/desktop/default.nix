@@ -138,7 +138,20 @@
       alacritty = {
         enable = true;
         settings = {
-          font.size = 16.0; # 20.O
+          # Use our custom Terminal font
+          font = let
+            mkFont = style: {
+              family = "MonoLisaHugoTerm Nerd Font";
+              inherit style;
+            };
+          in {
+            size = 16.0; # 20.O
+
+            normal = mkFont "Regular";
+            bold = mkFont "Bold";
+            italic = mkFont "Italic";
+            bold_italic = mkFont "Bold Italic";
+          };
 
           # Snazzy theme
           colors.draw_bold_text_with_bright_colors = true;
