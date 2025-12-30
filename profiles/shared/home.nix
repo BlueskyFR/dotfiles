@@ -42,6 +42,7 @@
     # Cli tools
     zip
     unzip
+    jq
 
     # rofi + rofi themes (gh) + rofimoji
     trashy # trash-cli alternative, usage -> alias rm="trashy"
