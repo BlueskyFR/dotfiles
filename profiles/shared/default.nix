@@ -274,6 +274,8 @@
   # Enable completions for system packages
   environment.pathsToLink = ["/share/zsh"];
 
+  # Always keep a reference to the source flake for the active system
+  environment.etc."current-nixos-flake".source = ./../..; # Relative to this file so point to the git repo root
   # Custom system build label
   ## Concats system tags if any + the git short revision; visible on boot in the generation names
   system.nixos.label = let
