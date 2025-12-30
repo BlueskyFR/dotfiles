@@ -2,6 +2,8 @@
   inputs,
   pkgs,
   lib,
+  self,
+  config,
   flakeDir,
   ...
 }: {
@@ -271,6 +273,15 @@
 
   # Enable completions for system packages
   environment.pathsToLink = ["/share/zsh"];
+
+  # Custom system build label
+  ## Concats system tags if any + the git short revision; visible on boot in the generation names
+  system.nixos.label = let
+    cfg = config.system.nixos;
+    # `dirtyShortRev` is set instead of `shortRev` when there are uncomitted changes
+    git_rev = self.sourceInfo.shortRev or self.sourceInfo.dirtyShortRev or "dirty";
+  in
+    lib.concatStringsSep "-" ((lib.sort (x: y: x < y) cfg.tags) ++ ["${cfg.version}.hugo.${git_rev}"]);
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
