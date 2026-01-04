@@ -269,6 +269,10 @@
         ];
       };
       #windowrule=animation slide,title:^(all_is_kitty)$
+
+      ecosystem = {
+        no_donation_nag = true;
+      };
     };
   };
 }
