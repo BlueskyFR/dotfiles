@@ -42,16 +42,16 @@
       ## Info about class/title/status: `hyprctl clients`
       windowrule = [
         # Fix for the forking processes mentionned above during startup
-        "workspace 2 silent, class:code"
+        "workspace 2 silent, match:class code"
         # NixOS configuration on workspace 10
-        "tag +nixos-conf, class:code, title: NixOS configuration"
+        "tag +nixos-conf, match:class code, match:title NixOS configuration"
         # Static rule, doesn't work on dynamic tags:
         # "workspace 10 silent, tag:nixos-conf*"
-        "workspace 3 silent, class:vivaldi-stable"
-        "workspace 4 silent, class:discord"
+        "workspace 3 silent, match:class vivaldi-stable"
+        "workspace 4 silent, match:class discord"
 
         # Picture-in-Picture
-        "float, pin, title:Picture in picture"
+        "float on, pin on, match:title Picture in picture"
       ];
 
       # Required for Nvidia drivers
