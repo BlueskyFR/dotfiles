@@ -81,18 +81,17 @@
       script = {
         updateFlakeInputs ? false,
         fancyOutput ? false,
-      }: ''
+      }:
+      # `lib.optionalString` defaults to "" if condition is false
+      ''
         sudo true
-        ${
-          if updateFlakeInputs
-          then "nix flake update --flake ${flakeDir}"
-          else ""
-        }
-        sudo nixos-rebuild switch --flake ${flakeDir}${
-          if fancyOutput
-          then " |& ${nix-output-monitor}/bin/nom"
-          else ""
-        }'';
+
+        ${lib.optionalString updateFlakeInputs "nix flake update --flake ${flakeDir}"}
+
+        sudo nixos-rebuild switch --flake ${flakeDir} \
+          --cores $(${pkgs.coreutils-full}/bin/nproc --all) \
+          --max-jobs 100 ${lib.optionalString fancyOutput " |& ${nix-output-monitor}/bin/nom"}
+      '';
     in [
       # Rebuild/sync system
       (writeShellScriptBin "s" (script {}))
