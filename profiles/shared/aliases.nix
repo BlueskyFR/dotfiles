@@ -13,7 +13,7 @@
     lt = "lsd --tree";
     llt = "lsd -lArth --tree";
 
-    p = "${pkgs.python313}/bin/python -q";
+    p = "${lib.getExe pkgs.python314} -q";
     b = "bat -pp"; # Colored cat
     bp = "bat -p"; # Colored cat (keep pager)
     cyme = "cyme --headings"; # Stylish lsusb
