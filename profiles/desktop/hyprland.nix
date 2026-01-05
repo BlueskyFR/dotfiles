@@ -17,8 +17,6 @@
         "[workspace 1] alacritty"
         "[workspace 2 silent] code"
         "[workspace 3 silent] vivaldi"
-        "[workspace 4 silent] discord"
-        "[workspace 9 silent] spotify"
 
         # System tray icons
         "sleep 10 && nm-applet"
@@ -48,7 +46,6 @@
         # Static rule, doesn't work on dynamic tags:
         # "workspace 10 silent, tag:nixos-conf*"
         "workspace 3 silent, match:class vivaldi-stable"
-        "workspace 4 silent, match:class discord"
 
         # Picture-in-Picture
         "float on, pin on, match:title Picture in picture"

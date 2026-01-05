@@ -68,6 +68,7 @@
 
       easy-hosts = let
         desktop = ./profiles/desktop;
+        personal = ./profiles/personal;
         work = ./profiles/work;
         server = ./profiles/server;
         sddmGreeter = ./profiles/sddm-greeter.nix;
@@ -93,14 +94,14 @@
           nzxt = {
             # arch = "x86_64"; (default)
             # class = "nixos"; (default; could be "iso")
-            modules = [desktop sddmGreeter];
+            modules = [desktop sddmGreeter personal];
             # nixpkgs = inputs.xxx;
             path = ./hosts/nzxt;
             # tags = [ "graphical" "desktop" ];
           };
 
           chador = {
-            modules = [desktop sddmGreeter];
+            modules = [desktop sddmGreeter personal];
             path = ./hosts/chador;
           };
 
@@ -117,7 +118,7 @@
           };
 
           banana = {
-            modules = [desktop sddmGreeter];
+            modules = [desktop sddmGreeter work];
             path = ./hosts/banana;
           };
 

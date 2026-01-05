@@ -11,7 +11,7 @@
   ];
 
   wayland.windowManager.hyprland.settings = {
-    # exec-once = ["[workspace 4 silent] teams-for-linux"];
-    # windowrule = [ "workspace 4 silent, class:teams" ];
+    exec-once = ["[workspace 4 silent] teams-for-linux"];
+    windowrule = ["workspace 4 silent, match:class teams-for-linux"];
   };
 }
