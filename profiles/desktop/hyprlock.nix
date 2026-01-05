@@ -92,9 +92,9 @@
           # font_family = JetBrains Mono Nerd Font Mono ExtraBold;
           # font_family = "VictorMono Nerd Font Mono Bold";
           font_family = "MonoLisa Hugo Variable";
-          font_size = 256;
+          font_size = 180;
           halign = "center";
-          position = "0, -10%";
+          position = "0, -6%";
           shadow_boost = 0.5;
           shadow_passes = 3;
           text_align = "center";
