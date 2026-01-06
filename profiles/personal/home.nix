@@ -13,6 +13,9 @@
       "[workspace 4 silent] discord"
       "[workspace 9 silent] spotify"
     ];
-    windowrule = ["workspace 4 silent, match:class discord"];
+    windowrule = [
+      "workspace 4 silent, match:class discord"
+      "workspace 9 silent, match:class spotify"
+    ];
   };
 }
