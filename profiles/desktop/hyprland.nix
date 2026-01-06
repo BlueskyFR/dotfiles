@@ -26,7 +26,7 @@
       # Also exec on reloads
       exec = [
         # Lift all workspace placement rules after startup or reload
-        "sleep 25 && hyprctl keyword windowrule workspace unset, 'class:.*'"
+        "sleep 25 && hyprctl keyword windowrule workspace unset, 'match:class .*'"
 
         # NixOS configuration on workspace 10
         ## The '*' needs to be shell-escaped, and the '\` itself needs to be escaped in the nix
