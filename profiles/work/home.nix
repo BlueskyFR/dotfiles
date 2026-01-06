@@ -7,6 +7,7 @@
 }: {
   home.packages = with pkgs; [
     teams-for-linux
+    slack
     remmina
 
     # Kubernetes
@@ -17,7 +18,10 @@
   ];
 
   wayland.windowManager.hyprland.settings = {
-    exec-once = ["[workspace 4 silent] teams-for-linux"];
+    exec-once = [
+      "[workspace 4 silent] teams-for-linux"
+      "[workspace 4 silent] slack"
+    ];
     windowrule = ["workspace 4 silent, match:class teams-for-linux"];
   };
 
