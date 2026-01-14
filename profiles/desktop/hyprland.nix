@@ -16,7 +16,7 @@
       exec-once = [
         "[workspace 1] alacritty"
         "[workspace 2 silent] code"
-        "[workspace 3 silent] vivaldi"
+        "[workspace 3 silent] sleep 8 && vivaldi"
 
         # System tray icons
         "sleep 10 && nm-applet"
