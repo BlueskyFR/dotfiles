@@ -18,8 +18,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-
     custom-hyprlock.url = "github:BlueskyFR/hyprlock";
 
     dms = {
@@ -79,13 +77,12 @@
             inputs.home-manager.nixosModules.home-manager
 
             # NixOS modules
-            inputs.chaotic.nixosModules.default
             inputs.vscode-server.nixosModules.default
 
             ./profiles/shared
 
             # Custom overlay
-            ./overlay.nix
+            ./overlay
           ];
           specialArgs = {flakeDir = "/conf";};
         };
