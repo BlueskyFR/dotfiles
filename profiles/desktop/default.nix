@@ -90,7 +90,11 @@
       # USB iso/file flasher
       popsicle
       spotify
-      (vivaldi.override {commandLineArgs = ["--ozone-platform-hint=auto"];})
+      (vivaldi.override {
+        proprietaryCodecs = true;
+        enableWidevine = true;
+        commandLineArgs = ["--ozone-platform-hint=auto"];
+      })
       discord-krisp
       postman
       pavucontrol
