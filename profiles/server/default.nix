@@ -43,9 +43,21 @@
   };
 
   # Firewall
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [80 443];
-    # allowedUDPPorts = [ ... ];
+  ## Utility to view stateful active sessions in the conntrack module
+  environment.systemPackages = with pkgs; [conntrack-tools];
+  networking = {
+    nftables.enable = true;
+
+    firewall = {
+      enable = true;
+      backend = "nftables";
+      allowPing = true;
+      allowedTCPPorts = [80 443];
+      allowedUDPPorts = [5520];
+
+      extraInputRules = ''
+        ip saddr 10.0.0.0/24 ip protocol { tcp, udp } accept comment "Allow TCP/UDP from LAN"
+      '';
+    };
   };
 }
