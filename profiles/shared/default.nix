@@ -127,12 +127,17 @@
     tree
     file
 
+    # Files
+    gdu
+    dust # `du` but more visual
+
     docker-compose
     passt
 
     # Network tools
     tcpdump
     ipcalc
+    gping # Ping, but with a graph
 
     # Hardware listing utils
     usbutils # Provides lsusb
