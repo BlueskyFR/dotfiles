@@ -198,6 +198,31 @@
 
       # Screenshot utility
       hyprshot.enable = true;
+
+      # Audio visualizer
+      cava = {
+        enable = true;
+        settings = {
+          output.channels = "mono";
+          smoothing = {
+            monstercat = 1;
+            waves = 0;
+          };
+          color = {
+            # From https://is.gd/0pDd0u
+            background = "'#1e1e2e'";
+            gradient = 1;
+            gradient_color_1 = "'#94e2d5'";
+            gradient_color_2 = "'#89dceb'";
+            gradient_color_3 = "'#74c7ec'";
+            gradient_color_4 = "'#89b4fa'";
+            gradient_color_5 = "'#cba6f7'";
+            gradient_color_6 = "'#f5c2e7'";
+            gradient_color_7 = "'#eba0ac'";
+            gradient_color_8 = "'#f38ba8'";
+          };
+        };
+      };
     };
 
     services = {
