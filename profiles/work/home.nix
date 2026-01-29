@@ -15,6 +15,7 @@
     kubecolor
     kubectx
     k9s
+    kubernetes-helm
   ];
 
   wayland.windowManager.hyprland.settings = {
