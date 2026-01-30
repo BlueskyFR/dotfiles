@@ -61,6 +61,8 @@
 
       # is.gd url shortener
       shorten() { out=$(curl -s --fail-with-body "https://is.gd/create.php?format=simple&url=$1") && wl-copy "$out" 2> /dev/null && echo '✅ Copied to clipboard!' || echo $out }
+      # Upload to anonymously to copyparty
+      upload() { curl -# -T $1 https://share.hugooo.dev/uploads/ | cat }
     '';
   };
 
