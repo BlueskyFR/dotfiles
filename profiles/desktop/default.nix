@@ -149,7 +149,7 @@
               inherit style;
             };
           in {
-            size = 16.0; # 20.O
+            size = 14.0;
 
             normal = mkFont "Regular";
             bold = mkFont "Bold";
