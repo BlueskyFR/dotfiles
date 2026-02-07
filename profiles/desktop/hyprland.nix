@@ -91,7 +91,10 @@
           "$mod, F, fullscreen, 0"
           "$mod, G, togglegroup"
           "$mod, H, changegroupactive, f"
-          "$mod, P, pseudo"
+          # "$mod, P, pseudo"
+          # Make the app/client fullscreen but keep the window non-fullscreen
+          # (fake fullscreen)
+          "$mod, P, fullscreenstate, 0 2"
           "$mod, O, exec, nwg-displays"
           "$mod, L, exec, hyprlock"
           "$mod SHIFT, R, exec, hyprctl reload"
