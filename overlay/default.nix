@@ -1,14 +1,9 @@
-{
-  inputs,
-  nixpkgs-stable,
-  system,
-  ...
-}: {
+{inputs, ...}: {
   nixpkgs.overlays = [
     (final: prev: {
       # Add a custom `pkgs.stable.XXX` attribute to easily access stable pkgs if needed
-      stable = import nixpkgs-stable {
-        inherit system;
+      stable = import inputs.nixpkgs-stable {
+        system = prev.stdenv.hostPlatform.system;
         config.allowUnfree = true;
       };
 
