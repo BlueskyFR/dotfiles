@@ -95,6 +95,7 @@
         enableWidevine = true;
         commandLineArgs = ["--ozone-platform-hint=auto"];
       })
+      brave
       discord-krisp
       postman
       pavucontrol
@@ -223,6 +224,8 @@
           };
         };
       };
+
+      firefox.enable = true;
     };
 
     services = {
