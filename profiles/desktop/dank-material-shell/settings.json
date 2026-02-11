@@ -296,10 +296,6 @@
           "id": "clock",
           "enabled": true,
           "clockCompactMode": false
-        },
-        {
-          "id": "weather",
-          "enabled": true
         }
       ],
       "rightWidgets": [
