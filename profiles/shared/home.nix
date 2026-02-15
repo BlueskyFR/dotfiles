@@ -102,6 +102,7 @@
   programs = {
     btop = {
       enable = true;
+      package = pkgs.btop.override {cudaSupport = true;};
       settings = {
         color_theme = "dracula";
         update_ms = 100;
