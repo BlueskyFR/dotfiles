@@ -162,7 +162,7 @@
   #  /etc/profiles/per-user/hugo/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    EDITOR = "code --wait";
+    EDITOR = lib.mkDefault "code --wait";
   };
 
   # Let Home Manager install and manage itself.
