@@ -30,6 +30,9 @@
   #   freeglut
   # ];
 
+  # TODO: move into a server-cuda module? or an option of the server module?
+  hardware.nvidia-container-toolkit.enable = true;
+
   hardware = {
     # Enable OpenGL
     graphics = {
