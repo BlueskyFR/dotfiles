@@ -37,6 +37,8 @@
         openssl.dev
         pkg-config
       ];
+      # Use a more recent nodejs version to have sqlite support for Github Copilot chat
+      nodejsPackage = pkgs.nodejs_22;
     };
 
     cron.enable = true;
