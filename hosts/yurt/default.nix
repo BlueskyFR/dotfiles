@@ -10,6 +10,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./cuda.nix
   ];
 
   home-manager.users.hugo = {};
