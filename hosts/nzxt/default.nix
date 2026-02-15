@@ -33,7 +33,7 @@
       monitorv2 = lib.mkForce [
         {
           # DP-3,3840x2160@239.99,2560x0,1.5,bitdepth,10,supports_wide_color,1,supports_hdr,1,sdr_min_luminance,0.005,sdr_max_luminance,200
-          output = "DP-3";
+          output = "DP-2";
           mode = "3840x2160@239.99";
           # position = "2560x0";
           position = "2048x0";
@@ -45,7 +45,7 @@
           sdr_max_luminance = 200;
           min_luminance = 0; # Monitor’s minimum luminance	float
           max_luminance = 200; # Monitor’s maximum possible luminance	int
-          # max_avg_luminance = XX  # Monitor’s maximum luminance on average for a typical frame	int
+          # max_avg_luminance = XX  # Monitor’s maximum luminance on average for a typical frame int
         }
       ];
 
