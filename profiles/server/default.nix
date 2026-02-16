@@ -51,9 +51,6 @@
     nftables.enable = true;
 
     firewall = {
-      enable = true;
-      backend = "nftables";
-      allowPing = true;
       allowedTCPPorts = [80 443];
       allowedUDPPorts = [5520];
 

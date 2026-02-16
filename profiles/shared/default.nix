@@ -207,6 +207,13 @@
       hwRender = true;
       useXkbConfig = true;
     };
+
+    # Automatic local network discovery through mDNS, used by e.g. Spotify
+    avahi = {
+      enable = true;
+      # Enable UDP port 5353 in the firewall to enable mDNS discovery
+      openFirewall = true;
+    };
   };
 
   security.sudo.extraConfig = ''
@@ -215,6 +222,16 @@
     # Set password timeout from 5 to 10 minutes
     Defaults timestamp_timeout=10
   '';
+
+  # Enable firewall through nftables on all hosts by default
+  networking = {
+    firewall = {
+      enable = true;
+      backend = "nftables";
+      allowPing = true;
+    };
+    nftables.enable = true;
+  };
 
   # Podman/containers
   virtualisation = {
