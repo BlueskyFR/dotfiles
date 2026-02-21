@@ -7,7 +7,7 @@
   flakeDir,
   ...
 }: {
-  imports = [./beta.nix];
+  imports = [./beta.nix ./uv.nix];
 
   # Home manager global config
   home-manager = {
