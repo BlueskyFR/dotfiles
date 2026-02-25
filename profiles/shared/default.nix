@@ -153,11 +153,15 @@
       #(nerdfonts.override {fonts = ["FiraCode"];})
       nerd-fonts.fira-code
       nerd-fonts.victor-mono
+      # TODO: add Josefin Sans
       #twemoji-color-font (old one)
       twitter-color-emoji
 
       # Custom fonts
-      monolisa-hugo
+      (monolisa-hugo.override {nerdify = true;})
+
+      # Fixes Chinese characters being invisible in Chromium/Electron-based apps
+      noto-fonts-cjk-sans
     ];
 
     fontconfig.defaultFonts = {
