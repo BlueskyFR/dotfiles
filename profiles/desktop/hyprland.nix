@@ -86,7 +86,8 @@
           ", Print, exec, hyprshot --clipboard-only -d -m region"
           "$mod, space, togglefloating"
           "$mod, D, exec, rofi -show drun -show-icons"
-          "$mod, E, togglesplit"
+          # See https://wiki.hypr.land/Configuring/Dwindle-Layout/#layout-messages
+          "$mod, E, layoutmsg, togglesplit"
           "$mod, Z, fullscreen, 1"
           "$mod, F, fullscreen, 0"
           "$mod, G, togglegroup"
@@ -108,8 +109,8 @@
 
           # Advanced binds
           ## Brightness control
-          # ", XF86MonBrightnessDown, exec, /run/current-system/sw/bin/light -u 10"
-          # ", XF86MonBrightnessUp, exec, /run/current-system/sw/bin/light -A 10"
+          ", XF86MonBrightnessDown, exec, ${lib.getExe pkgs.acpilight} -perceived -dec 10"
+          ", XF86MonBrightnessUp, exec, ${lib.getExe pkgs.acpilight} -perceived -inc 10"
 
           # Move focus with $mod + arrow keys
           "$mod, left, movefocus, l"

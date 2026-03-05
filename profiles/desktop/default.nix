@@ -58,18 +58,11 @@
       withUWSM = false; # Useless for now, so remove the buggy sddm greeter entry
       # programs.uwsm.enable ?
     };
-
-    light = {
-      enable = true;
-      # System-level daemon so that brightness controls even work outside
-      # of Hyprland like on TTYs
-      brightnessKeys = {
-        enable = true;
-        minBrightness = 1;
-      };
-    };
   };
 
+  # Replacement for unmaintained `light`
+  hardware.acpilight.enable = true;
+  # Needed to access acpilight functionalities
   users.users.hugo.extraGroups = ["video"]; # video is for light (screen brightness control)
 
   # Home-manager introduces its own `config` so we shadow the main scope's
