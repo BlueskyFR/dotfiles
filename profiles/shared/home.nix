@@ -72,7 +72,7 @@
     sl
     cmatrix
     asciiquarium
-    neofetch
+    fastfetch
     ipfetch
     countryfetch
   ];
@@ -142,6 +142,8 @@
         virtualenvs.in-project = true;
       };
     };
+
+    npm.enable = true;
 
     # Run software without installing it (`, cowsay wow`)
     nix-index-database.comma.enable = true;
