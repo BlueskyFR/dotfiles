@@ -279,7 +279,7 @@
       '';
     };
 
-    gtk = {
+    gtk = rec {
       enable = true;
       colorScheme = "dark";
       iconTheme = {
@@ -300,6 +300,7 @@
         name = "WhiteSur-Dark-pink"; # or e.g. WhiteSur-Light-solid-pink
         # name = "adw-gtk3";
       };
+      gtk4.theme = theme;
     };
 
     home.pointerCursor = {
