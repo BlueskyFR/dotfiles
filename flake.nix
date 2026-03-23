@@ -38,8 +38,8 @@
     custom-fonts = {
       url = "github:BlueskyFR/fonts";
       # url = "/home/hugo/code/custom-fonts";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-parts.follows = "flake-parts";
+      # inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.flake-parts.follows = "flake-parts";
     };
   };
 
