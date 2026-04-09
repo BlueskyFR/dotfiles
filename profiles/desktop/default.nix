@@ -5,7 +5,7 @@
   config,
   ...
 }: {
-  imports = [./bluetooth.nix ./hyprlock.nix];
+  imports = [./bluetooth.nix ./hyprlock.nix ./boot-splash.nix];
 
   boot.loader.grub = {
     # Automatically pre-select the last boot item
