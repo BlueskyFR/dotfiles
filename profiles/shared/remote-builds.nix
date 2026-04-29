@@ -47,7 +47,7 @@
 
         # Disable local builds if the host is not a builder itself
         # (can still be overriden by some specific build options)
-        max-jobs = lib.mkIf (!config.is-remote-builder) 0;
+        max-jobs = lib.mkIf (!config.is-remote-builder) (lib.mkForce 0);
       };
     };
 
