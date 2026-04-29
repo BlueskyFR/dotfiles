@@ -21,7 +21,7 @@
       useDefaultShell = true;
 
       # Allow our hosts to passwordlessly login
-      openssh.authorizedKeys.keyFiles = map (host: ./authorized-keys/${host}.pub) ["banana" "zbook"];
+      openssh.authorizedKeys.keyFiles = [./remotebuild.pub];
       ## To specify the keys inline instead:
       # openssh.authorizedKeys.keys = [];
     };

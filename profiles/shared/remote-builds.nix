@@ -28,13 +28,13 @@
           maxJobs = 128;
           speedFactor = 2;
 
-          sshUser = "build";
+          sshUser = "remotebuild";
           # The expected pubkey of the builder, base64-encoded;
           ## get it with `base64 -w0 /etc/ssh/ssh_host_type_key.pub`
           publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUhzZktxcWoyL05IZ0J5dzI4OXd5bHRtclp0dWx0V2lRNlNQVkpDRCs3Qm4gcm9vdEB5dXJ0Cg==";
           # The private key to use to authenticate (passwordless) to the builder
           ## (should be a local fs path)
-          sshKey = "${config.users.users.hugo.home}/.ssh/id_ed25519.pub";
+          sshKey = "${flakeDir}/profiles/remote-builder/remotebuild";
 
           supportedFeatures = ["big-parallel" "nixos-test" "benchmark" "kvm"];
         }
@@ -44,5 +44,11 @@
       ## i.e. make the builder fetch the dependencies itself rather than waiting for the host to upload them
       settings.builders-use-substitutes = true;
     };
+
+    # Auto-accept our builder's fingerprint the first time
+    programs.ssh.extraConfig = ''
+      Host hugooo.dev
+        StrictHostKeyChecking accept-new
+    '';
   };
 }
