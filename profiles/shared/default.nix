@@ -7,7 +7,7 @@
   flakeDir,
   ...
 }: {
-  imports = [./beta.nix ./uv.nix];
+  imports = [./beta.nix ./uv.nix ./remote-builds.nix];
 
   # Home manager global config
   home-manager = {
@@ -59,10 +59,7 @@
     };
 
     # Automatic store optimisation, not after each build but from a systemd timer
-    optimise = {
-      automatic = true;
-      dates = ["monthly"];
-    };
+    optimise.automatic = true;
 
     # Automatic garbage collection
     gc = {

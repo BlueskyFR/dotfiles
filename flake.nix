@@ -69,6 +69,7 @@
         personal = ./profiles/personal;
         work = ./profiles/work;
         server = ./profiles/server;
+        remoteBuilder = ./profiles/remote-builder;
         sddmGreeter = ./profiles/sddm-greeter.nix;
       in {
         shared = {
@@ -103,7 +104,7 @@
           };
 
           yurt = {
-            modules = [server];
+            modules = [server remoteBuilder];
             path = ./hosts/yurt;
           };
 
