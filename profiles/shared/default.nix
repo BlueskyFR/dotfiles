@@ -56,6 +56,11 @@
       # Replaces files having identical contents with hard links to save disk space,
       # after each build
       auto-optimise-store = false;
+      # Use all cores for builds
+      cores = 0;
+      # Set max. 1 job per CPU core
+      max-jobs = "auto";
+      # TODO: check out the rest of https://nix.dev/tutorials/nixos/distributed-builds-setup.html#optimise-the-remote-builder-configuration
     };
 
     # Automatic store optimisation, not after each build but from a systemd timer

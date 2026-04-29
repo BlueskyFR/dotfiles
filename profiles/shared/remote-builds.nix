@@ -40,9 +40,15 @@
         }
       ];
 
-      # Use remote builders as binary caches too, speeds up additional builds
-      ## i.e. make the builder fetch the dependencies itself rather than waiting for the host to upload them
-      settings.builders-use-substitutes = true;
+      settings = {
+        # Use remote builders as binary caches too, speeds up additional builds
+        ## i.e. make the builder fetch the dependencies itself rather than waiting for the host to upload them
+        builders-use-substitutes = true;
+
+        # Disable local builds if the host is not a builder itself
+        # (can still be overriden by some specific build options)
+        max-jobs = lib.mkIf (!config.is-remote-builder) 0;
+      };
     };
 
     # Auto-accept our builder's fingerprint the first time

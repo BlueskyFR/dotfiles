@@ -92,7 +92,7 @@
 
         sudo nixos-rebuild switch --flake ${flakeDir} \
           --cores $(${pkgs.coreutils-full}/bin/nproc --all) \
-          --max-jobs 100 ${lib.optionalString fancyOutput " |& ${nix-output-monitor}/bin/nom"}
+          ${lib.optionalString fancyOutput " |& ${nix-output-monitor}/bin/nom"}
       '';
     in [
       # Rebuild/sync system
