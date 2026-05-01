@@ -19,7 +19,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    custom-hyprlock.url = "github:BlueskyFR/hyprlock";
+    hyprlock.url = "github:hyprwm/hyprlock";
 
     dms = {
       url = "github:AvengeMedia/DankMaterialShell";

@@ -12,7 +12,7 @@
     programs.hyprlock = {
       enable = true;
       # Custom fix: https://github.com/hyprwm/hyprlock/pull/938
-      package = inputs.custom-hyprlock.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      package = inputs.hyprlock.packages.${pkgs.stdenv.hostPlatform.system}.default;
       settings = {
         animations = {
           enabled = true;
