@@ -3,9 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # nixpkgs.url = "/home/hugo/code/nixpkgs";
+    # nixpkgs.url = "/home/hugo/tmp/nixpkgs";
     # Difference between Nix channels: https://is.gd/2ySq2I
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
+    # nixpkgs-stable.url = "/home/hugo/tmp/nixpkgs";
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
