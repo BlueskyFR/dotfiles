@@ -28,14 +28,16 @@
     # Nix aliases
     repl = "nix repl ${flakeDir}#nixosConfigurations.$(hostname)";
 
-    zz = "zz";
-
     # Make aliases work with sudo X
     # sudo = "sudo"; # Breaks the `sudo` oh-my-zsh plugin
 
     diff = "diff --color=auto";
     grep = "grep --color=auto";
     ip = "ip -color=auto";
+
+    # Ability to restore the bulk-copied links from a group of vivaldi tabs (one per line);
+    # accepts --incognito as extra parameter
+    vivaldi-paste-links = "${lib.getExe' pkgs.wl-clipboard-rs "wl-paste"} | xargs -d '\n' vivaldi";
   };
 
   programs.zsh = {
