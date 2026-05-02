@@ -5,7 +5,13 @@
   modulesPath,
   ...
 }: {
-  environment.systemPackages = with pkgs; [egl-wayland wayland-protocols];
+  environment = {
+    systemPackages = with pkgs; [egl-wayland wayland-protocols];
+    variables = {
+      NVD_BACKEND = "direct";
+      LBVA_DRIVER_NAME = "nvidia";
+    };
+  };
 
   # Load Nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"]; # or "nvidiaLegacy470", etc.
@@ -14,7 +20,7 @@
     # Enable OpenGL
     graphics = {
       enable = true;
-      extraPackages = with pkgs; [intel-media-driver libvdpau-va-gl];
+      extraPackages = with pkgs; [intel-media-driver libvdpau-va-gl nvidia-vaapi-driver];
     };
 
     nvidia = {
