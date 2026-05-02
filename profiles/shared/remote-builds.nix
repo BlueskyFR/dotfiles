@@ -48,6 +48,8 @@
         # Disable local builds if the host is not a builder itself
         # (can still be overriden by some specific build options)
         max-jobs = lib.mkIf (!config.is-remote-builder) (lib.mkForce 0);
+        # The following line seems to break builds when remote builds are enabled - taking forever for some reason
+        # max-jobs = "auto"; # "auto" means use all logical cores
       };
     };
 
