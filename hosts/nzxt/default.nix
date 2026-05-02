@@ -14,6 +14,10 @@
   ];
 
   # wow.hyprlandGitVersion.enable = true;
+  services.flatpak.enable = true;
+
+  # nvidia driver build fail temporary fix
+  # boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_18;
 
   home-manager.users.hugo = {
     wayland.windowManager.hyprland.settings = {
