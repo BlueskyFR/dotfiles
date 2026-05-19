@@ -65,6 +65,9 @@
   # Needed to access acpilight functionalities
   users.users.hugo.extraGroups = ["video"]; # video is for light (screen brightness control)
 
+  # File preview for nautilus
+  services.gnome.sushi.enable = true;
+
   # Home-manager introduces its own `config` so we shadow the main scope's
   home-manager.users.hugo = {config, ...}: {
     imports = [
@@ -101,6 +104,11 @@
       fira
 
       nautilus
+      # Video thumbnails for Nautilus
+      ffmpegthumbnailer
+
+      vlc
+
       # Dynamically update Hyprland monitors using a GUI
       nwg-displays
       # Print key names (Wayland equivalent of X11's xev)

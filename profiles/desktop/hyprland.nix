@@ -9,6 +9,8 @@
     package = null;
     portalPackage = null;
 
+    configType = "hyprlang";
+
     settings = {
       # Startup apps
       # (move to workspace only applies to non-forking processes
@@ -225,7 +227,7 @@
       # Tiling layout using a binary tree, similar to i3
       dwindle = {
         # See https://wiki/hyprland.org/Configuring/Dwindle-Layout/ for more
-        pseudotile = "yes"; # Bound to $mod + P
+        # pseudotile = "yes"; # Bound to $mod + P  # Removed?
         preserve_split = "yes";
       };
 

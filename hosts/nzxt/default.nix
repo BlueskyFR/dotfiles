@@ -16,8 +16,7 @@
   # wow.hyprlandGitVersion.enable = true;
   services.flatpak.enable = true;
 
-  # nvidia driver build fail temporary fix
-  # boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_18;
+  # boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_6;
 
   home-manager.users.hugo = {
     wayland.windowManager.hyprland.settings = {
@@ -34,24 +33,31 @@
       ];
 
       # Override nwg-displays' settings for this particular screen to enable HDR support
-      monitorv2 = lib.mkForce [
-        {
-          # DP-3,3840x2160@239.99,2560x0,1.5,bitdepth,10,supports_wide_color,1,supports_hdr,1,sdr_min_luminance,0.005,sdr_max_luminance,200
-          output = "DP-2";
-          mode = "3840x2160@239.99";
-          # position = "2560x0";
-          position = "2048x0";
-          scale = 1.5;
-          bitdepth = 10;
-          supports_wide_color = true;
-          supports_hdr = true;
-          sdr_min_luminance = 0.005;
-          sdr_max_luminance = 200;
-          min_luminance = 0; # Monitor’s minimum luminance	float
-          max_luminance = 200; # Monitor’s maximum possible luminance	int
-          # max_avg_luminance = XX  # Monitor’s maximum luminance on average for a typical frame int
-        }
-      ];
+      ## Check at https://testufo.com/hdr
+      # monitorv2 = lib.mkForce [
+      #   {
+      #     # DP-3,3840x2160@239.99,2560x0,1.5,bitdepth,10,supports_wide_color,1,supports_hdr,1,sdr_min_luminance,0.005,sdr_max_luminance,200
+      #     output = "DP-2";
+      #     mode = "3840x2160@239.99";
+      #     # position = "2560x0";
+      #     position = "2048x0";
+      #     scale = 1.5;
+      #     bitdepth = 10;
+      #     supports_wide_color = 1;
+      #     supports_hdr = 1;
+      #     sdr_min_luminance = 0.005;
+      #     sdr_max_luminance = 215;
+      #     cm = "hdr";
+      #     vrr = 0;
+      #     #min_luminance = 0; # Monitor’s minimum luminance	float
+      #     #max_luminance = 200; # Monitor’s maximum possible luminance	int
+      #     # max_avg_luminance = XX  # Monitor’s maximum luminance on average for a typical frame int
+      #   }
+      # ];
+      # Avoid black flashes (https://wiki.hypr.land/0.54.0/Configuring/Variables/#quirks)
+      # quirks = {
+      #   prefer_hdr = 1;
+      # };
 
       #misc.vfr = true;
       misc = {
@@ -61,6 +67,11 @@
         swallow_regex = ["^Alacritty$"];
         # Matches titles to ignore
         swallow_exception_regex = [".*wev.*"];
+      };
+
+      render = {
+        cm_enabled = true;
+        cm_auto_hdr = 1;
       };
     };
   };
