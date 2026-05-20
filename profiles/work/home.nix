@@ -9,14 +9,22 @@
     teams-for-linux
     slack
     remmina
+    virt-viewer
+    keepassxc
 
     # Kubernetes
     kubectl
-    kubecolor
     kubectx
     k9s
     kubernetes-helm
   ];
+
+  programs.kubecolor = {
+    enable = true;
+    # Alias `kubectl` to `kubecolor`
+    enableAlias = true;
+    enableZshIntegration = true;
+  };
 
   wayland.windowManager.hyprland.settings = {
     exec-once = [
@@ -30,7 +38,6 @@
   home.shellAliases = {
     # Kubernetes
     ks = "toggle_show_k8s_env";
-    kubectl = "kubecolor";
     k = "show_k8s_env; kubectl";
     kexec = "k exec --stdin --tty";
     kg = "k get";
@@ -50,6 +57,9 @@
       toggle_show_k8s_env() { [[ -v SHOW_K8S_ENV ]] && unset SHOW_K8S_ENV || export SHOW_K8S_ENV=1; }
       ## Decode base64 kubernetes secrets
       kgs() { kubectl get secret $1 -o json | jq '.data | map_values(@base64d)' }
+
+      # Enable back completions for our custom `k` alias
+      compdef k=kubectl
     '';
   };
 }
