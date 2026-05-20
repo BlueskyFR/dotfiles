@@ -9,6 +9,7 @@
     package = null;
     portalPackage = null;
 
+    # TODO: switch to lua when stable enough
     configType = "hyprlang";
 
     settings = {

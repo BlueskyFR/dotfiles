@@ -27,7 +27,7 @@
   };
 
   # Use the latest stable Linux kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
   # Bootloader
   boot.loader = {

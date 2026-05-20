@@ -118,6 +118,8 @@
       grimblast
 
       android-tools
+      # Java
+      temurin-bin
     ];
 
     programs = {
@@ -138,6 +140,8 @@
             zlib
             openssl.dev
             pkg-config
+            # Java
+            temurin-bin
           ]);
       };
 
