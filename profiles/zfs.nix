@@ -7,7 +7,7 @@
   services = {
   };
 
-  environment.systemPackages = with pkgs; [];
+  # environment.systemPackages = with pkgs; [];
 
   boot = {
     # Automatically use the latest ZFS-compatible Linux kernel
@@ -45,9 +45,7 @@
       # Weekly automatic scrubbing (checks and repairs corruption), once per month (default)
       autoScrub.enable = true;
 
-      # Let SSDs know which blocks are now free so they can do their own business, harmless for HDDs:
-      # leave off at the pool level (check with `zpool get autotrim tank`), seems to have some performance
-      # impact e.g. when deleting a lot of small files; but a periodic job like this is good, once per week (default)
+      # Let SSDs know which blocks are now free so they can do their own business, harmless for HDDs, once per week (default)
       trim.enable = true;
 
       # Automatically take snapshots to be able to rollback e.g. in case of unintended deletion of files
