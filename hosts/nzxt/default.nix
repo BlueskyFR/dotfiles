@@ -18,6 +18,21 @@
 
   # boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_6;
 
+  # NFS mount
+  fileSystems."/tv" = {
+    device = "yurt.wow:/tv";
+    fsType = "nfs";
+    # Dynamic auto-mount and unmount timeout (30 min)
+    options = [
+      # Dynamic automount on access
+      "x-systemd.automount"
+      # Auto-unmount timeout (30 min)
+      "x-systemd.idle-timeout=1800"
+      # Prevents mounting at boot (required for automount)
+      "noauto"
+    ];
+  };
+
   home-manager.users.hugo = {
     wayland.windowManager.hyprland.settings = {
       # Monitors configuration

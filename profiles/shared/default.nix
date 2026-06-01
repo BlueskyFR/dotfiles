@@ -128,6 +128,7 @@
     wget
     tree
     file
+    nfs-utils
 
     # Files
     gdu
