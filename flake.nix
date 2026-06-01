@@ -2,22 +2,24 @@
   description = "My Nixos config flake using flake-parts!";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # nixpkgs.url = "/home/hugo/tmp/nixpkgs";
+    # Use stable channel by default
     # Difference between Nix channels: https://is.gd/2ySq2I
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
+    # nixpkgs.url = "/home/hugo/tmp/nixpkgs";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # nixpkgs-stable.url = "/home/hugo/tmp/nixpkgs";
+
+    home-manager = {
+      # Make home-manager match our main NixOS version
+      url = "github:nix-community/home-manager/release-26.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
     easy-hosts.url = "github:tgirlcloud/easy-hosts";
-
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     hyprlock.url = "github:hyprwm/hyprlock";
 
@@ -46,7 +48,7 @@
 
   outputs = inputs @ {
     nixpkgs,
-    nixpkgs-stable,
+    nixpkgs-unstable,
     flake-parts,
     easy-hosts,
     ...
@@ -128,92 +130,4 @@
         };
       };
     };
-
-  /*
-  outputs = inputs @ {
-    self,
-    nixpkgs,
-    # nixpkgs-stable,
-    home-manager,
-    utils,
-    chaotic,
-    ...
-  }: let
-    flakeDir = "/conf";
-    nixpkgs-stable = inputs.nixpkgs-stable.x86_64-linux.nixpkgs;
-  in
-    utils.lib.mkFlake {
-      # Required arguments
-      inherit self inputs;
-
-      # Shared configuration between all channels
-      channelsConfig = {allowUnfree = true;};
-
-      # Overlays applied to all channels
-      sharedOverlays = [
-        (import ./overlays.nix)
-      ];
-
-      hostDefaults = {
-        # Default architecture
-        system = "x86_64-linux";
-
-        modules = [
-          ./options.nix
-          ./profiles/shared
-
-          # NixOS module, not a function �
-          home-manager.nixosModules.home-manager
-
-          chaotic.nixosModules.default
-        ];
-
-        extraArgs = {inherit nixpkgs-stable inputs flakeDir;};
-      };
-
-      hosts = let
-        desktop = ./profiles/desktop;
-        server = ./profiles/server.nix;
-      in {
-        nzxt.modules = [
-          desktop
-          ./hosts/nzxt
-        ];
-
-        chador.modules = [
-          desktop
-          ./hosts/chador
-        ];
-
-        Yurt.modules = [
-          server
-        ];
-
-        Banana.modules = [
-          desktop
-        ];
-      };
-    };
-
-  #let
-  #  system = "x86_64-linux";
-  #  pkgs = nixpkgs.legacyPackages.${system};
-  #in {
-  #  # TODO: add https://is.gd/FPd0jn
-  #  # system.nixos.label = concatStringsSep "-" ((sort (x: y: x < y) cfg.tags) ++ [ "${cfg.version}.${self.sourceInfo.shortRev or "dirty"}" ]);
-  #  nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-  #    specialArgs = {inherit inputs system;};
-  #    modules = [
-  #      ./configuration.nix
-  #
-  #      home-manager.nixosModules.home-manager
-  #      {
-  #        home-manager.useGlobalPkgs = true;
-  #        home-manager.useUserPackages = true;
-  #        home-manager.users.hugo = import ./home.nix;
-  #      }
-  #    ];
-  #  };
-  #};
-  */
 }
