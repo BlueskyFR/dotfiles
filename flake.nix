@@ -73,6 +73,7 @@
         work = ./profiles/work;
         server = ./profiles/server;
         remoteBuilder = ./profiles/remote-builder;
+        zfs = ./profiles/zfs.nix;
         sddmGreeter = ./profiles/sddm-greeter.nix;
       in {
         shared = {
@@ -107,7 +108,7 @@
           };
 
           yurt = {
-            modules = [server remoteBuilder];
+            modules = [server zfs remoteBuilder];
             path = ./hosts/yurt;
           };
 

@@ -13,5 +13,9 @@
     ./cuda.nix
   ];
 
+  # Get with `head -c 8 /etc/machine-id` or random;
+  ## required by ZFS to ensure dataset is not being imported on the wrong machine
+  networking.hostId = "014117ef";
+
   home-manager.users.hugo = {};
 }
