@@ -31,7 +31,7 @@
 
     # Dev
     gh
-    deno
+    unstable.deno
     ## Rust
     rustup
     gcc # Needed for rustup
@@ -75,6 +75,7 @@
     fastfetch
     ipfetch
     countryfetch
+    sm
   ];
 
   # Make fonts installed through `home.packages` discoverable
