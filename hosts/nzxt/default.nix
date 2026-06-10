@@ -22,7 +22,6 @@
   fileSystems."/tv" = {
     device = "yurt.wow:/tv";
     fsType = "nfs";
-    # Dynamic auto-mount and unmount timeout (30 min)
     options = [
       # Dynamic automount on access
       "x-systemd.automount"
@@ -99,6 +98,9 @@
     # idVendor + idProduct fetched with `cyme` (lsusb)
     extraRules = ''
       ACTION=="add", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c336", RUN+="${pkgs.g810-led}/bin/g810-led -fx hwave keys aa"
+
+      # STM32 DFU (Flysky EL18 STM32 DFU mode access from chromium-based browsers/WebUSB)
+      ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="df11", MODE="0664", GROUP="users", TAG+="uaccess"
     '';
   };
 }

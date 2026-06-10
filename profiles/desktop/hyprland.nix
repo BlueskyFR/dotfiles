@@ -64,7 +64,14 @@
         "NVD_BACKEND,direct"
         # Flickering issues
         "ELECTRON_OZONE_PLATFORM_HINT,auto"
+        # XWayland tweaks
+        "GDK_SCALE,2"
       ];
+
+      # XWayland tweaks
+      xwayland.force_zero_scaling = true;
+
+      cursor.no_hardware_cursors = 1;
 
       # Monitors configuration
       # monitor = name, resolution, position, scale

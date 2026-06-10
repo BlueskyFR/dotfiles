@@ -108,6 +108,8 @@
       ffmpegthumbnailer
 
       vlc
+      # Send notifications
+      libnotify # Provides `notify-send`
 
       # Dynamically update Hyprland monitors using a GUI
       nwg-displays

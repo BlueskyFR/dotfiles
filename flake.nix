@@ -70,6 +70,7 @@
       easy-hosts = let
         desktop = ./profiles/desktop;
         personal = ./profiles/personal;
+        gaming = ./profiles/gaming;
         work = ./profiles/work;
         server = ./profiles/server;
         remoteBuilder = ./profiles/remote-builder;
@@ -96,7 +97,7 @@
           nzxt = {
             # arch = "x86_64"; (default)
             # class = "nixos"; (default; could be "iso")
-            modules = [desktop sddmGreeter personal];
+            modules = [desktop sddmGreeter personal gaming];
             # nixpkgs = inputs.xxx;
             path = ./hosts/nzxt;
             # tags = [ "graphical" "desktop" ];
