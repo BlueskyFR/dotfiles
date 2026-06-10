@@ -1,4 +1,4 @@
-# krisp-patcher.py courtesy of https://github.com/sersorrel/sys
+# Source: https://codeberg.org/keysmashes/sys/src/branch/main/common/nixpkgs/programs/krisp-patcher.py
 import sys
 import shutil
 
@@ -9,18 +9,11 @@ from capstone.x86 import *
 if len(sys.argv) < 2:
     print(f"Usage: {sys.argv[0]} [path to discord_krisp.node]")
     # "Unix programs generally use 2 for command line syntax errors and 1 for all other kind of errors."
-    exit()
+    sys.exit(2)
 
 executable = sys.argv[1]
 
-elf: ELFFile
-
-try:
-    elf = ELFFile(open(executable, "rb"))
-except FileNotFoundError:
-    print("Krisp executable could not be located. Skipping.")
-    exit()
-
+elf = ELFFile(open(executable, "rb"))
 symtab = elf.get_section_by_name('.symtab')
 
 krisp_initialize_address = symtab.get_symbol_by_name("_ZN7discordL17DoKrispInitializeEv")[0].entry.st_value

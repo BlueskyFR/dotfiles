@@ -47,9 +47,9 @@
           ];
           # Ignore syntax checker error codes that affect krisp-patcher.py
           flakeIgnore = [
-            "E501"
-            "F403"
-            "F405"
+            "E501" # line too long (82 > 79 characters)
+            "F403" # ‘from module import *’ used; unable to detect undefined names
+            "F405" # name may be undefined, or defined from star imports: module
           ];
         } (builtins.readFile ./krisp-patcher.py);
         binaryName = "Discord";

@@ -108,7 +108,14 @@
     users.hugo = {
       isNormalUser = true;
       description = "Hugo";
-      extraGroups = ["networkmanager" "wheel"];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        # Unprivileged access to serial devices
+        # "dialout"
+        # Allow mounting & unmounting devices through pmount
+        # "plugdev"
+      ];
       # packages = with pkgs; [];
     };
 

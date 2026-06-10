@@ -91,8 +91,10 @@
         enableWidevine = true;
         commandLineArgs = ["--ozone-platform-hint=auto"];
       })
+      (chromium.override {enableWideVine = true;})
       brave
-      discord-krisp
+      # TODO: Krisp support dropped until https://github.com/NixOS/nixpkgs/pull/506089 is merged
+      discord
       postman
       pavucontrol
       networkmanagerapplet
@@ -122,6 +124,7 @@
       android-tools
       # Java
       temurin-bin
+      edgetx
     ];
 
     programs = {
@@ -333,5 +336,11 @@
       ## with this page for instance (change visible live): https://hugooo.dev/dark-mode.html
       "org/gnome/desktop/interface".color-scheme = "prefer-dark";
     };
+
+    # Electron apps issues on Wayland
+    xdg.configFile."electron-flags.conf".text = ''
+      --enable-features=UseOzonePlatform
+      --ozone-platform=wayland
+    '';
   };
 }
