@@ -18,6 +18,9 @@
 
   # boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_6;
 
+  # Disable remote builds for this host since it has a good conection/compute power/storage
+  remote-builds.enable = false;
+
   # NFS mount
   fileSystems."/tv" = {
     device = "yurt.wow:/tv";
@@ -103,4 +106,12 @@
       ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="df11", MODE="0664", GROUP="users", TAG+="uaccess"
     '';
   };
+
+  networking.firewall.allowedUDPPortRanges = [
+    # WebRTC
+    {
+      from = 10000;
+      to = 20000;
+    }
+  ];
 }

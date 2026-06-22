@@ -8,7 +8,8 @@
   ...
 }: {
   # Custom setting to determine if the current system is a builder itself elsewhere
-  is-remote-builder = lib.mkForce true; # Accessible elsewhere using `config.is-remote-builder`
+  # e.g. prevents on building remotely on itself ;)
+  remote-builds.is-builder = lib.mkForce true;
   # Our remote build user needs to be trusted by the nix daemon
   ## (this gives root-like priviledges on the host thought!)
   nix.settings.trusted-users = ["remotebuild"];

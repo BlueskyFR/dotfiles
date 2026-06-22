@@ -9,21 +9,35 @@
 }: {
   # Separate the options definition from our config below
   options = {
-    is-remote-builder = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Whether the current host is a remote builder itself.";
+    # Let's use kebab-case for our custom modules cause why not ;)
+    remote-builds = {
+      is-builder = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Whether the current host is a remote builder itself.";
+      };
+
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = !config.remote-builds.is-builder;
+        description = "Enable remote builds for the current host. Enabled by default unless the host is a builder itself.";
+      };
     };
   };
 
-  config = {
+  config = let
+    enable = config.remote-builds.enable;
+  in {
     nix = {
       # Only distribute the builds if the machine is not a builder itself
-      distributedBuilds = !config.is-remote-builder;
-      buildMachines = lib.mkIf (!config.is-remote-builder) [
+      distributedBuilds = enable;
+      buildMachines = lib.mkIf enable [
         {
           hostName = "hugooo.dev";
-          systems = ["x86_64-linux"];
+          systems = [
+            "x86_64-linux"
+            "i686-linux" # 32 bit
+          ];
           protocol = "ssh-ng";
           maxJobs = 128;
           speedFactor = 2;
@@ -47,7 +61,7 @@
 
         # Disable local builds if the host is not a builder itself
         # (can still be overriden by some specific build options)
-        max-jobs = lib.mkIf (!config.is-remote-builder) (lib.mkForce 0);
+        max-jobs = lib.mkIf enable (lib.mkForce 0);
         # The following line seems to break builds when remote builds are enabled - taking forever for some reason
         # max-jobs = "auto"; # "auto" means use all logical cores
       };
