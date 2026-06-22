@@ -75,7 +75,6 @@
     fastfetch
     ipfetch
     countryfetch
-    screen-message
   ];
 
   # Make fonts installed through `home.packages` discoverable

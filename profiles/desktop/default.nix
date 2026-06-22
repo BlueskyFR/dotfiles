@@ -133,6 +133,9 @@
       android-tools
       # Java
       temurin-bin
+
+      # Very important
+      screen-message
       edgetx
     ];
 
