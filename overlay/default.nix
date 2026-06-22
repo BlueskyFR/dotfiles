@@ -1,8 +1,8 @@
 {inputs, ...}: {
   nixpkgs.overlays = [
     (final: prev: {
-      # Add a custom `pkgs.unstable.XXX` attribute to easily access stable pkgs if needed
-      unstable = import inputs.nixpkgs-unstable {
+      # Add a custom `pkgs.stable.XXX` attribute to easily access stable pkgs if needed
+      stable = import inputs.nixpkgs-stable {
         system = prev.stdenv.hostPlatform.system;
         config.allowUnfree = true;
       };

@@ -31,7 +31,7 @@
 
     # Dev
     gh
-    unstable.deno
+    deno
     ## Rust
     rustup
     gcc # Needed for rustup

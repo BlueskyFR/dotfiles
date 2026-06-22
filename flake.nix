@@ -4,14 +4,15 @@
   inputs = {
     # Use stable channel by default
     # Difference between Nix channels: https://is.gd/2ySq2I
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # nixpkgs.url = "/home/hugo/tmp/nixpkgs";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
     # nixpkgs-stable.url = "/home/hugo/tmp/nixpkgs";
 
     home-manager = {
       # Make home-manager match our main NixOS version
-      url = "github:nix-community/home-manager/release-26.05";
+      # url = "github:nix-community/home-manager/release-26.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -48,7 +49,7 @@
 
   outputs = inputs @ {
     nixpkgs,
-    nixpkgs-unstable,
+    nixpkgs-stable,
     flake-parts,
     easy-hosts,
     ...
