@@ -69,7 +69,13 @@
   services.gnome.sushi.enable = true;
 
   # Home-manager introduces its own `config` so we shadow the main scope's
-  home-manager.users.hugo = {config, ...}: {
+  home-manager.users.hugo = {config, ...}: let
+    vivaldi-pkg = pkgs.vivaldi.override {
+      proprietaryCodecs = true;
+      enableWidevine = true;
+      commandLineArgs = ["--ozone-platform-hint=auto"];
+    };
+  in {
     imports = [
       ./hyprland.nix
       ./rofi.nix
@@ -82,15 +88,18 @@
       # ./ax-shell.nix
     ];
 
+    # Vivaldi
+    xdg.mimeApps = {
+      enable = true;
+      # Auto-add all mimeapps exposed by vivaldi to the list
+      defaultApplicationPackages = [vivaldi-pkg];
+    };
+
     home.packages = with pkgs; [
       # USB iso/file flasher
       popsicle
       spotify
-      (vivaldi.override {
-        proprietaryCodecs = true;
-        enableWidevine = true;
-        commandLineArgs = ["--ozone-platform-hint=auto"];
-      })
+      vivaldi-pkg
       (chromium.override {enableWideVine = true;})
       brave
       # TODO: Krisp support dropped until https://github.com/NixOS/nixpkgs/pull/506089 is merged
