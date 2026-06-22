@@ -43,7 +43,7 @@
       open = true;
 
       # Package channel to use
-      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
 
       # Enable the `nvidia-settings` menu
       nvidiaSettings = true;
