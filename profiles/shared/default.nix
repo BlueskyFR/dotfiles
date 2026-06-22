@@ -217,8 +217,8 @@
 
     # Support 24 bit colors instead of 256 by replacing Getty with Kmscon for TTYs
     kmscon = {
-      enable = true;
-      hwRender = true;
+      enable = false;
+      config.hwaccel = true;
       useXkbConfig = true;
     };
 
