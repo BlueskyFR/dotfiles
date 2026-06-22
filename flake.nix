@@ -116,7 +116,7 @@
           # Work
 
           zbook = {
-            modules = [desktop];
+            modules = [desktop sddmGreeter work];
             path = ./hosts/zbook;
           };
 
