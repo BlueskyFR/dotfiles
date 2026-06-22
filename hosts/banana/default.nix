@@ -28,7 +28,7 @@
                 criteria = "eDP-1";
                 status = "enable";
                 scale = 1.0;
-                mode = "1920x1200@60.00Hz";
+                mode = "1920x1200@60.00300";
               }
             ];
             # Switching back to a single monitor is broken unless `hyprctl monitors all` is ran for some reason...
