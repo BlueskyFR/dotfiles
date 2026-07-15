@@ -35,8 +35,10 @@
     };
 
     vscode-server = {
-      url = "github:nix-community/nixos-vscode-server";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # FIXME: Using https://github.com/nix-community/nixos-vscode-server/pull/101 until merged;
+      # fixes https://github.com/nix-community/nixos-vscode-server/issues/102
+      url = "github:nix-community/nixos-vscode-server/79ada60decf3ff4bee4968f8b1136cb1846827a8";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
     custom-fonts = {
