@@ -63,7 +63,16 @@
   # Replacement for unmaintained `light`
   hardware.acpilight.enable = true;
   # Needed to access acpilight functionalities
-  users.users.hugo.extraGroups = ["video"]; # video is for light (screen brightness control)
+  users.users.hugo.extraGroups = [
+    # `video` is for light (screen brightness control)
+    "video"
+
+    # Allow unprivileged access to serial devices on desktop (graphical) computers
+    # (should be avoided on shared servers/sensitive environments)
+    "dialout"
+    # Allow mounting & unmounting devices through pmount
+    # "plugdev"
+  ];
 
   # File preview for nautilus
   services.gnome.sushi.enable = true;
@@ -159,6 +168,10 @@
             pkg-config
             # Java
             temurin-bin
+
+            # Agents sandboxing
+            socat
+            bubblewrap # Unprivileged sandboxing tool
           ]);
       };
 

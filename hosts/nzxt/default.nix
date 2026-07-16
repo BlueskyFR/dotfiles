@@ -104,6 +104,12 @@
 
       # STM32 DFU (Flysky EL18 STM32 DFU mode access from chromium-based browsers/WebUSB)
       ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="df11", MODE="0664", GROUP="users", TAG+="uaccess"
+      # Betaflight STM32
+      # ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="0483", ATTRS{iManufacturer}=="Betaflight", MODE="0664", GROUP="users", TAG+="uaccess"
+      # DFU (Internal bootloader for STM32 and AT32 MCUs)
+      SUBSYSTEM=="usb", ATTRS{idVendor}=="2e3c", ATTRS{idProduct}=="df11", MODE="0664", TAG+="uaccess"
+      SUBSYSTEM=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="df11", MODE="0664", TAG+="uaccess"
+      # Add more & check with `lsusb` and `lsusb -v | less`
     '';
   };
 
