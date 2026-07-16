@@ -21,6 +21,7 @@
         ./home.nix
         ./aliases.nix
         ./zsh.nix
+        ./yazi.nix
       ];
     };
     extraSpecialArgs = {inherit flakeDir;};
@@ -111,10 +112,6 @@
       extraGroups = [
         "networkmanager"
         "wheel"
-        # Unprivileged access to serial devices
-        # "dialout"
-        # Allow mounting & unmounting devices through pmount
-        # "plugdev"
       ];
       # packages = with pkgs; [];
     };
