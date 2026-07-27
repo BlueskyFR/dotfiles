@@ -38,6 +38,7 @@
     # Ability to restore the bulk-copied links from a group of vivaldi tabs (one per line);
     # accepts --incognito as extra parameter
     vivaldi-paste-links = "${lib.getExe' pkgs.wl-clipboard-rs "wl-paste"} | xargs -d '\n' vivaldi";
+    yt-dl-wav = "${lib.getExe pkgs.yt-dlp} -x --audio-format wav";
   };
 
   programs.zsh = {

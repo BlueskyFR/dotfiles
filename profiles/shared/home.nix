@@ -50,6 +50,7 @@
     manix # Nix/HM cli doc searcher
     nix-output-monitor # Fancy dependency graph for `nix build`
     tldr
+    yt-dlp
 
     # System tools
     xdg-utils # Makes url handlers work between apps
