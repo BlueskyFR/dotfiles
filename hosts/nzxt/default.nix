@@ -22,17 +22,31 @@
   remote-builds.enable = false;
 
   # NFS mount
-  fileSystems."/tv" = {
-    device = "yurt.wow:/tv";
-    fsType = "nfs";
-    options = [
-      # Dynamic automount on access
-      "x-systemd.automount"
-      # Auto-unmount timeout (30 min)
-      "x-systemd.idle-timeout=1800"
-      # Prevents mounting at boot (required for automount)
-      "noauto"
-    ];
+  fileSystems = {
+    "/tv" = {
+      device = "yurt.wow:/tv";
+      fsType = "nfs";
+      options = [
+        # Dynamic automount on access
+        "x-systemd.automount"
+        # Auto-unmount timeout (30 min)
+        "x-systemd.idle-timeout=1800"
+        # Prevents mounting at boot (required for automount)
+        "noauto"
+      ];
+    };
+    "/backup" = {
+      device = "yurt.wow:/backup";
+      fsType = "nfs";
+      options = [
+        # Dynamic automount on access
+        "x-systemd.automount"
+        # Auto-unmount timeout (30 min)
+        "x-systemd.idle-timeout=1800"
+        # Prevents mounting at boot (required for automount)
+        "noauto"
+      ];
+    };
   };
 
   home-manager.users.hugo = {
