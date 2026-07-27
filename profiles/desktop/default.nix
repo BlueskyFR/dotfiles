@@ -260,6 +260,41 @@
         };
       };
 
+      mpv = {
+        enable = true;
+        scripts = with pkgs.mpvScripts; [
+          # Better interface
+          # uosc
+          modernx
+          # Thumbnails seeking preview
+          thumbfast
+          # Media keys protocol support
+          mpris
+          # Block YouTube sponsors
+          sponsorblock
+          # Auto subtitles download
+          autosub
+          # Auto-reload the video when stream is stuck
+          reload
+        ];
+        config = {
+          # Name for our profile
+          profile = "gpu-hq";
+          # https://mpv.io/manual/stable/#video-output-drivers-gpu-next
+          vo = "gpu-next";
+          # https://mpv.io/manual/stable/#options-gpu-api
+          gpu-api = "vulkan";
+          # Start in fullscreen
+          fullscreen = "yes";
+          # Don't close the player after finishing the video
+          keep-open = "always";
+          # https://mpv.io/manual/stable/#options-hwdec
+          hwdec = "auto";
+          ytdl-format = "bestvideo+bestaudio";
+          # More cool options at https://github.com/noelsimbolon/mpv-config/blob/linux/mpv.conf
+        };
+      };
+
       firefox.enable = true;
     };
 
