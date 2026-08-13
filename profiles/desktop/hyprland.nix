@@ -51,7 +51,7 @@
         "workspace 3 silent, match:class vivaldi-stable"
 
         # Picture-in-Picture
-        "float on, pin on, match:title Picture in picture"
+        "float on, pin on, keep_aspect_ratio on, match:title Picture in picture"
       ];
 
       # Required for Nvidia drivers
