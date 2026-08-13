@@ -129,6 +129,8 @@
       discord
       postman
       pavucontrol
+      # Wireplumber-focused alternative to pavucontrol
+      pwvucontrol
       networkmanagerapplet
       # Gaming devices configuration
       ## Also needs ratbagd (see services)
@@ -142,6 +144,7 @@
       ffmpegthumbnailer
 
       vlc
+      jellyfin-desktop
       # Send notifications
       libnotify # Provides `notify-send`
 
