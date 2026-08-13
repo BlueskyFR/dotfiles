@@ -50,6 +50,15 @@
   };
 
   home-manager.users.hugo = {
+    home.packages = with pkgs; [
+      # Video editing, only needed on this host
+      gyroflow
+
+      davinci-resolve-studio
+
+      # (callPackage ./davinci-resolve.nix {studioVariant = true;})
+    ];
+
     wayland.windowManager.hyprland.settings = {
       # Monitors configuration
       # monitor = name, resolution, position, scale
