@@ -98,10 +98,24 @@
     ];
 
     # Vivaldi
-    xdg.mimeApps = {
-      enable = true;
-      # Auto-add all mimeapps exposed by vivaldi to the list
-      defaultApplicationPackages = [vivaldi-pkg];
+    xdg = {
+      mimeApps = {
+        enable = true;
+        # Auto-add all mimeapps exposed by vivaldi to the list
+        defaultApplicationPackages = [vivaldi-pkg];
+        defaultApplications = {
+          "x-scheme-handler/mailto" = lib.mkDefault "gmail.desktop";
+        };
+      };
+
+      desktopEntries = {
+        "gmail" = {
+          name = "Gmail (mailto: links)";
+          exec = "xdg-open \"https://google.com\"";
+          mimeType = ["x-scheme-handler/mailto"];
+          noDisplay = true; # Don't display in the menus
+        };
+      };
     };
 
     home.packages = with pkgs; [
