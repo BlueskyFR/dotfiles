@@ -57,7 +57,6 @@
           "cp" # Defines `cpv` (uses rsync)
           "sudo" # Prefixes current command with `sudo` by pressing `esc` twice! 🤩
           "fzf" # Setup completions & keyboard shortcuts for an existing fzf installation
-          "poetry" #"poetry-env"
         ];
       };
     };

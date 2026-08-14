@@ -134,7 +134,7 @@
     };
 
     poetry = {
-      enable = true;
+      enable = false;
       settings = {
         # Create a venv if it doesn't exist, so do not use an existing and/or
         # system environment
