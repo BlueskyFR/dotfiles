@@ -68,5 +68,13 @@
     # NFS shares export;
     # export a share with e.g. `sudo zfs set sharenfs="ro=10.0.0.0/24" DATASET`
     nfs.server.enable = true;
+
+    # Samba shares export (`zfs set sharesmb=on DATASET`)
+    samba = {
+      enable = true;
+      openFirewall = true;
+      usershares.enable = true;
+      # Also be sure to create a password for your user with `sudo smbpasswd -a $USER` since Samba uses its own password db
+    };
   };
 }
