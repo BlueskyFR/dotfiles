@@ -83,6 +83,7 @@
       '')
     ]
     ++ (let
+      readlink = lib.getExe' pkgs.coreutils "readlink";
       script = {
         updateFlakeInputs ? false,
         fancyOutput ? false,
@@ -96,6 +97,13 @@
         sudo nixos-rebuild switch --flake ${flakeDir} \
           --cores $(${pkgs.coreutils-full}/bin/nproc --all) \
           ${lib.optionalString fancyOutput " |& ${nix-output-monitor}/bin/nom"}
+
+        # Check if a reboot is required; compare critical components versions with the
+        # activated system (i.e. `nixos-rebuild boot` will not ask for a reboot as it is not NEEDED)
+        booted="$(${readlink} /run/booted-system/{initrd,kernel,kernel-modules})"
+        activated="$(${readlink} /run/current-system/{initrd,kernel,kernel-modules})"
+
+        [ "''${booted}" != "''${activated}" ] && echo -e '\n\n🍉 \e[1mA reboot is required!\e[0m'
       '';
     in [
       # Rebuild/sync system
