@@ -133,6 +133,7 @@
     tree
     file
     nfs-utils
+    dnsutils
 
     # Files
     gdu
