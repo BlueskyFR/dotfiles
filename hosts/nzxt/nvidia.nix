@@ -16,6 +16,16 @@
   # Load Nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"]; # or "nvidiaLegacy470", etc.
 
+  # Env vars read by Hyprland
+  # Only needed when Hyprland + Nvidia
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "nvidia";
+    XDG_SESSION_TYPE = "wayland";
+    GBM_BACKEND = "nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    NVD_BACKEND = "direct";
+  };
+
   hardware = {
     # Enable OpenGL
     graphics = {
