@@ -35,10 +35,10 @@ in {
       modesetting.enable = true;
 
       # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-      powerManagement.enable = true;
+      powerManagement.enable = false;
       # Fine-grained power management. Turns off GPU when not in use.
       # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-      powerManagement.finegrained = true;
+      powerManagement.finegrained = false;
 
       # Use the NVidia open source kernel module (not to be confused with the
       # independent third-party "nouveau" open source driver).
@@ -63,11 +63,11 @@ in {
 
       prime = {
         # Use GPU by default if true
-        sync.enable = false;
+        sync.enable = true;
         # OR enable GPU offload
         offload = {
-          enable = true;
-          enableOffloadCmd = true; # Provides `nvidia-offload`
+          enable = false;
+          enableOffloadCmd = false; # Provides `nvidia-offload`
         };
 
         # Make sure to use the correct Bus ID values for your system!
