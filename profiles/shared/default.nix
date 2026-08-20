@@ -153,7 +153,19 @@
   ];
 
   fonts = {
+    enableDefaultPackages = false;
     packages = with pkgs; [
+      #twemoji-color-font (old one)
+      twitter-color-emoji
+
+      # Custom fonts
+      (monolisa-hugo.override {nerdify = true;})
+
+      noto-fonts
+      # Fixes Chinese characters being invisible in Chromium/Electron-based apps
+      noto-fonts-cjk-sans
+      noto-fonts-color-emoji
+
       # # It is sometimes useful to fine-tune packages, for example, by applying
       # # overrides. You can do that directly here, just don't forget the
       # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -162,19 +174,22 @@
       nerd-fonts.fira-code
       nerd-fonts.victor-mono
       # TODO: add Josefin Sans
-      #twemoji-color-font (old one)
-      twitter-color-emoji
-
-      # Custom fonts
-      (monolisa-hugo.override {nerdify = true;})
-
-      # Fixes Chinese characters being invisible in Chromium/Electron-based apps
-      noto-fonts-cjk-sans
     ];
 
     fontconfig.defaultFonts = {
-      emoji = ["Twitter Color Emoji"];
-      monospace = ["MonoLisaHugoTerm Nerd Font"];
+      # Prefered font first, then fallbacks below.
+      # Noto (by Google) covers many charsets and has good fallbacks
+      emoji = [
+        "Twitter Color Emoji"
+        "Noto Color Emoji"
+      ];
+      monospace = [
+        "MonoLisaHugoTerm Nerd Font"
+        # Google's Noto (NO TOfu) fallbacks
+        "Noto Sans Mono"
+        "Noto Sans Symbols 2" # Contains braille
+        "Noto Sans Symbols"
+      ];
     };
   };
 

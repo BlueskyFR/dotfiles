@@ -198,7 +198,8 @@
           # Use our custom Terminal font
           font = let
             mkFont = style: {
-              family = "MonoLisaHugoTerm Nerd Font";
+              # family = "MonoLisaHugoTerm Nerd Font";
+              family = "monospace";
               inherit style;
             };
           in {
