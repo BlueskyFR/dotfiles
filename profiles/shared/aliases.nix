@@ -85,11 +85,11 @@
   home.packages = with pkgs;
     [
       (writeShellScriptBin "upgrade-firmware" ''
-        sudo fwupdmgr get-devices
+        sudo fwupdmgr get-devices --no-unreported-check
         echo Waiting 2 sec...
         sleep 2
         sudo fwupdmgr refresh --force
-        sudo fwupdmgr get-updates
+        sudo fwupdmgr get-updates --no-unreported-check
         sudo fwupdmgr update
       '')
     ]
