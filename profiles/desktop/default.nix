@@ -144,13 +144,13 @@
       ffmpegthumbnailer
 
       vlc
-      # Jellyfin: fetch a fresher version (I took it from the latest master at the time)
+      # Jellyfin: use a much newer build (last release was in 2025 last time I checked!)
       (jellyfin-desktop.overrideAttrs (oldAttrs: {
         src = fetchFromGitHub {
           owner = "jellyfin";
           repo = "jellyfin-desktop";
-          rev = "4e1010b90ff3a8e0dca9026618ba12e6cee1ddd5";
-          hash = "sha256-crWTAAtxjVpOtZygjc84PcQvP02jhqmr2fmaABTa+8E=";
+          rev = "2cb4a4456fd29b5b62d825ef0e5df93ed6913328";
+          hash = "sha256-EbDTw7Nzq6JTF3YmIBNizDiPJ8wbc1leREfgCbME3Js=";
           fetchSubmodules = true;
         };
       }))
