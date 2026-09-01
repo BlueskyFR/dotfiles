@@ -54,7 +54,7 @@
       # Video editing, only needed on this host
       gyroflow
 
-      davinci-resolve-studio
+      # davinci-resolve-studio
 
       # (callPackage ./davinci-resolve.nix {studioVariant = true;})
     ];
