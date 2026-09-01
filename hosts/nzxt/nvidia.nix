@@ -11,6 +11,13 @@
       NVD_BACKEND = "direct";
       LBVA_DRIVER_NAME = "nvidia";
     };
+
+    sessionVariables = {
+      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      GBM_BACKEND = "nvidia-drm";
+      __GL_GSYNC_ALLOWED = "1";
+      __GL_VRR_ALLOWED = "1";
+    };
   };
 
   # Load Nvidia driver for Xorg and Wayland
@@ -18,13 +25,14 @@
 
   # Env vars read by Hyprland
   # Only needed when Hyprland + Nvidia
-  environment.sessionVariables = {
-    LIBVA_DRIVER_NAME = "nvidia";
-    XDG_SESSION_TYPE = "wayland";
-    GBM_BACKEND = "nvidia-drm";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    NVD_BACKEND = "direct";
-  };
+  # WARNING: POSSIBLY CRASHING SDDM
+  #environment.sessionVariables = {
+  #  LIBVA_DRIVER_NAME = "nvidia";
+  #  XDG_SESSION_TYPE = "wayland";
+  #  GBM_BACKEND = "nvidia-drm";
+  #  __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+  #  NVD_BACKEND = "direct";
+  #};
 
   hardware = {
     # Enable OpenGL
