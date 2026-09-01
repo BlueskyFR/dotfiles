@@ -144,7 +144,16 @@
       ffmpegthumbnailer
 
       vlc
-      jellyfin-desktop
+      # Jellyfin: fetch a fresher version (I took it from the latest master at the time)
+      (jellyfin-desktop.overrideAttrs (oldAttrs: {
+        src = fetchFromGitHub {
+          owner = "jellyfin";
+          repo = "jellyfin-desktop";
+          rev = "4e1010b90ff3a8e0dca9026618ba12e6cee1ddd5";
+          hash = "sha256-crWTAAtxjVpOtZygjc84PcQvP02jhqmr2fmaABTa+8E=";
+          fetchSubmodules = true;
+        };
+      }))
       # Send notifications
       libnotify # Provides `notify-send`
 
