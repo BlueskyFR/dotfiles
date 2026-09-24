@@ -52,6 +52,9 @@
 
         # Picture-in-Picture
         "float on, pin on, keep_aspect_ratio on, match:title Picture in picture"
+
+        # Disable VRR for MPV (fixes flickering)
+        "no_vrr 1, match:class ^(mpv)$"
       ];
 
       # Required for Nvidia drivers

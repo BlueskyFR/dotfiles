@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "ableton-linux": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1790068051,
+        "narHash": "sha256-VZ/bnURQT0G2jTtOS/o1+WZYxZCOxtpPtLkwXDsYOmQ=",
+        "owner": "shibco",
+        "repo": "ableton-linux",
+        "rev": "72a649290141b3e8cf0a254637eb45ce71ae28c9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "shibco",
+        "repo": "ableton-linux",
+        "type": "github"
+      }
+    },
     "bun2nix": {
       "inputs": {
         "flake-parts": [
@@ -56,11 +76,11 @@
     "dank-qml-common": {
       "flake": false,
       "locked": {
-        "lastModified": 1790170755,
-        "narHash": "sha256-2KAqICiM0ftXh77+6BPO4wpXmv4BMhD5DAtC1zh5mt0=",
+        "lastModified": 1790258284,
+        "narHash": "sha256-tk2rCsMS6jstnDXn9vt/+F3LoKrNpPWxyfBPtQ63Z28=",
         "owner": "AvengeMedia",
         "repo": "dank-qml-common",
-        "rev": "12e45e5d6f9deac6893d0538ad2c2a0344b584c3",
+        "rev": "4b9a18dc9cce81731d266ba1e89c75786776ba75",
         "type": "github"
       },
       "original": {
@@ -78,11 +98,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1790175627,
-        "narHash": "sha256-bI7iajIdMMm84Hqh2GETZAHJYtDmB+E5UuNMUWON3Tc=",
+        "lastModified": 1790276238,
+        "narHash": "sha256-oFk+w7dK6mgrxEIXakGDTcLbNTFbuERNc4oLsDSeu8g=",
         "owner": "AvengeMedia",
         "repo": "DankMaterialShell",
-        "rev": "6ab3755405161b6a6909e3599aa7addb7709be64",
+        "rev": "8508121f4ae34ee886ce96f4370475d674950a88",
         "type": "github"
       },
       "original": {
@@ -206,11 +226,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1790128814,
-        "narHash": "sha256-6Gm9q+wW3E4Ey4F6wEbJAwaMsEK6hvCYfTW7yY64ZfA=",
+        "lastModified": 1790275434,
+        "narHash": "sha256-9dZF1EviQA/XKCjHChddQh7skrfKnZPSqPOqEeOKW0k=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "0b2f1129177f70c5f0f5d88bb53c49ca47d0bfc0",
+        "rev": "f2981148865f7390d187a91d4b1a3a7616047d6d",
         "type": "github"
       },
       "original": {
@@ -359,11 +379,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1790156955,
-        "narHash": "sha256-fX01id/iJpSbHzVDYgrQHy1vr7OsqCZrNAwfYsestLQ=",
+        "lastModified": 1790255433,
+        "narHash": "sha256-a/tZWRpZsIIh6mY16bR57/8hbkCFDASasOxrQjMTekY=",
         "owner": "numtide",
         "repo": "llm-agents.nix",
-        "rev": "06830d044f23ec9bc55cec62771122d2941c634d",
+        "rev": "c2d669b6ed4001f1f7c2a45cf14724467387cbe0",
         "type": "github"
       },
       "original": {
@@ -440,11 +460,11 @@
     },
     "nixpkgs-stable": {
       "locked": {
-        "lastModified": 1790113641,
-        "narHash": "sha256-D2aaQetafdpHxbwA4ldAxs51UX0b11pXL+JL/5L8VrM=",
+        "lastModified": 1790218706,
+        "narHash": "sha256-6e4Na3z008XpdVyOXgfasXIn1aN+z8AXFG+jXdQSyuI=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "1bc55b9def8165e82073919945c3239903fe4dc2",
+        "rev": "c508844df6c28fa6dabc1b6af70f3ccbd65c5201",
         "type": "github"
       },
       "original": {
@@ -472,11 +492,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1790055231,
-        "narHash": "sha256-QpXotokGh5eeMG1Njiuh27oP0rK6t5+cMp7ymXSs7mc=",
+        "lastModified": 1790178388,
+        "narHash": "sha256-kK3t7gwoz4Nx8RF46cs1Xz/skKNcK7y3KYP+gGqX6W8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "b6c98e9e6633ee64753b594ff4a5febf0367fc00",
+        "rev": "00455b0a3690d3f5dc61e9aef4277dc86235b73f",
         "type": "github"
       },
       "original": {
@@ -488,11 +508,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1790046670,
-        "narHash": "sha256-MYiI+CzL0tuWgRPjGsKCDHqYs2T3OzMlMQWOYWG0qso=",
+        "lastModified": 1790185690,
+        "narHash": "sha256-xJ+X4hBtOcAFGBOe5nAMyMUeF9foJBmIOu3NjBqBycU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "6774f7bc253789b113a4f39285dc0fa100abeacc",
+        "rev": "4975466d324710c576dc11ad614684e6bd8cad8e",
         "type": "github"
       },
       "original": {
@@ -504,6 +524,7 @@
     },
     "root": {
       "inputs": {
+        "ableton-linux": "ableton-linux",
         "custom-fonts": "custom-fonts",
         "dms": "dms",
         "easy-hosts": "easy-hosts",
