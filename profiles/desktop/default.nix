@@ -127,6 +127,7 @@
       brave
       # TODO: Krisp support dropped until https://github.com/NixOS/nixpkgs/pull/506089 is merged
       discord
+      signal-desktop
       postman
       pavucontrol
       # Wireplumber-focused alternative to pavucontrol
