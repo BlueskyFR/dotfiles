@@ -119,6 +119,7 @@
           "$mod, equal, exec, [float; size 350 150; pin] ${lib.getExe' pkgs.ffmpeg "ffplay"} -hide_banner https://shonanbeachfm.out.airtime.pro/shonanbeachfm_c"
           # Exit Hyprland
           "$mod SHIFT, E, exit"
+          "$mod, J, exec, jellyfin-desktop"
 
           # Advanced binds
           ## Brightness control
