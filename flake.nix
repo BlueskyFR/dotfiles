@@ -5,6 +5,7 @@
     # Use stable channel by default
     # Difference between Nix channels: https://is.gd/2ySq2I
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "github:nixos/nixpkgs/b6205187ee21dd962062d9d1d44f5706d90fd253";
     # nixpkgs.url = "/home/hugo/tmp/nixpkgs";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
     # nixpkgs-stable.url = "/home/hugo/tmp/nixpkgs";
@@ -41,6 +42,8 @@
       # inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    llm-agents.url = "github:numtide/llm-agents.nix";
+
     custom-fonts = {
       url = "github:BlueskyFR/fonts";
       # url = "/home/hugo/code/custom-fonts";
@@ -54,6 +57,7 @@
     nixpkgs-stable,
     flake-parts,
     easy-hosts,
+    llm-agents,
     ...
   }:
     flake-parts.lib.mkFlake {inherit inputs;}
@@ -89,6 +93,13 @@
             inputs.vscode-server.nixosModules.default
 
             ./profiles/shared
+
+            # Imported overlays
+            {
+              nixpkgs.overlays = [
+                llm-agents.overlays.shared-nixpkgs
+              ];
+            }
 
             # Custom overlay
             ./overlay

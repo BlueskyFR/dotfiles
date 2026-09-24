@@ -146,10 +146,6 @@
 
     npm.enable = true;
 
-    claude-code = {
-      enable = true;
-    };
-
     # Run software without installing it (`, cowsay wow`)
     nix-index-database.comma.enable = true;
   };
