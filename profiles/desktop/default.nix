@@ -84,6 +84,8 @@
       enableWidevine = true;
       commandLineArgs = ["--ozone-platform-hint=auto"];
     };
+
+    firefox-pkg = pkgs.firefox;
   in {
     imports = [
       ./hyprland.nix
@@ -102,7 +104,7 @@
       mimeApps = {
         enable = true;
         # Auto-add all mimeapps exposed by vivaldi to the list
-        defaultApplicationPackages = [vivaldi-pkg];
+        defaultApplicationPackages = [firefox-pkg];
         defaultApplications = {
           "x-scheme-handler/mailto" = lib.mkDefault "gmail.desktop";
         };
@@ -323,7 +325,10 @@
         };
       };
 
-      firefox.enable = true;
+      firefox = {
+        enable = true;
+        package = firefox-pkg;
+      };
     };
 
     services = {
