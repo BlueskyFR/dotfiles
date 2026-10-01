@@ -19,7 +19,7 @@
       exec-once = [
         "[workspace 1] alacritty"
         "[workspace 2 silent] code"
-        "[workspace 3 silent] sleep 8 && vivaldi"
+        "[workspace 3 silent] firefox"
 
         # System tray icons
         "sleep 10 && nm-applet"
@@ -49,6 +49,7 @@
         # Static rule, doesn't work on dynamic tags:
         # "workspace 10 silent, tag:nixos-conf*"
         "workspace 3 silent, match:class vivaldi-stable"
+        "workspace 3 silent, match:class firefox"
 
         # Picture-in-Picture
         "float on, pin on, keep_aspect_ratio on, match:title Picture in picture"
@@ -93,6 +94,7 @@
           # Standard binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
           "$mod, Return, exec, alacritty"
           "$mod, V, exec, vivaldi"
+          "$mod, B, exec, firefox"
           "$mod, S, exec, nautilus --new-window"
           "$mod, A, killactive"
           "$mod SHIFT, A, forcekillactive"
