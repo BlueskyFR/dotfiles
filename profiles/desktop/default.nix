@@ -5,7 +5,7 @@
   config,
   ...
 }: {
-  imports = [./pipewire ./bluetooth.nix ./hyprlock.nix ./boot-splash.nix ./tailscale.nix];
+  imports = [./pipewire ./bluetooth.nix ./hyprlock.nix ./boot-splash.nix ./printing.nix ./tailscale.nix];
 
   boot.loader.grub = {
     # Automatically pre-select the last boot item
