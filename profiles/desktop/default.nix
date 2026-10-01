@@ -171,6 +171,7 @@
       android-tools
       # Java
       temurin-bin
+      wireshark
 
       # Very important
       screen-message
