@@ -63,7 +63,7 @@
                 # field is unknown (If one of these fields is missing, it needs to be populated with the string
                 # "Unknown" (e.g. "Foocorp ASDF Unknown").)
                 criteria = "Hewlett Packard HP E240 6CM7170460";
-                mode = "1920x1080@60Hz";
+                mode = "1920x1080@60.00Hz";
                 position = "1280,0";
                 status = "enable";
               }
