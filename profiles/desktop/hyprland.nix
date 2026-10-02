@@ -52,7 +52,7 @@
         "workspace 3 silent, match:class firefox"
 
         # Picture-in-Picture
-        "float on, pin on, keep_aspect_ratio on, match:title Picture in picture"
+        "float on, pin on, keep_aspect_ratio on, match:title (Picture in picture|Picture-in-Picture)"
 
         # Disable VRR for MPV (fixes flickering)
         "no_vrr 1, match:class ^(mpv)$"
