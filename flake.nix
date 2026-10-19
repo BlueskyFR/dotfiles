@@ -23,8 +23,6 @@
     };
     easy-hosts.url = "github:tgirlcloud/easy-hosts";
 
-    hyprlock.url = "github:hyprwm/hyprlock";
-
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";

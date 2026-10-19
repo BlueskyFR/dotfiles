@@ -11,8 +11,6 @@
   home-manager.users.hugo = {
     programs.hyprlock = {
       enable = true;
-      # Custom fix: https://github.com/hyprwm/hyprlock/pull/938
-      package = inputs.hyprlock.packages.${pkgs.stdenv.hostPlatform.system}.default;
       settings = {
         animations = {
           enabled = true;
@@ -99,6 +97,7 @@
           shadow_passes = 3;
           text_align = "center";
           # text = "$TIME";
+          # To debug & show failed PAM attempts, you can add, at the end of the next line: `<br/><span>$PAMPROMPT</span><br/><span>$PAMFAIL</span>`
           text = ''cmd[update:1000] H=$((10##$(date +%H) * 255 / 23)); M=$((10##$(date +%M) * 255 / 59)); S=$((10##$(date +%S) * 255 / 59)); hex=$(printf '%02X%02X%02X' $H $M $S); echo "<span foreground='##$hex' font_weight='600'>$(date +%X)</span><br/><span font_size='64pt' line_height='1025' font_weight='150'>0x$hex</span>"'';
           valign = "top";
           zindex = 3;
