@@ -5,8 +5,9 @@
   ...
 }: {
   # Also provides a GUI Polkit agent through Quickshell
-  programs.dank-material-shell = {
+  programs.dms-shell = {
     enable = true;
+
     systemd = {
       enable = true;
       restartIfChanged = true;
@@ -26,9 +27,12 @@
     # default.settings = lib.importJSON ./settings.json;
   };
 
-  # Overwrite DMS' config with ours every time instead of on first install only
-  xdg.configFile."DankMaterialShell/settings.json" = {
-    force = true;
-    source = ./settings.json;
+  # Home-manager options
+  home-manager.users.hugo = {
+    # Overwrite DMS' config with ours every time instead of on first install only
+    xdg.configFile."DankMaterialShell/settings.json" = {
+      force = true;
+      source = ./settings.json;
+    };
   };
 }
