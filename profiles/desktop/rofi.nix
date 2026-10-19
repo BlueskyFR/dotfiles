@@ -8,6 +8,9 @@
     enable = true;
     package = pkgs.rofi;
     plugins = with pkgs; [rofi-emoji rofi-rbw-wayland];
+    # Launch apps in their own systemd unit under UWSM instead of inside Hyprland's
+    ## See https://github.com/Vladimir-csp/uwsm#launcher-integration
+    settings.run-command = "uwsm app -- {cmd}";
     theme = let
       # Use `mkLiteral` for string-like values that should show without
       # quotes, e.g.:

@@ -21,7 +21,16 @@ in {
     KERNEL=="card*", KERNELS=="0000:${iGpuId}", SUBSYSTEM=="drm", SUBSYSTEMS=="pci", SYMLINK+="dri/${iGpuName}"
     KERNEL=="card*", KERNELS=="0000:${nvidiaGpuId}", SUBSYSTEM=="drm", SUBSYSTEMS=="pci", SYMLINK+="dri/${nvidiaGpuName}"
   '';
-  environment.sessionVariables.AQ_DRM_DEVICES = "/dev/dri/${nvidiaGpuName}:/dev/dri/${iGpuName}";
+  environment.sessionVariables = {
+    AQ_DRM_DEVICES = "/dev/dri/${nvidiaGpuName}:/dev/dri/${iGpuName}";
+
+    # Required for Nvidia drivers (PRIME sync: Nvidia is the primary GPU)
+    ## Moved from Hyprland's `env`, which UWSM services don't see
+    LIBVA_DRIVER_NAME = "nvidia";
+    GBM_BACKEND = "nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    NVD_BACKEND = "direct";
+  };
 
   hardware = {
     # Enable OpenGL

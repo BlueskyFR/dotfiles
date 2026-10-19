@@ -7,12 +7,17 @@
 }: {
   environment = {
     systemPackages = with pkgs; [egl-wayland wayland-protocols];
-    variables = {
-      NVD_BACKEND = "direct";
-      LBVA_DRIVER_NAME = "nvidia";
-    };
+    # Moved to `sessionVariables`: `variables` only goes to /etc/profile, so the systemd user manager
+    # (hence UWSM-started services/apps) never saw them; also fixes the `LBVA_DRIVER_NAME` typo
+    # variables = {
+    #   NVD_BACKEND = "direct";
+    #   LBVA_DRIVER_NAME = "nvidia";
+    # };
 
+    # Required for Nvidia drivers (moved from Hyprland's `env`, which UWSM services don't see)
     sessionVariables = {
+      LIBVA_DRIVER_NAME = "nvidia";
+      NVD_BACKEND = "direct";
       __GLX_VENDOR_LIBRARY_NAME = "nvidia";
       GBM_BACKEND = "nvidia-drm";
       __GL_GSYNC_ALLOWED = "1";
@@ -26,6 +31,7 @@
   # Env vars read by Hyprland
   # Only needed when Hyprland + Nvidia
   # WARNING: POSSIBLY CRASHING SDDM
+  ## (all but `XDG_SESSION_TYPE` are now set above; untested with SDDM, suspect `XDG_SESSION_TYPE` first if it breaks)
   #environment.sessionVariables = {
   #  LIBVA_DRIVER_NAME = "nvidia";
   #  XDG_SESSION_TYPE = "wayland";

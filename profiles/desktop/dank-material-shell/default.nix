@@ -30,6 +30,9 @@
   # Home-manager options
   home-manager.users.hugo = {
     # Overwrite DMS' config with ours every time instead of on first install only
+    ## UWSM: `launchPrefix` + `customPowerActionLock` use `uwsm app --` so launched apps/hyprlock get their own unit
+    ## in app-graphical.slice; hyprlock would otherwise run inside dms.service and get killed if DMS restarts
+    ## (`restartIfChanged`) while locked
     xdg.configFile."DankMaterialShell/settings.json" = {
       force = true;
       source = ./settings.json;

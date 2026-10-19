@@ -55,8 +55,15 @@
     hyprland = {
       enable = true;
       portalPackage = lib.mkDefault pkgs.xdg-desktop-portal-hyprland; # Just to be exhaustive
-      withUWSM = false; # Useless for now, so remove the buggy sddm greeter entry
-      # programs.uwsm.enable ?
+      # Start Hyprland through UWSM (systemd-managed session: proper graphical-session.target,
+      # XDG autostart, apps as units, ordered shutdown), see https://wiki.hypr.land/Useful-Utilities/Systemd-start/
+      ## The "Hyprland (uwsm-managed)" greeter entry is shipped by the hyprland package itself whatever
+      ## this is set to; with `false` it was "buggy" most likely because uwsm's systemd units + dbus-broker were missing
+      ## Also sets `programs.uwsm.enable = true` (no need to set it here), but do NOT set
+      ## `programs.uwsm.waylandCompositors.hyprland`: it would add a duplicate greeter entry
+      # WARNING: implies `services.dbus.implementation = "broker"`, reboot after switching to it
+      # withUWSM = false; # Useless for now, so remove the buggy sddm greeter entry
+      withUWSM = true;
     };
   };
 

@@ -9,6 +9,11 @@
     package = null;
     portalPackage = null;
 
+    # UWSM (see `withUWSM` in ./default.nix) already manages the session/graphical-session.target;
+    # HM's integration (`dbus-update-activation-environment` + `hyprland-session.target` exec-once) conflicts with it
+    ## See https://wiki.hypr.land/Useful-Utilities/Systemd-start/
+    systemd.enable = false;
+
     # TODO: switch to lua when stable enough
     configType = "hyprlang";
 
@@ -16,14 +21,20 @@
       # Startup apps
       # (move to workspace only applies to non-forking processes
       # since it is PID-based)
+      ## Apps should be started with `uwsm app -- <cmd>` so they run in their own unit instead of Hyprland's
+      ## (https://wiki.hypr.land/Useful-Utilities/Systemd-start/), BUT exec rules like `[workspace N]`/`[float]`
+      ## match the PID, which `uwsm app` may break (untested; scope mode should exec in place): entries using them are left unwrapped on purpose
+      # TODO: drop the exec rule for a class-based `windowrule` (already exists for code/firefox) to allow wrapping
       exec-once = [
         "[workspace 1] alacritty"
         "[workspace 2 silent] code"
         "[workspace 3 silent] firefox"
 
         # System tray icons
-        "sleep 10 && nm-applet"
-        "sleep 10 && blueman-applet"
+        ## Removed: UWSM runs XDG autostart entries, which already start both (would duplicate the tray icons)
+        ## (`nm-applet.desktop` from HM's networkmanagerapplet package, `blueman.desktop` from `services.blueman`)
+        # "sleep 10 && nm-applet"
+        # "sleep 10 && blueman-applet"
       ];
 
       # Also exec on reloads
@@ -58,19 +69,19 @@
         "no_vrr 1, match:class ^(mpv)$"
       ];
 
-      # Required for Nvidia drivers
-      env = [
-        "LIBVA_DRIVER_NAME,nvidia"
-        "XDG_SESSION_TYPE,wayland"
-        "GBM_BACKEND,nvidia-drm"
-        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-        "WLR_NO_HARDWARE_CURSORS,1"
-        "NVD_BACKEND,direct"
-        # Flickering issues
-        "ELECTRON_OZONE_PLATFORM_HINT,auto"
-        # XWayland tweaks
-        "GDK_SCALE,2"
-      ];
+      # Environment variables
+      ## Under UWSM, `env` only reaches Hyprland and its direct children, not systemd services
+      ## (DMS, portals, XDG autostart, `uwsm app` units), so they were moved out of here
+      ## (https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/):
+      ## - Nvidia ones: `environment.sessionVariables` in hosts/*/nvidia.nix (per-host, were applied everywhere)
+      ## - Toolkit ones: `xdg.configFile."uwsm/env"` below
+      ## - `HYPR*`/`AQ_*` ones belong to `xdg.configFile."uwsm/env-hyprland"` (none for now)
+      # env = [
+      #   # Dropped: UWSM sets the XDG session variables itself
+      #   "XDG_SESSION_TYPE,wayland"
+      #   # Dropped: obsolete, superseded by `cursor.no_hardware_cursors` below
+      #   "WLR_NO_HARDWARE_CURSORS,1"
+      # ];
 
       # XWayland tweaks
       xwayland.force_zero_scaling = true;
@@ -92,14 +103,17 @@
       bind =
         [
           # Standard binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-          "$mod, Return, exec, alacritty"
-          "$mod, V, exec, vivaldi"
-          "$mod, B, exec, firefox"
-          "$mod, S, exec, nautilus --new-window"
+          ## Long-lived apps are launched with `uwsm app --` (see `exec-once` above), except the ones
+          ## using `[float; ...]` exec rules (PID-based) which are left unwrapped for the same reason (to be tested)
+          "$mod, Return, exec, uwsm app -- alacritty"
+          "$mod, V, exec, uwsm app -- vivaldi"
+          "$mod, B, exec, uwsm app -- firefox"
+          "$mod, S, exec, uwsm app -- nautilus --new-window"
           "$mod, A, killactive"
           "$mod SHIFT, A, forcekillactive"
           ", Print, exec, hyprshot --clipboard-only -d -m region"
           "$mod, space, togglefloating"
+          # Apps are launched through `uwsm app --` with rofi's `run-command` (see ./rofi.nix)
           "$mod, D, exec, rofi -show drun -show-icons"
           # See https://wiki.hypr.land/Configuring/Dwindle-Layout/#layout-messages
           "$mod, E, layoutmsg, togglesplit"
@@ -111,8 +125,8 @@
           # Make the app/client fullscreen but keep the window non-fullscreen
           # (fake fullscreen)
           "$mod, P, fullscreenstate, 0 2"
-          "$mod, O, exec, nwg-displays"
-          "$mod, L, exec, hyprlock"
+          "$mod, O, exec, uwsm app -- nwg-displays"
+          "$mod, L, exec, uwsm app -- hyprlock"
           "$mod SHIFT, R, exec, hyprctl reload"
           # 768 is in pixels; 768 = (3840px / 1.5x) * 33%
           "$mod, M, exec, [float; size 768 60%] pwvucontrol"
@@ -120,8 +134,11 @@
           # Shonan Beach FM
           "$mod, equal, exec, [float; size 350 150; pin] ${lib.getExe' pkgs.ffmpeg "ffplay"} -hide_banner https://shonanbeachfm.out.airtime.pro/shonanbeachfm_c"
           # Exit Hyprland
-          "$mod SHIFT, E, exit"
-          "$mod, J, exec, jellyfin-desktop"
+          ## `exit` interferes with UWSM's ordered shutdown sequence (https://wiki.hypr.land/Configuring/Basics/Dispatchers/);
+          ## if units get stuck, fallback is `loginctl terminate-user ""`
+          # "$mod SHIFT, E, exit"
+          "$mod SHIFT, E, exec, uwsm stop"
+          "$mod, J, exec, uwsm app -- jellyfin-desktop"
 
           # Advanced binds
           ## Brightness control
@@ -295,4 +312,14 @@
       };
     };
   };
+
+  # Session-wide environment, sourced by UWSM before starting Hyprland so systemd services see it too
+  ## (theming/toolkit vars, see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/)
+  ## Changes only apply after logging out and back in
+  xdg.configFile."uwsm/env".text = ''
+    # Flickering issues
+    export ELECTRON_OZONE_PLATFORM_HINT=auto
+    # XWayland tweaks
+    export GDK_SCALE=2
+  '';
 }
