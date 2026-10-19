@@ -6,6 +6,11 @@
   "clockFormat": "24h",
   "barElevationEnabled": false,
   "blurEnabled": true,
+  "showWorkspaceName": true,
+  "showWorkspaceApps": true,
+  "groupActiveWorkspaceApps": true,
+  "reverseScrolling": true,
+  "workspaceActiveAppHighlightEnabled": true,
   "centeringMode": "geometric",
   "cursorSettings": {
     "theme": "System Default",
