@@ -15,6 +15,10 @@
         extraPackages = with pkgs; [kdePackages.qt5compat];
       };
 
+      # Pre-select the UWSM entry, otherwise SDDM keeps reusing the last chosen (plain "Hyprland") session;
+      # `hyprland-uwsm` is listed in the hyprland package's `providedSessions`
+      defaultSession = lib.mkDefault "hyprland-uwsm";
+
       ly.enable = lib.mkForce false;
     };
 

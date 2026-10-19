@@ -34,7 +34,8 @@
   "lockPamExternallyManaged": true,
   "lockScreenNotificationMode": 2,
   "notificationShowTimeoutBar": true,
-  "customPowerActionLock": "hyprlock",
+  "customPowerActionLock": "uwsm app -- hyprlock",
+  "launchPrefix": "uwsm app --",
   "barConfigs": [
     {
       "id": "default",

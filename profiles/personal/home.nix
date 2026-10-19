@@ -14,6 +14,7 @@
   };
 
   wayland.windowManager.hyprland.settings = {
+    # Not wrapped with `uwsm app --`: `[workspace N]` exec rules are PID-based (see ../desktop/hyprland.nix)
     exec-once = [
       "[workspace 4 silent] discord"
       "[workspace 9 silent] spotify"
