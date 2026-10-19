@@ -5,7 +5,7 @@
   config,
   ...
 }: {
-  imports = [./pipewire ./bluetooth.nix ./hyprlock.nix ./boot-splash.nix ./printing.nix ./tailscale.nix];
+  imports = [./dank-material-shell ./pipewire ./bluetooth.nix ./hyprlock.nix ./boot-splash.nix ./printing.nix ./tailscale.nix];
 
   boot.loader.grub = {
     # Automatically pre-select the last boot item
@@ -90,9 +90,6 @@
     imports = [
       ./hyprland.nix
       ./rofi.nix
-
-      inputs.dms.homeModules.dank-material-shell
-      ./dank-material-shell
 
       # Ax-Shell
       # inputs.ax-shell.homeManagerModules.default

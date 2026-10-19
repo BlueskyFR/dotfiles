@@ -2,11 +2,14 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
+  # Flake-parts args, with system pre-selected
+  inputs',
+  self',
   config,
   pkgs,
   lib,
   ...
-} @ inputs: {
+}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -55,6 +58,7 @@
       gyroflow
 
       # davinci-resolve-studio
+      # inputs'.ableton-linux.packages.default
 
       # (callPackage ./davinci-resolve.nix {studioVariant = true;})
     ];

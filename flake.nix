@@ -25,11 +25,6 @@
 
     hyprlock.url = "github:hyprwm/hyprlock";
 
-    dms = {
-      url = "github:AvengeMedia/DankMaterialShell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -97,6 +92,7 @@
             # Imported overlays
             {
               nixpkgs.overlays = [
+                # Exposes numtide's packages under the `.llm-agents` namespace
                 llm-agents.overlays.shared-nixpkgs
               ];
             }
