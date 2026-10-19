@@ -5,6 +5,17 @@
 }: {
   environment.systemPackages = with pkgs; [egl-wayland wayland-protocols];
 
+  # Not set here although Hyprland's `env` used to apply them on every host: with PRIME offload the iGPU
+  # renders the session, so forcing Nvidia's GBM/GLX globally doesn't belong (`nvidia-offload` sets them per app)
+  # FIXME: untested on this host, uncomment if Hyprland on chador relied on them
+  # environment.sessionVariables = {
+  #   # Required for Nvidia drivers
+  #   LIBVA_DRIVER_NAME = "nvidia";
+  #   GBM_BACKEND = "nvidia-drm";
+  #   __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+  #   NVD_BACKEND = "direct";
+  # };
+
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"];
   # Blacklist nouveau
