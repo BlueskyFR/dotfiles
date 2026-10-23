@@ -11,7 +11,7 @@
     ./beta.nix
     ./uv.nix
     ./remote-builds.nix
-    ./claude.nix
+    ./ai-agents.nix
   ];
 
   # Home manager global config

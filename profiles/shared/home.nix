@@ -38,7 +38,6 @@
     cargo-binstall # Shouldn't be needed - but just in case
     cargo-flamegraph
     bacon
-    llm-agents.orca
 
     # Cli tools
     zip
