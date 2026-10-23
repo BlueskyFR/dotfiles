@@ -11,7 +11,7 @@
       enable = true;
       # CUPS Remote Printer Discovery daemon
       browsed.enable = true;
-      drivers = with pkgs; [hplip];
+      drivers = with pkgs; [stable.hplip];
     };
 
     # Printing also requires Avahi
