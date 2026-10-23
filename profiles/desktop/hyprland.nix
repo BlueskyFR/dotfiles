@@ -12,14 +12,70 @@
     # TODO: switch to lua when stable enough
     configType = "hyprlang";
 
-    settings = {
+    settings = let
+      # Workspace binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
+      # Key codes can be retrieved using `wev`
+      workspaces = [
+        {
+          name = "name:0 · ai";
+          key = "twosuperior";
+        }
+        {
+          # name = "name:1 · term";
+          name = "1";
+          key = "ampersand";
+        }
+        {
+          # name = "name:2 · code";
+          name = "2";
+          key = "eacute";
+        }
+        {
+          # name = "name:3 · browser";
+          name = "3";
+          key = "quotedbl";
+        }
+        {
+          # name = "name:4 · chat";
+          name = "4";
+          key = "apostrophe";
+        }
+        {
+          name = "5";
+          key = "parenleft";
+        }
+        {
+          name = "6";
+          key = "minus";
+        }
+        {
+          name = "7";
+          key = "egrave";
+        }
+        {
+          name = "8";
+          key = "underscore";
+        }
+        {
+          name = "9";
+          key = "ccedilla";
+        }
+        {
+          # name = "name:10 · sys-cfg";
+          name = "10";
+          key = "agrave";
+        }
+      ];
+      # Get a workspace name from its id
+      ws = n: (builtins.elemAt workspaces n).name;
+    in {
       # Startup apps
       # (move to workspace only applies to non-forking processes
       # since it is PID-based)
       exec-once = [
-        "[workspace 1] alacritty"
-        "[workspace 2 silent] code"
-        "[workspace 3 silent] firefox"
+        "[workspace ${ws 1}] alacritty"
+        "[workspace ${ws 2} silent] code"
+        "[workspace ${ws 3} silent] sleep 7 && firefox"
 
         # System tray icons
         "sleep 10 && nm-applet"
@@ -36,20 +92,20 @@
         ## string in order to be passed to the shell;
         ## The `workspace X silent` is a static rule, meaning it cannot apply to dynamic tags
         ## so we make it dynamic manually by triggering it a couple seconds after startup
-        "sleep 10 && hyprctl dispatch movetoworkspacesilent '10,tag:nixos-conf\\*'"
+        "sleep 10 && hyprctl dispatch movetoworkspacesilent '${ws 10},tag:nixos-conf\\*'"
       ];
 
       # Window rules
       ## Info about class/title/status: `hyprctl clients`
       windowrule = [
         # Fix for the forking processes mentionned above during startup
-        "workspace 2 silent, match:class code"
+        "workspace ${ws 2} silent, match:class code"
         # NixOS configuration on workspace 10
         "tag +nixos-conf, match:class code, match:title NixOS configuration"
         # Static rule, doesn't work on dynamic tags:
         # "workspace 10 silent, tag:nixos-conf*"
-        "workspace 3 silent, match:class vivaldi-stable"
-        "workspace 3 silent, match:class firefox"
+        "workspace ${ws 3} silent, match:class vivaldi-stable"
+        "workspace ${ws 3} silent, match:class firefox"
 
         # Picture-in-Picture
         "float on, pin on, keep_aspect_ratio on, match:title (Picture in picture|Picture-in-Picture)"
@@ -94,7 +150,7 @@
           # Standard binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
           "$mod, Return, exec, alacritty"
           "$mod, V, exec, vivaldi"
-          "$mod, B, exec, firefox"
+          "$mod, B, exec, sleep 8 && firefox"
           "$mod, S, exec, nautilus --new-window"
           "$mod, A, killactive"
           "$mod SHIFT, A, forcekillactive"
@@ -118,7 +174,7 @@
           "$mod, M, exec, [float; size 768 60%] pwvucontrol"
           "$mod, C, exec, [float; size 650 350; center; pin] alacritty --command ${lib.getExe pkgs.python314} -q"
           # Shonan Beach FM
-          "$mod, equal, exec, [float; size 350 150; pin] ${lib.getExe' pkgs.ffmpeg "ffplay"} -hide_banner https://shonanbeachfm.out.airtime.pro/shonanbeachfm_c"
+          "$mod, F12, exec, [float; size 350 150; pin] ${lib.getExe' pkgs.ffmpeg "ffplay"} -hide_banner https://shonanbeachfm.out.airtime.pro/shonanbeachfm_c"
           # Exit Hyprland
           "$mod SHIFT, E, exit"
           "$mod, J, exec, jellyfin-desktop"
@@ -150,46 +206,87 @@
           "$mod, mouse_up, workspace, e-1"
 
           # Special workspace (scratchpad)
-          "$mod, twosuperior, togglespecialworkspace"
-          "$mod SHIFT, twosuperior, setfloating, active"
-          "$mod SHIFT, twosuperior, resizeactive, exact 90% 85%"
-          "$mod SHIFT, twosuperior, centerwindow, 1"
-          "$mod SHIFT, twosuperior, movetoworkspace, special"
+          "$mod, equal, togglespecialworkspace"
+          "$mod SHIFT, equal, setfloating, active"
+          "$mod SHIFT, equal, resizeactive, exact 90% 85%"
+          "$mod SHIFT, equal, centerwindow, 1"
+          "$mod SHIFT, equal, movetoworkspace, special"
         ]
         ++ (
-          # Workspaces
-          # Binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
-          # Key codes can be retrieved using `wev`
-          builtins.concatLists (builtins.genList (
-              x: let
-                azertyKeys = ["ampersand" "eacute" "quotedbl" "apostrophe" "parenleft" "minus" "egrave" "underscore" "ccedilla" "agrave"];
-                wsKey = builtins.elemAt azertyKeys x;
-                ws = builtins.toString (x + 1);
-              in [
-                # Switch workspace with $mod + [0-9]
-                "$mod, ${wsKey}, workspace, ${ws}"
-                # Move active window to a workspace with $mod + SHIFT + [0-9]
-                "$mod SHIFT, ${wsKey}, movetoworkspace, ${ws}"
-                # Same but silent (doesn't switch workspace) with ALT instead
-                "$mod ALT, ${wsKey}, movetoworkspacesilent, ${ws}"
+          # Workspace bindings
+          builtins.concatLists (
+            builtins.map (workspace: [
+              # Switch workspace with $mod + [0-10]
+              "$mod, ${workspace.key}, workspace, ${workspace.name}"
+              # Move active window to a workspace with $mod + SHIFT + [0-10]
+              "$mod SHIFT, ${workspace.key}, movetoworkspace, ${workspace.name}"
+              # Same but silent (doesn't switch workspace) with ALT instead
+              "$mod ALT, ${workspace.key}, movetoworkspacesilent, ${workspace.name}"
 
-                # Move active window to workspace [0-9] + place it on the other screen
-                ## 1. Move the window silently/in the background to it
-                "$mod CTRL, ${wsKey}, movetoworkspacesilent, ${ws}"
-                ## 2. Then move the target workspace relative to the still active monitor
-                "$mod CTRL, ${wsKey}, moveworkspacetomonitor, ${ws} -1"
-                ## 3. Finally switch to it!
-                "$mod CTRL, ${wsKey}, workspace, ${ws}"
+              # Move active window to workspace [0-10] + place it on the other screen
+              ## 1. Move the window silently/in the background to it
+              "$mod CTRL, ${workspace.key}, movetoworkspacesilent, ${workspace.name}"
+              ## 2. Then move the target workspace relative to the still active monitor
+              "$mod CTRL, ${workspace.key}, moveworkspacetomonitor, ${workspace.name} -1"
+              ## 3. Finally switch to it!
+              "$mod CTRL, ${workspace.key}, workspace, ${workspace.name}"
 
-                # Now same but silently/without switching to it at the end!
-                "$mod CTRL ALT, ${wsKey}, movetoworkspacesilent, ${ws}"
-                "$mod CTRL ALT, ${wsKey}, moveworkspacetomonitor, ${ws} -1"
-                "$mod CTRL ALT, ${wsKey}, workspace, ${ws}"
-                ## Just switch back to the previous on top of that ;)
-                "$mod CTRL ALT, ${wsKey}, workspace, previous"
-              ]
-            )
-            10)
+              # Now same but silently/without switching to it at the end!
+              "$mod CTRL ALT, ${workspace.key}, movetoworkspacesilent, ${workspace.name}"
+              "$mod CTRL ALT, ${workspace.key}, moveworkspacetomonitor, ${workspace.name} -1"
+              "$mod CTRL ALT, ${workspace.key}, workspace, ${workspace.name}"
+              ## Just switch back to the previous on top of that ;)
+              "$mod CTRL ALT, ${workspace.key}, workspace, previous"
+            ])
+            workspaces
+          )
+          /*
+           builtins.concatLists (builtins.genList (
+            x: let
+              # Maps a workspace name or id to a key to activate it
+              workspaceMap = {
+                "name:ADE" = "twosuperior"; # 0
+                "name:terminal" = "ampersand"; # 1
+                "name:IDE" = "eacute"; # 2
+                "name:browser" = "quotedbl"; # 3
+                "name:socials" = "apostrophe"; # 4
+                "5" = "parenleft"; # 5
+                "6" = "minus"; # 6
+                "7" = "egrave"; # 7
+                "8" = "underscore"; # 8
+                "9" = "ccedilla"; # 9
+                "name:nixos-config" = "agrave"; # 10
+              };
+              # azertyKeys = ["twosuperior" "ampersand" "eacute" "quotedbl" "apostrophe" "parenleft" "minus" "egrave" "underscore" "ccedilla" "agrave"];
+              # wsKey = builtins.elemAt azertyKeys x;
+              # ws = builtins.toString x;
+              key = builtins.elemAt wor
+            in [
+              # Switch workspace with $mod + [0-10]
+              "$mod, ${wsKey}, workspace, ${ws}"
+              # Move active window to a workspace with $mod + SHIFT + [0-10]
+              "$mod SHIFT, ${wsKey}, movetoworkspace, ${ws}"
+              # Same but silent (doesn't switch workspace) with ALT instead
+              "$mod ALT, ${wsKey}, movetoworkspacesilent, ${ws}"
+
+              # Move active window to workspace [0-10] + place it on the other screen
+              ## 1. Move the window silently/in the background to it
+              "$mod CTRL, ${wsKey}, movetoworkspacesilent, ${ws}"
+              ## 2. Then move the target workspace relative to the still active monitor
+              "$mod CTRL, ${wsKey}, moveworkspacetomonitor, ${ws} -1"
+              ## 3. Finally switch to it!
+              "$mod CTRL, ${wsKey}, workspace, ${ws}"
+
+              # Now same but silently/without switching to it at the end!
+              "$mod CTRL ALT, ${wsKey}, movetoworkspacesilent, ${ws}"
+              "$mod CTRL ALT, ${wsKey}, moveworkspacetomonitor, ${ws} -1"
+              "$mod CTRL ALT, ${wsKey}, workspace, ${ws}"
+              ## Just switch back to the previous on top of that ;)
+              "$mod CTRL ALT, ${wsKey}, workspace, previous"
+            ]
+          )
+          10)
+          */
         );
 
       # m = movement is expected, drag_threshold is configurable (a click won't count)
