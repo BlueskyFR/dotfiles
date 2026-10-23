@@ -57,7 +57,8 @@
         {
           "id": "focusedWindow",
           "enabled": true,
-          "focusedWindowCompactMode": false
+          "focusedWindowCompactMode": false,
+          "focusedWindowSize": 0
         }
       ],
       "centerWidgets": [
@@ -138,7 +139,10 @@
       "scrollEnabled": false,
       "followInterfaceStyle": true,
       "widgetFollowInterfaceStyle": true,
-      "island": true
+      "island": true,
+      "islandHomeCompactTight": false,
+      "islandBatteryStyle": "ring",
+      "islandSatelliteBackground": true
     }
   ],
   "desktopClockCustomColor": {
@@ -152,7 +156,8 @@
     "hslHue": -1,
     "hslSaturation": 0,
     "hslLightness": 1,
-    "valid": true
+    "valid": true,
+    "rgba": -1
   },
   "systemMonitorCustomColor": {
     "r": 1,
@@ -165,7 +170,22 @@
     "hslHue": -1,
     "hslSaturation": 0,
     "hslLightness": 1,
-    "valid": true
+    "valid": true,
+    "rgba": -1
+  },
+  "builtInPluginSettings": {
+    "dms_settings_search": {
+      "trigger": "?"
+    },
+    "dms_clipboard_search": {
+      "trigger": "cb"
+    },
+    "dms_power": {
+      "trigger": "pw"
+    },
+    "dms_qr_generator": {
+      "trigger": "qrg"
+    }
   },
   "configVersion": 18
 }
