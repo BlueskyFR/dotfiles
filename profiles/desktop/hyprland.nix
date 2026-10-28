@@ -149,8 +149,9 @@
         [
           # Standard binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
           "$mod, Return, exec, alacritty"
-          "$mod, V, exec, vivaldi"
-          "$mod, B, exec, sleep 8 && firefox"
+          "$mod, V, exec, firefox"
+          # Modern bluetooth mgmt GUI
+          "$mod, B, exec, ${lib.getExe pkgs.overskride}"
           "$mod, S, exec, nautilus --new-window"
           "$mod, A, killactive"
           "$mod SHIFT, A, forcekillactive"
