@@ -6,11 +6,11 @@
   ...
 }: {
   # Enable PAM access for Hyprlock
-  security.pam.services.hyprlock = {};
+  # security.pam.services.hyprlock = {};
 
   home-manager.users.hugo = {
     programs.hyprlock = {
-      enable = true;
+      enable = false;
       settings = {
         animations = {
           enabled = true;

@@ -5,7 +5,7 @@
   ...
 }: {
   # Also provides a GUI Polkit agent through Quickshell
-  programs.dms-shell = {
+  programs.dux-shell = {
     enable = true;
 
     systemd = {
