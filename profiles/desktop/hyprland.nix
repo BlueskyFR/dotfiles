@@ -168,7 +168,8 @@
           # (fake fullscreen)
           "$mod, P, fullscreenstate, 0 2"
           "$mod, O, exec, nwg-displays"
-          "$mod, L, exec, hyprlock"
+          # dux-shell lockscreen
+          "$mod, L, exec, dms ipc call lock lock"
           "$mod SHIFT, R, exec, hyprctl reload"
           # 768 is in pixels; 768 = (3840px / 1.5x) * 33%
           "$mod, M, exec, [float; size 768 60%] pwvucontrol"
