@@ -64,6 +64,25 @@
             '';
           passthru = removeAttrs previousAttrs.passthru ["updateScript"];
         });
+
+      # TODO: keep until bluez v5.88 (or any > 5.87)
+      bluez-latest = prev.bluez.overrideAttrs (old: {
+        version = "82667d7-unstable";
+        src = final.fetchFromGitHub {
+          owner = "bluez";
+          repo = "bluez";
+          rev = "14bd6ab65f4a647302edbd6df27f6faa91bee8a8";
+          hash = "sha256-kEAPyxjfw0YTRkdZpv/ztUT3OmwK5HejbPGrAXBkrtY=";
+        };
+        patches = [
+          ./bluez-readline-82667d7-v2.patch
+        ];
+        postInstall =
+          builtins.replaceStrings
+          ["install -Dm755 attrib/gatttool $out/bin/gatttool"]
+          [""]
+          old.postInstall;
+      });
     })
   ];
 }
