@@ -22,7 +22,7 @@
   # boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_6;
 
   # Disable remote builds for this host since it has a good conection/compute power/storage
-  remote-builds.enable = false;
+  remote-builds.enable = true;
 
   # NFS mount
   fileSystems = {
