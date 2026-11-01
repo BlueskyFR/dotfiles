@@ -292,7 +292,68 @@
   "barElevationEnabled": false,
   "blurEnabled": true,
   "blurBorderSeeded": true,
+  "scrollTitleEnabled": true,
+  "audioVisualizerEnabled": true,
   "centeringMode": "geometric",
+  "dashTabsEvenlySpaced": true,
+  "dashTabs": [
+    {
+      "id": "overview",
+      "enabled": true
+    },
+    {
+      "id": "media",
+      "enabled": true
+    },
+    {
+      "id": "wallpaper",
+      "enabled": true
+    },
+    {
+      "id": "weather",
+      "enabled": true
+    },
+    {
+      "id": "wellbeing",
+      "enabled": true
+    },
+    {
+      "id": "notifications",
+      "enabled": true
+    }
+  ],
+  "dashCards": [
+    {
+      "id": "clock",
+      "w": 2,
+      "h": 1
+    },
+    {
+      "id": "weather",
+      "w": 1,
+      "h": 1
+    },
+    {
+      "id": "notifications",
+      "w": 3,
+      "h": 5
+    },
+    {
+      "id": "calendar",
+      "w": 3,
+      "h": 3
+    },
+    {
+      "id": "media",
+      "w": 3,
+      "h": 1
+    }
+  ],
+  "dashOptions": {
+    "media": {
+      "animatedArt": true
+    }
+  },
   "cursorSettings": {
     "theme": "System Default",
     "size": 24,
@@ -315,11 +376,197 @@
   "lockPamExternallyManaged": true,
   "notificationShowTimeoutBar": true,
   "customPowerActionLock": "",
+  "powerMenuBootEntries": [
+    {
+      "id": "0000",
+      "label": "Windows Boot Manager"
+    }
+  ],
   "barConfigs": [
     {
       "id": "default",
       "name": "Main Bar",
       "enabled": true,
+      "position": 0,
+      "screenPreferences": [
+        "all"
+      ],
+      "showOnLastDisplay": false,
+      "leftWidgets": [
+        "launcherButton",
+        {
+          "id": "workspaceSwitcher",
+          "enabled": true,
+          "showWorkspaceIndex": true,
+          "showWorkspaceApps": true,
+          "maxWorkspaceIcons": 5,
+          "showWorkspaceName": true,
+          "groupActiveWorkspaceApps": true,
+          "reverseScrolling": true,
+          "workspaceActiveAppHighlightEnabled": true
+        },
+        {
+          "id": "focusedWindow",
+          "enabled": true,
+          "focusedWindowCompactMode": false,
+          "focusedWindowSize": 0
+        }
+      ],
+      "centerWidgets": [
+        {
+          "id": "music",
+          "enabled": true,
+          "mediaSize": 2,
+          "overflowMode": "section",
+          "mediaStyle": "controls"
+        },
+        {
+          "id": "clock",
+          "enabled": true,
+          "clockCompactMode": false
+        }
+      ],
+      "rightWidgets": [
+        "systemTray",
+        "clipboard",
+        {
+          "id": "cpuUsage",
+          "enabled": true,
+          "minimumWidth": true
+        },
+        {
+          "id": "memUsage",
+          "enabled": true,
+          "showSwap": false,
+          "minimumWidth": true,
+          "showInGb": true
+        },
+        {
+          "id": "network_speed_monitor",
+          "enabled": false
+        },
+        "notificationButton",
+        "battery",
+        {
+          "id": "controlCenterButton",
+          "enabled": true,
+          "showNetworkIcon": true,
+          "showBluetoothIcon": true,
+          "showAudioIcon": true,
+          "showAudioPercent": true,
+          "showVpnIcon": true,
+          "showBrightnessIcon": true,
+          "showBrightnessPercent": true,
+          "showMicIcon": true,
+          "showMicPercent": true,
+          "showBatteryIcon": true,
+          "showPrinterIcon": true
+        }
+      ],
+      "spacing": 4,
+      "innerPadding": 4,
+      "bottomGap": 0,
+      "transparency": 1,
+      "widgetTransparency": 1,
+      "squareCorners": false,
+      "noBackground": false,
+      "gothCornersEnabled": false,
+      "gothCornerRadiusOverride": false,
+      "gothCornerRadiusValue": 12,
+      "borderEnabled": false,
+      "borderColor": "surfaceText",
+      "borderOpacity": 1,
+      "borderThickness": 1,
+      "widgetOutlineEnabled": false,
+      "widgetOutlineColor": "primary",
+      "widgetOutlineOpacity": 1,
+      "widgetOutlineThickness": 1,
+      "fontScale": 1,
+      "autoHide": false,
+      "autoHideDelay": 250,
+      "openOnOverview": false,
+      "visible": true,
+      "popupGapsAuto": true,
+      "popupGapsManual": 4,
+      "maximizeDetection": true,
+      "scrollEnabled": false,
+      "followInterfaceStyle": true,
+      "widgetFollowInterfaceStyle": true,
+      "island": true,
+      "islandHomeCompactTight": false,
+      "islandBatteryStyle": "ring",
+      "islandSatelliteBackground": true,
+      "islandNotch": true,
+      "hideOnLastDisplay": true,
+      "islandMediaAutoSwitch": true,
+      "islandFloating": false,
+      "islandPlacement": "free",
+      "islandSatellitePosition": "edges",
+      "widgetStyle": "pills",
+      "surfaceColor": "default",
+      "islandPalette": "default",
+      "islandHomeLayout": [
+        {
+          "id": "workspaces",
+          "enabled": false
+        },
+        {
+          "id": "media",
+          "enabled": true
+        },
+        {
+          "id": "clock",
+          "enabled": true
+        },
+        {
+          "id": "weather",
+          "enabled": false
+        },
+        {
+          "id": "status",
+          "enabled": false
+        },
+        {
+          "id": "volume",
+          "enabled": false
+        },
+        {
+          "id": "brightness",
+          "enabled": false
+        },
+        {
+          "id": "notifications",
+          "enabled": true
+        },
+        {
+          "id": "privacy",
+          "enabled": true
+        },
+        {
+          "id": "tray",
+          "enabled": false
+        }
+      ],
+      "dot": false,
+      "islandRouteWallpaper": "island",
+      "islandRouteWeather": "island",
+      "islandRouteDash": "island",
+      "islandRouteMedia": "island",
+      "islandInteractionMode": "hybrid",
+      "islandSharedRouting": "normal",
+      "islandMediaClockVisible": true,
+      "islandNotificationExpand": false,
+      "islandNotificationBadgeClearOnOpen": false,
+      "islandRouteLauncher": "follow",
+      "islandRouteControlCenter": "follow",
+      "islandRouteNotificationCenter": "follow",
+      "islandRouteClipboard": "follow",
+      "islandRoutePowerMenu": "follow"
+    },
+    {
+      "id": "dot1793543409880",
+      "name": "Dot",
+      "enabled": false,
       "position": 0,
       "screenPreferences": [
         "all"
@@ -421,12 +668,13 @@
       "popupGapsManual": 4,
       "maximizeDetection": true,
       "scrollEnabled": false,
-      "followInterfaceStyle": true,
+      "followInterfaceStyle": false,
       "widgetFollowInterfaceStyle": true,
-      "island": true,
+      "island": false,
       "islandHomeCompactTight": false,
       "islandBatteryStyle": "ring",
-      "islandSatelliteBackground": true
+      "islandSatelliteBackground": true,
+      "dot": true
     }
   ],
   "builtInPluginSettings": {

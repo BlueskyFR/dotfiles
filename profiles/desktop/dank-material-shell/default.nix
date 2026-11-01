@@ -34,5 +34,11 @@
       force = true;
       source = ./settings.json;
     };
+
+    home.packages = with pkgs; [
+      # User-space application to modify the Intel Extensible Firmware Interface (EFI) Boot Manager;
+      # allows rebooting to Windows automatically by setting the firmware's one-time BootNext entry.
+      efibootmgr
+    ];
   };
 }
