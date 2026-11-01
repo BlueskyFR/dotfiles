@@ -58,6 +58,15 @@
       withUWSM = false; # Useless for now, so remove the buggy sddm greeter entry
       # programs.uwsm.enable ?
     };
+
+    # Does not have a home manager module (yet) it seems;
+    # automatically adds its udev rules
+    openlogi = {
+      enable = true;
+      launchAtLogin = true;
+      # Swap with nixpkgs' precompiled one instead of rebuilding 1000 crates locally
+      package = pkgs.openlogi;
+    };
   };
 
   # Replacement for unmaintained `light`
@@ -172,7 +181,6 @@
 
       # Very important
       screen-message
-      edgetx
     ];
 
     programs = {

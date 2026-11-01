@@ -43,6 +43,11 @@
       # inputs.nixpkgs.follows = "nixpkgs";
       # inputs.flake-parts.follows = "flake-parts";
     };
+
+    openlogi = {
+      url = "github:AprilNEA/OpenLogi?dir=packaging";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
