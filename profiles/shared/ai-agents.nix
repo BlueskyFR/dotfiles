@@ -19,6 +19,8 @@
         # New in HM 26.11 (TODO: remove when upgrading)
         configDir = "${config.xdg.configHome}/claude";
       };
+
+      opencode.enable = true;
     };
 
     home.packages = with pkgs; [
