@@ -133,7 +133,6 @@
       vivaldi-pkg
       (chromium.override {enableWideVine = true;})
       brave
-      # TODO: Krisp support dropped until https://github.com/NixOS/nixpkgs/pull/506089 is merged
       discord
       signal-desktop
       postman
@@ -151,6 +150,8 @@
       nautilus
       # Video thumbnails for Nautilus
       ffmpegthumbnailer
+
+      gimp
 
       vlc
       # Jellyfin: use a much newer build (last release was in 2025 last time I checked!)
