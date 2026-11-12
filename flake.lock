@@ -165,6 +165,24 @@
         "type": "github"
       }
     },
+    "flake-utils": {
+      "inputs": {
+        "systems": "systems_2"
+      },
+      "locked": {
+        "lastModified": 1794427683,
+        "narHash": "sha256-o7ey9gEilsxaifqJWnBDlYSKbNWYQYtKwDyXeZU2kaU=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "cd489559845d81f673a12885576016c65cbe9363",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -356,7 +374,8 @@
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-stable": "nixpkgs-stable",
         "openlogi": "openlogi",
-        "vscode-server": "vscode-server"
+        "vscode-server": "vscode-server",
+        "zestbay": "zestbay"
       }
     },
     "rust-overlay": {
@@ -381,6 +400,21 @@
       }
     },
     "systems": {
+      "locked": {
+        "lastModified": 1791244623,
+        "narHash": "sha256-uuanbkFk8a313Zfrxdcz8Us/yQtaxNnKJtX8v0ZPpd8=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "d36eeed142f88b5a636f2e3856a53c61654cf29b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_2": {
       "locked": {
         "lastModified": 1791244623,
         "narHash": "sha256-uuanbkFk8a313Zfrxdcz8Us/yQtaxNnKJtX8v0ZPpd8=",
@@ -432,6 +466,29 @@
         "owner": "nix-community",
         "repo": "nixos-vscode-server",
         "rev": "79ada60decf3ff4bee4968f8b1136cb1846827a8",
+        "type": "github"
+      }
+    },
+    "zestbay": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "dir": "pkg/nix",
+        "lastModified": 1794416808,
+        "narHash": "sha256-34EQPvHN++XGHWaezLv0b4qD8SYyGxK31YaAPaKqQ8U=",
+        "owner": "lemonxah",
+        "repo": "zestbay",
+        "rev": "dbb1c758aa21a5179600bf6b4921e223a81af800",
+        "type": "github"
+      },
+      "original": {
+        "dir": "pkg/nix",
+        "owner": "lemonxah",
+        "repo": "zestbay",
         "type": "github"
       }
     }

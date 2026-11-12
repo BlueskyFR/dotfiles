@@ -48,6 +48,11 @@
       url = "github:AprilNEA/OpenLogi?dir=packaging";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    zestbay = {
+      url = "github:lemonxah/zestbay?dir=pkg/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {

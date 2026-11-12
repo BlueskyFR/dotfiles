@@ -174,6 +174,7 @@
           "$mod SHIFT, R, exec, hyprctl reload"
           # 768 is in pixels; 768 = (3840px / 1.5x) * 33%
           "$mod, M, exec, [float; size 768 60%] pwvucontrol"
+          "$mod SHIFT, M, exec, ${lib.getExe pkgs.zestbay}"
           "$mod, C, exec, [float; size 650 350; center; pin] alacritty --command ${lib.getExe pkgs.python314} -q"
           # Shonan Beach FM
           "$mod, F12, exec, [float; size 350 150; pin] ${lib.getExe' pkgs.ffmpeg "ffplay"} -hide_banner https://shonanbeachfm.out.airtime.pro/shonanbeachfm_c"

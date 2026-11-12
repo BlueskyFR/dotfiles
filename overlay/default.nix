@@ -83,6 +83,8 @@
           [""]
           old.postInstall;
       });
+
+      zestbay = inputs.zestbay.packages.${prev.stdenv.hostPlatform.system}.default;
     })
   ];
 }
