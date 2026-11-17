@@ -225,6 +225,7 @@
       "showOnLastDisplay": true,
       "position": 1,
       "mode": "compact",
+      "middleClickAction": "close",
       "taskbarAlign": "center",
       "widgetExpansion": "popout",
       "iconSize": 40,
@@ -289,11 +290,15 @@
   "currentThemeCategory": "dynamic",
   "matugenScheme": "scheme-vibrant",
   "matugenTargetMonitor": "DP-2",
+  "dmsWindowsFloatingSeeded": [
+    "hyprland"
+  ],
   "barElevationEnabled": false,
   "blurEnabled": true,
   "blurBorderSeeded": true,
   "scrollTitleEnabled": true,
   "audioVisualizerEnabled": true,
+  "bluetoothMprisEnabled": true,
   "centeringMode": "geometric",
   "dashTabsEvenlySpaced": true,
   "dashTabs": [
@@ -375,6 +380,7 @@
   "matugenTemplateNeovim": true,
   "lockPamExternallyManaged": true,
   "notificationShowTimeoutBar": true,
+  "osdWorkspaceEnabled": false,
   "customPowerActionLock": "",
   "powerMenuBootEntries": [
     {
@@ -397,13 +403,16 @@
         {
           "id": "workspaceSwitcher",
           "enabled": true,
-          "showWorkspaceIndex": true,
+          "showWorkspaceIndex": false,
           "showWorkspaceApps": true,
           "maxWorkspaceIcons": 5,
           "showWorkspaceName": true,
           "groupActiveWorkspaceApps": true,
           "reverseScrolling": true,
-          "workspaceActiveAppHighlightEnabled": true
+          "workspaceActiveAppHighlightEnabled": true,
+          "workspaceIndicatorCompact": false,
+          "workspaceIndicatorRoundness": -1,
+          "workspaceIndicatorStyle": "pills"
         },
         {
           "id": "focusedWindow",
@@ -561,7 +570,9 @@
       "islandRouteControlCenter": "follow",
       "islandRouteNotificationCenter": "follow",
       "islandRouteClipboard": "follow",
-      "islandRoutePowerMenu": "follow"
+      "islandRoutePowerMenu": "follow",
+      "islandMediaLyrics": true,
+      "islandDashTabs": false
     },
     {
       "id": "dot1793543409880",

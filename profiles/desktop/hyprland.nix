@@ -1,397 +1,47 @@
 {
   pkgs,
+  inputs,
   lib,
+  config,
   ...
 }: {
-  wayland.windowManager.hyprland = {
-    enable = true;
-    # Set the Hyprland and xdg-desktop-portal packages to null to use the ones from the NixOS module
-    package = null;
-    portalPackage = null;
+  options = {
+    # Allow each host to override exported variables to nix.lua
+    hyprland-variables = lib.mkOption {
+      type = (pkgs.formats.json {}).type;
+      default = {};
+    };
+  };
 
-    # TODO: switch to lua when stable enough
-    configType = "hyprlang";
+  config = {
+    # Some variables that we export to a nix.lua so that nix variable interpolation can be used
+    hyprland-variables = {
+      # Some important things we may want to override per-host or per-profile
+      monitors = [];
+      # List of `{cmd = "str", workspace = "id", class? = "str"}`
+      autostart = [];
 
-    settings = let
-      # Workspace binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
-      # Key codes can be retrieved using `wev`
-      workspaces = [
-        {
-          name = "name:0 · ai";
-          key = "twosuperior";
-        }
-        {
-          # name = "name:1 · term";
-          name = "1";
-          key = "ampersand";
-        }
-        {
-          # name = "name:2 · code";
-          name = "2";
-          key = "eacute";
-        }
-        {
-          # name = "name:3 · browser";
-          name = "3";
-          key = "quotedbl";
-        }
-        {
-          # name = "name:4 · chat";
-          name = "4";
-          key = "apostrophe";
-        }
-        {
-          name = "5";
-          key = "parenleft";
-        }
-        {
-          name = "6";
-          key = "minus";
-        }
-        {
-          name = "7";
-          key = "egrave";
-        }
-        {
-          name = "8";
-          key = "underscore";
-        }
-        {
-          name = "9";
-          key = "ccedilla";
-        }
-        {
-          # name = "name:10 · sys-cfg";
-          name = "10";
-          key = "agrave";
-        }
-      ];
-      # Get a workspace name from its id
-      ws = n: (builtins.elemAt workspaces n).name;
-    in {
-      # Startup apps
-      # (move to workspace only applies to non-forking processes
-      # since it is PID-based)
-      exec-once = [
-        "[workspace ${ws 1}] alacritty"
-        "[workspace ${ws 2} silent] code"
-        "[workspace ${ws 3} silent] sleep 7 && firefox"
+      overskride = lib.getExe pkgs.overskride;
+      zestbay = lib.getExe pkgs.zestbay;
+      python = lib.getExe pkgs.python314;
+      ffplay = lib.getExe' pkgs.ffmpeg "ffplay";
+      acpilight = lib.getExe pkgs.acpilight;
+    };
 
-        # System tray icons
-        "sleep 10 && nm-applet"
-        "sleep 10 && blueman-applet"
-      ];
-
-      # Also exec on reloads
-      exec = [
-        # Lift all workspace placement rules after startup or reload
-        "sleep 25 && hyprctl keyword windowrule workspace unset, 'match:class .*'"
-
-        # NixOS configuration on workspace 10
-        ## The '*' needs to be shell-escaped, and the '\` itself needs to be escaped in the nix
-        ## string in order to be passed to the shell;
-        ## The `workspace X silent` is a static rule, meaning it cannot apply to dynamic tags
-        ## so we make it dynamic manually by triggering it a couple seconds after startup
-        "sleep 10 && hyprctl dispatch movetoworkspacesilent '${ws 10},tag:nixos-conf\\*'"
-      ];
-
-      # Window rules
-      ## Info about class/title/status: `hyprctl clients`
-      windowrule = [
-        # Fix for the forking processes mentionned above during startup
-        "workspace ${ws 2} silent, match:class code"
-        # NixOS configuration on workspace 10
-        "tag +nixos-conf, match:class code, match:title NixOS configuration"
-        # Static rule, doesn't work on dynamic tags:
-        # "workspace 10 silent, tag:nixos-conf*"
-        "workspace ${ws 3} silent, match:class vivaldi-stable"
-        "workspace ${ws 3} silent, match:class firefox"
-
-        # Picture-in-Picture
-        "float on, pin on, keep_aspect_ratio on, match:title (Picture in picture|Picture-in-Picture)"
-
-        # Disable VRR for MPV (fixes flickering)
-        "no_vrr 1, match:class ^(mpv)$"
-      ];
-
-      # Required for Nvidia drivers
-      env = [
-        "LIBVA_DRIVER_NAME,nvidia"
-        "XDG_SESSION_TYPE,wayland"
-        "GBM_BACKEND,nvidia-drm"
-        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-        "WLR_NO_HARDWARE_CURSORS,1"
-        "NVD_BACKEND,direct"
-        # Flickering issues
-        "ELECTRON_OZONE_PLATFORM_HINT,auto"
-        # XWayland tweaks
-        "GDK_SCALE,2"
-      ];
-
-      # XWayland tweaks
-      xwayland.force_zero_scaling = true;
-
-      cursor.no_hardware_cursors = 1;
-
-      # Monitors configuration
-      # monitor = name, resolution, position, scale
-      # Position: X is normal but Y is reversed
-      monitor = lib.mkDefault [
-        # "DP-3, highrr, 1920x-360, auto, vrr, 1" # Variable refresh rate, 1 = on
-        # "DP-2, highres, 0x0, auto"
-      ];
-      # Support defining monitors imperatively and dynamically using nwg-displays;
-      # to support it you must force `monitor = lib.mkForce [];` above and per-host.
-      source = "~/.config/hypr/monitors.conf";
-
-      "$mod" = "SUPER";
-      bind =
-        [
-          # Standard binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-          "$mod, Return, exec, alacritty"
-          "$mod, V, exec, firefox"
-          # Modern bluetooth mgmt GUI
-          "$mod, B, exec, ${lib.getExe pkgs.overskride}"
-          "$mod, S, exec, nautilus --new-window"
-          "$mod, A, killactive"
-          "$mod SHIFT, A, forcekillactive"
-          ", Print, exec, hyprshot --clipboard-only -d -m region"
-          "$mod, space, togglefloating"
-          "$mod, D, exec, rofi -show drun -show-icons"
-          # See https://wiki.hypr.land/Configuring/Dwindle-Layout/#layout-messages
-          "$mod, E, layoutmsg, togglesplit"
-          "$mod, Z, fullscreen, 1"
-          "$mod, F, fullscreen, 0"
-          "$mod, G, togglegroup"
-          "$mod, H, changegroupactive, f"
-          # "$mod, P, pseudo"
-          # Make the app/client fullscreen but keep the window non-fullscreen
-          # (fake fullscreen)
-          "$mod, P, fullscreenstate, 0 2"
-          "$mod, O, exec, nwg-displays"
-          # dux-shell lockscreen
-          "$mod, L, exec, dms ipc call lock lock"
-          "$mod SHIFT, R, exec, hyprctl reload"
-          # 768 is in pixels; 768 = (3840px / 1.5x) * 33%
-          "$mod, M, exec, [float; size 768 60%] pwvucontrol"
-          "$mod SHIFT, M, exec, ${lib.getExe pkgs.zestbay}"
-          "$mod, C, exec, [float; size 650 350; center; pin] alacritty --command ${lib.getExe pkgs.python314} -q"
-          # Shonan Beach FM
-          "$mod, F12, exec, [float; size 350 150; pin] ${lib.getExe' pkgs.ffmpeg "ffplay"} -hide_banner https://shonanbeachfm.out.airtime.pro/shonanbeachfm_c"
-          # Exit Hyprland
-          "$mod SHIFT, E, exit"
-          "$mod, J, exec, jellyfin-desktop"
-
-          # Advanced binds
-          ## Brightness control
-          ", XF86MonBrightnessDown, exec, ${lib.getExe pkgs.acpilight} -perceived -dec 10"
-          ", XF86MonBrightnessUp, exec, ${lib.getExe pkgs.acpilight} -perceived -inc 10"
-
-          # Move focus with $mod + arrow keys
-          "$mod, left, movefocus, l"
-          "$mod, right, movefocus, r"
-          "$mod, up, movefocus, u"
-          "$mod, down, movefocus, d"
-
-          # Move window in a certain direction with shift + arrow keys
-          "$mod SHIFT, left, movewindow, l"
-          "$mod SHIFT, right, movewindow, r"
-          "$mod SHIFT, up, movewindow, u"
-          "$mod SHIFT, down, movewindow, d"
-
-          # Move workspaces to other monitors
-          "$mod, W, focusworkspaceoncurrentmonitor, previous"
-          "$mod, X, movecurrentworkspacetomonitor, +1"
-          "$mod SHIFT, X, movecurrentworkspacetomonitor, -1"
-
-          # Scroll through existing workspaces with $mod + scroll
-          "$mod, mouse_down, workspace, e+1"
-          "$mod, mouse_up, workspace, e-1"
-
-          # Special workspace (scratchpad)
-          "$mod, equal, togglespecialworkspace"
-          "$mod SHIFT, equal, setfloating, active"
-          "$mod SHIFT, equal, resizeactive, exact 90% 85%"
-          "$mod SHIFT, equal, centerwindow, 1"
-          "$mod SHIFT, equal, movetoworkspace, special"
-        ]
-        ++ (
-          # Workspace bindings
-          builtins.concatLists (
-            builtins.map (workspace: [
-              # Switch workspace with $mod + [0-10]
-              "$mod, ${workspace.key}, workspace, ${workspace.name}"
-              # Move active window to a workspace with $mod + SHIFT + [0-10]
-              "$mod SHIFT, ${workspace.key}, movetoworkspace, ${workspace.name}"
-              # Same but silent (doesn't switch workspace) with ALT instead
-              "$mod ALT, ${workspace.key}, movetoworkspacesilent, ${workspace.name}"
-
-              # Move active window to workspace [0-10] + place it on the other screen
-              ## 1. Move the window silently/in the background to it
-              "$mod CTRL, ${workspace.key}, movetoworkspacesilent, ${workspace.name}"
-              ## 2. Then move the target workspace relative to the still active monitor
-              "$mod CTRL, ${workspace.key}, moveworkspacetomonitor, ${workspace.name} -1"
-              ## 3. Finally switch to it!
-              "$mod CTRL, ${workspace.key}, workspace, ${workspace.name}"
-
-              # Now same but silently/without switching to it at the end!
-              "$mod CTRL ALT, ${workspace.key}, movetoworkspacesilent, ${workspace.name}"
-              "$mod CTRL ALT, ${workspace.key}, moveworkspacetomonitor, ${workspace.name} -1"
-              "$mod CTRL ALT, ${workspace.key}, workspace, ${workspace.name}"
-              ## Just switch back to the previous on top of that ;)
-              "$mod CTRL ALT, ${workspace.key}, workspace, previous"
-            ])
-            workspaces
-          )
-          /*
-           builtins.concatLists (builtins.genList (
-            x: let
-              # Maps a workspace name or id to a key to activate it
-              workspaceMap = {
-                "name:ADE" = "twosuperior"; # 0
-                "name:terminal" = "ampersand"; # 1
-                "name:IDE" = "eacute"; # 2
-                "name:browser" = "quotedbl"; # 3
-                "name:socials" = "apostrophe"; # 4
-                "5" = "parenleft"; # 5
-                "6" = "minus"; # 6
-                "7" = "egrave"; # 7
-                "8" = "underscore"; # 8
-                "9" = "ccedilla"; # 9
-                "name:nixos-config" = "agrave"; # 10
-              };
-              # azertyKeys = ["twosuperior" "ampersand" "eacute" "quotedbl" "apostrophe" "parenleft" "minus" "egrave" "underscore" "ccedilla" "agrave"];
-              # wsKey = builtins.elemAt azertyKeys x;
-              # ws = builtins.toString x;
-              key = builtins.elemAt wor
-            in [
-              # Switch workspace with $mod + [0-10]
-              "$mod, ${wsKey}, workspace, ${ws}"
-              # Move active window to a workspace with $mod + SHIFT + [0-10]
-              "$mod SHIFT, ${wsKey}, movetoworkspace, ${ws}"
-              # Same but silent (doesn't switch workspace) with ALT instead
-              "$mod ALT, ${wsKey}, movetoworkspacesilent, ${ws}"
-
-              # Move active window to workspace [0-10] + place it on the other screen
-              ## 1. Move the window silently/in the background to it
-              "$mod CTRL, ${wsKey}, movetoworkspacesilent, ${ws}"
-              ## 2. Then move the target workspace relative to the still active monitor
-              "$mod CTRL, ${wsKey}, moveworkspacetomonitor, ${ws} -1"
-              ## 3. Finally switch to it!
-              "$mod CTRL, ${wsKey}, workspace, ${ws}"
-
-              # Now same but silently/without switching to it at the end!
-              "$mod CTRL ALT, ${wsKey}, movetoworkspacesilent, ${ws}"
-              "$mod CTRL ALT, ${wsKey}, moveworkspacetomonitor, ${ws} -1"
-              "$mod CTRL ALT, ${wsKey}, workspace, ${ws}"
-              ## Just switch back to the previous on top of that ;)
-              "$mod CTRL ALT, ${wsKey}, workspace, previous"
-            ]
-          )
-          10)
-          */
-        );
-
-      # m = movement is expected, drag_threshold is configurable (a click won't count)
-      # (drag_threshold is 0 by default though!)
-      # Bind flags: https://wiki.hypr.land/Configuring/Binds/#bind-flags
-      bindm = [
-        # Move/resize windows with mod + LMB/RMB and dragging
-        "$mod, mouse:272, movewindow"
-        "$mod, mouse:273, resizewindow"
-
-        # Move window using mouse button 5
-        ", mouse:277, movewindow"
-      ];
-
-      # l = works even when screen is locked
-      bindl = [
-        # `playerctl` acts on the app currently playing some media
-        # Bluetooth events (keys) can be debugged using `sudo evtest`
-        ", XF86AudioPlay, exec, playerctl play-pause"
-        ", XF86AudioPause, exec, playerctl play-pause"
-        ", XF86AudioPrev, exec, playerctl previous"
-        ", XF86AudioNext, exec, playerctl next"
-        # Use wpctl (Wireplumber) for volume control to change the system volume
-        # instead of the app's volume (if it was playerctl)
-        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_SINK@ 5%-"
-        ", XF86AudioRaiseVolume, exec, wpctl set-volume --limit 1.0 @DEFAULT_SINK@ 5%+"
-        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_SINK@ toggle"
-      ];
-
-      # le = will repeat when held even when screen is locked
-      bindle = [
-        # Seek forward/backward X seconds when combining with CTRL
-        # (to avoid conflicting with regular key presses)
-        "CTRL, XF86AudioPrev, exec, playerctl position 5-"
-        "CTRL, XF86AudioNext, exec, playerctl position 5+"
-
-        # Control the app volume when using CTRL + volume keys
-        "CTRL, XF86AudioLowerVolume, exec, playerctl volume 0.05-"
-        "CTRL, XF86AudioRaiseVolume, exec, playerctl volume 0.05+"
-      ];
-
-      input = {
-        kb_layout = "fr";
-        accel_profile = "flat";
-        numlock_by_default = true;
-        touchpad.natural_scroll = "yes";
+    home-manager.users.hugo = {
+      wayland.windowManager.hyprland = {
+        enable = true;
+        # Set the Hyprland and xdg-desktop-portal packages to null to use the ones from the NixOS module
+        package = null;
+        portalPackage = null;
       };
 
-      # Tiling layout using a binary tree, similar to i3
-      dwindle = {
-        # See https://wiki/hyprland.org/Configuring/Dwindle-Layout/ for more
-        # pseudotile = "yes"; # Bound to $mod + P  # Removed?
-        preserve_split = "yes";
-      };
+      # Now export the above block we defined to a nix.lua file
+      xdg.configFile."hypr/nix.lua".text = "return " + lib.generators.toLua {} config.hyprland-variables;
 
-      general = {
-        # See https://wiki.hyprland.org/Configuring/Variables/ for more
-        gaps_in = 5;
-        gaps_out = 10;
-        border_size = 2;
-        "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-        "col.inactive_border" = "rgba(595959aa)";
-
-        # Sets the default tiling layout
-        layout = "dwindle";
-      };
-
-      decoration = {
-        # See https://wiki.hyprland.org/Configuring/Variables/ for more
-        rounding = 8; # 10
-        blur = {
-          enabled = true;
-          size = 3;
-          passes = 1;
-        };
-      };
-
-      animations = {
-        bezier = [
-          "overshot, 0.13, 0.99, 0.29, 1.1"
-          "easeInOutCirc, 0.85, 0, 0.15, 1"
-          "easeOutQuart, 0.25, 1, 0.5, 1"
-          "easeOutBack, 0.34, 1.56, 0.64, 1"
-        ];
-        animation = [
-          # "windows, 1, 4, overshot, slide"
-          # "border, 1, 10, default"
-          # "fade, 1, 10, default"
-          # "workspaces, 1, 6, overshot, slide"
-          "windows, 1, 4, overshot, slide"
-          # "windows, 1, 4, easeOutBack, gnomed"
-          "windowsOut, 1, 4, default" # Zoom-out closing effect
-          "border, 1, 10, default"
-          "fade, 1, 4, default"
-          "workspaces, 1, 4.5, overshot, slidefade"
-          #"specialworkspace, 1, 8, default, slidefadevert"
-        ];
-      };
-      #windowrule=animation slide,title:^(all_is_kitty)$
-
-      ecosystem = {
-        no_donation_nag = true;
+      # Use our independent lua file rather than using Nix's weird lua-in-nix thing
+      xdg.configFile."hypr/hyprland.lua" = {
+        source = ./hyprland.lua;
       };
     };
   };

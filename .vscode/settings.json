@@ -1,5 +1,10 @@
 {
     // Set a specific title for this workspace/window so it can be detected by Hyprland
     // using dynamic tags by matching the WM_CLASS ("code") + the window title
-    "window.title": "NixOS configuration"
+    "window.title": "NixOS configuration",
+    // Add Hyprland's stubs for autocompletion with vscode.
+    // This can also be put in a generic .luarc.json at the repo root
+    "Lua.workspace.library": [
+        "/run/current-system/sw/share/hypr/stubs"
+    ]
 }

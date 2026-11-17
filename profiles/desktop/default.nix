@@ -5,7 +5,7 @@
   config,
   ...
 }: {
-  imports = [./dank-material-shell ./pipewire ./bluetooth.nix ./hyprlock.nix ./boot-splash.nix ./printing.nix ./tailscale.nix];
+  imports = [./hyprland.nix ./dank-material-shell ./pipewire ./bluetooth.nix ./hyprlock.nix ./boot-splash.nix ./printing.nix ./tailscale.nix];
 
   boot.loader.grub = {
     # Automatically pre-select the last boot item
@@ -63,7 +63,6 @@
     # automatically adds its udev rules
     openlogi = {
       enable = true;
-      launchAtLogin = true;
       # Swap with nixpkgs' precompiled one instead of rebuilding 1000 crates locally
       package = pkgs.openlogi;
     };
@@ -97,7 +96,6 @@
     firefox-pkg = pkgs.firefox;
   in {
     imports = [
-      ./hyprland.nix
       ./rofi.nix
 
       # Ax-Shell
@@ -310,7 +308,7 @@
           # Block YouTube sponsors
           sponsorblock
           # Auto subtitles download
-          autosub
+          # autosub # FIXME: installation fails for now
           # Auto-reload the video when stream is stuck
           reload
         ];
