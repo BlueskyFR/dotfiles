@@ -217,6 +217,10 @@ hl.bind(mod .. " + SHIFT + R", exec("hyprctl reload"))
 -- FIXME: doesn't fully work bc it forks
 hl.bind(mod .. " + M", exec("pwvucontrol", { float = true, size = { 768, "monitor_h * 0.6" } }))
 hl.bind(mod .. " + SHIFT + M", exec(nix.zestbay))
+hl.bind(mod .. " + C", exec(
+  "alacritty --command " .. nix.python .. " -q",
+  { float = true, size = { 650, 350 }, center = true, pin = true }
+))
 -- Shonan Beach FM
 hl.bind(mod .. " + F12", exec(
   nix.ffplay .. " -hide_banner https://shonanbeachfm.out.airtime.pro/shonanbeachfm_c",

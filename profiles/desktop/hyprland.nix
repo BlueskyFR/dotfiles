@@ -23,7 +23,7 @@
 
       overskride = lib.getExe pkgs.overskride;
       zestbay = lib.getExe pkgs.zestbay;
-      python = lib.getExe pkgs.python314;
+      python = lib.getExe pkgs.python315;
       ffplay = lib.getExe' pkgs.ffmpeg "ffplay";
       acpilight = lib.getExe pkgs.acpilight;
     };
