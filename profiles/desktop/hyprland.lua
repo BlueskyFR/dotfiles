@@ -194,9 +194,9 @@ end
 -- Binds
 
 hl.bind(mod .. " + Return", exec("alacritty"))
-hl.bind(mod .. " + V", exec("firefox"))
+hl.bind(mod .. " + B", exec("firefox"))
 -- Modern bluetooth mgmt GUI
-hl.bind(mod .. " + B", exec(nix.overskride))
+hl.bind(mod .. " + N", exec(nix.overskride))
 hl.bind(mod .. " + S", exec("nautilus --new-window"))
 hl.bind(mod .. " + A", hl.dsp.window.close())
 hl.bind(mod .. " + SHIFT + A", hl.dsp.window.kill())
